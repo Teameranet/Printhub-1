@@ -1,0 +1,21 @@
+{
+  "name": "printhub",
+  "version": "1.0.0",
+  "description": "Printhub - Full-stack application with React frontend and Node.js backend",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm start",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "dev-backend": "cd backend && npm run dev",
+    "dev-frontend": "cd frontend && npm run dev",
+    "build-frontend": "cd frontend && npm run build"
+  },
+  "keywords": ["react", "nodejs", "express", "supabase"],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
