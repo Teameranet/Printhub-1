@@ -1,0 +1,4 @@
+- Start with a home page design.
+- Responsive design for mobile and desktop devices.
+- Easy navigation and user interface.
+- After design the home page show the design on localhost:3000 & continue next step.
