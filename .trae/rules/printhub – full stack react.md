@@ -1,1 +1,0 @@
-- Responsive design for mobile and desktop devices.
