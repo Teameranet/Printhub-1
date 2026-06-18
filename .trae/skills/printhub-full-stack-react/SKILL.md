@@ -1,3 +1,9 @@
+---
+name: PrintHub – Full Stack React
+description: Build PrintHub – Full Stack React +  Printing Management Platform
+Create a modern, scalable, production-ready full-stack web application called **PrintHub** using **React JSX (Vite)** for the frontend and a modular backend architecture. Follow the exact project structure provided and maintain clean, reusable, component-based development practices.
+---
+
 # Build PrintHub – Full Stack React +  Printing Management Platform
 Create a modern, scalable, production-ready full-stack web application called **PrintHub** using **React JSX (Vite)** for the frontend and a modular backend architecture. Follow the exact project structure provided and maintain clean, reusable, component-based development practices.
 
@@ -373,4 +379,4 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Admin Email: admin@example.com
   - Admin Password: 123456
   - Admin Login URL: http://localhost:3000/adminuser/login
-  - Admin Dashboard URL: http://localhost:3000/adminuser/dashboard  
+  - Admin Dashboard URL: http://localhost:3000/adminuser/dashboard
