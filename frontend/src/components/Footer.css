@@ -1,0 +1,15 @@
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--glass-border);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-dark);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  font-size: 0.875rem;
+}

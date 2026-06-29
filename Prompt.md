@@ -7,115 +7,214 @@ the following file structure:
 
 PROJECT FILE STRUCTURE
 ───────────────────────
-├── frontend/
-│   │
-│   ├── user/
-│   │   ├── public/
-│   │   │   ├── index.html
-│   │   │   ├── favicon.ico
-│   │   │   └── manifest.json
-│   │   │
-│   │   ├── src/
-│   │   │   ├── assets/
-│   │   │   │   ├── images/
-│   │   │   │   ├── icons/
-│   │   │   │   └── fonts/
-│   │   │   │
-│   │   │   ├── components/ # Reusable, stateless UI components (e.g., Button.jsx , Button.css)
-│   │   │   │   ├── ui/
-│   │   │   │   └── shared/
-│   │   │   │
-│   │   │   ├── features/ (e.g., auth.jsx , auth.css)
-│   │   │   │   ├── auth/
-│   │   │   │   ├── home/
-│   │   │   │   ├── profile/
-│   │   │   │   ├── projects/
-│   │   │   │   ├── community/
-│   │   │   │   └── settings/
-│   │   │   │
-│   │   │   ├── hooks/
-│   │   │   ├── context/
-│   │   │   ├── services/
-│   │   │   ├── utils/
-│   │   │   ├── constants/
-│   │   │   ├── styles/
-│   │   │   ├── routes/
-│   │   │   ├── types/
-│   │   │   ├── App.jsx
-│   │   │   └── main.jsx
-│   │   │
-│   │   ├── .env
-│   │   ├── package.json
-│   │   └── README.md
-│   │
-│   └── admin/
-│       ├── public/
-│       ├── src/
-│       │   ├── assets/
-│       │   ├── components/
-│       │   │   ├── ui/ # Reusable, stateless UI components (e.g., Button.jsx , Button.css)
-│       │   │   └── shared/
-│       │   │
-│       │   ├── features/ (e.g., auth.jsx , auth.css)
-│       │   │   ├── auth/
-│       │   │   ├── dashboard/
-│       │   │   ├── users/
-│       │   │   ├── projects/
-│       │   │   ├── reports/
-│       │   │   ├── roles/
-│       │   │   └── settings/
-│       │   │
-│       │   ├── hooks/
-│       │   ├── context/
-│       │   ├── services/
-│       │   ├── utils/
-│       │   ├── constants/
-│       │   ├── styles/ # Global CSS styles
-│       │   ├── routes/
-│       │   ├── types/
-│       │   ├── App.jsx
-│       │   └── main.jsx
-│       │
-│       ├── .env
-│       ├── package.json
-│       └── README.md
+PrintHub/
 │
-├── backend/
+├── frontend/                          # React JSX (Vite) application
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   ├── manifest.json             # PWA manifest
+│   │   ├── robots.txt
+│   │   └── images/                   # Static images (logos, icons)
 │   │
 │   ├── src/
-│   │   ├── config/
+│   │   ├── user/                     # USER-FACING MODULE
+│   │   │   ├── assets/
+│   │   │   │   ├── images/
+│   │   │   │   ├── fonts/
+│   │   │   │   └── scss/            # SCSS partials scoped to user module
+│   │   │   │
+│   │   │   ├── components/          # Reusable, stateless UI components (e.g., Button.jsx, Button.css)
+│   │   │   │   ├── ui/              # Primitive UI (Button, Input, Modal, Card, etc.)
+│   │   │   │   └── shared/          # Composite components (Navbar, Footer, ServiceCard, etc.)
+│   │   │   │
+│   │   │   ├── features/            # Domain-specific modules (e.g., auth.jsx, auth.css)
+│   │   │   │   ├── auth/            # Sign Up, Sign In, OTP, Forgot Password
+│   │   │   │   ├── print/           # Normal & Advanced Print flows
+│   │   │   │   ├── services/        # Services grid & details
+│   │   │   │   ├── pricing/         # Pricing calculator
+│   │   │   │   ├── cart/            # Cart & checkout
+│   │   │   │   ├── payment/         # Payment gateway integration
+│   │   │   │   ├── profile/         # User profile & dashboard
+│   │   │   │   └── orders/          # Order history & tracking
+│   │   │   │
+│   │   │   ├── pages/               # Route-level page components (e.g., Home.jsx, Home.css)
+│   │   │   │   ├── Home.jsx
+│   │   │   │   ├── About.jsx
+│   │   │   │   ├── Contact.jsx
+│   │   │   │   ├── Services.jsx
+│   │   │   │   ├── ServiceDetails.jsx
+│   │   │   │   ├── NormalPrint.jsx
+│   │   │   │   ├── AdvancedPrint.jsx
+│   │   │   │   ├── PricingCalculator.jsx
+│   │   │   │   ├── Cart.jsx
+│   │   │   │   ├── Checkout.jsx
+│   │   │   │   ├── OrderSuccess.jsx
+│   │   │   │   ├── Profile.jsx
+│   │   │   │   ├── OrderHistory.jsx
+│   │   │   │   ├── OrderTracking.jsx
+│   │   │   │   └── NotFound.jsx
+│   │   │   │
+│   │   │   ├── layouts/             # Layout wrappers (e.g., UserLayout.jsx)
+│   │   │   │
+│   │   │   ├── context/             # React Context providers (AuthContext, CartContext, etc.)
+│   │   │   │
+│   │   │   ├── routes/              # Route definitions & guards for user module
+│   │   │   │   └── UserRoutes.jsx
+│   │   │   │
+│   │   │   └── index.js             # Barrel export for the user module
 │   │   │
-│   │   ├── controllers/
+│   │   ├── admin/                    # ADMIN-FACING MODULE
+│   │   │   ├── assets/
+│   │   │   │   ├── images/
+│   │   │   │   └── scss/
+│   │   │   │
+│   │   │   ├── components/          # Reusable, stateless UI components (e.g., Button.jsx, Button.css)
+│   │   │   │   ├── ui/              # Primitive UI (DataTable, Modal, Form fields, etc.)
+│   │   │   │   └── shared/          # Composite (Sidebar, Header, Charts, etc.)
+│   │   │   │
+│   │   │   ├── features/            # Domain-specific admin modules
+│   │   │   │   ├── dashboard/       # KPIs, analytics
+│   │   │   │   ├── users/           # User management
+│   │   │   │   ├── services/        # Service & spec field management
+│   │   │   │   ├── pricing/         # Pricing rules
+│   │   │   │   ├── orders/          # Order management
+│   │   │   │   └── content/         # CMS (banners, about, etc.)
+│   │   │   │
+│   │   │   ├── pages/               # Route-level page components (e.g., Dashboard.jsx, Dashboard.css)
+│   │   │   │   ├── Dashboard.jsx
+│   │   │   │   ├── Users.jsx
+│   │   │   │   ├── Services.jsx
+│   │   │   │   ├── Pricing.jsx
+│   │   │   │   ├── Orders.jsx
+│   │   │   │   ├── Content.jsx
+│   │   │   │   ├── Settings.jsx
+│   │   │   │   └── Login.jsx
+│   │   │   │
+│   │   │   ├── layouts/             # Admin layout (Sidebar + Header)
+│   │   │   │
+│   │   │   ├── context/             # Admin Context providers
+│   │   │   │
+│   │   │   ├── routes/              # Route definitions & guards for admin module
+│   │   │   │   └── AdminRoutes.jsx
+│   │   │   │
+│   │   │   └── index.js             # Barrel export for the admin module
 │   │   │
-│   │   ├── models/
+│   │   ├── hooks/                   # Shared custom hooks (useAuth, useFetch, useDebounce, etc.)
 │   │   │
-│   │   ├── routes/
+│   │   ├── services/                # Cross-module business logic / API clients
+│   │   │   └── api/                 # Axios/Fetch instances & endpoint modules
+│   │   │       ├── client.js
+│   │   │       ├── authApi.js
+│   │   │       ├── orderApi.js
+│   │   │       └── serviceApi.js
 │   │   │
-│   │   ├── middleware/
+│   │   ├── store/                   # Global state management (Redux/Zustand/Context)
 │   │   │
-│   │   ├── services/
+│   │   ├── utils/                   # Pure helper functions (formatters, validators)
 │   │   │
-│   │   ├── utils/
+│   │   ├── constants/               # App-wide constants, enums, config keys
 │   │   │
-│   │   ├── sockets/
+│   │   ├── styles/                  # Global CSS styles (reset, variables, theme)
+│   │   │   ├── index.css            # Tailwind / global imports
+│   │   │   ├── variables.css
+│   │   │   └── reset.css
+│   │   │
+│   │   ├── routes/                  # Top-level router config
+│   │   │   ├── AppRoutes.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   │
+│   │   ├── App.jsx                  # Root component
+│   │   ├── App.css
+│   │   ├── main.jsx                 # Vite entry point (ReactDOM.createRoot)
+│   │   └── index.html               # Vite root HTML template (project root, NOT in public/)
+│   │
+│   ├── .env                         # VITE_* environment variables
+│   ├── .env.example
+│   ├── .eslintrc.cjs
+│   ├── .prettierrc
+│   ├── .gitignore
+│   ├── vite.config.js               # Vite configuration (aliases, plugins)
+│   ├── jsconfig.json                # Path aliases (@/...)
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
+│
+├── backend/                          # Node.js / Express API server
+│   ├── src/
+│   │   ├── config/                  # DB, env, third-party service configs
+│   │   │   ├── db.js
+│   │   │   ├── cloudinary.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── controllers/             # Route handlers (thin)
+│   │   │   ├── authController.js
+│   │   │   ├── userController.js
+│   │   │   ├── orderController.js
+│   │   │   ├── serviceController.js
+│   │   │   └── pricingController.js
+│   │   │
+│   │   ├── models/                  # Mongoose / Sequelize models
+│   │   │   ├── User.js
+│   │   │   ├── Order.js
+│   │   │   ├── Service.js
+│   │   │   ├── PriceRule.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── routes/                  # Express routers
+│   │   │   ├── authRoutes.js
+│   │   │   ├── userRoutes.js
+│   │   │   ├── orderRoutes.js
+│   │   │   ├── serviceRoutes.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── middleware/              # Auth, error, validation, rate-limit
+│   │   │   ├── auth.js
+│   │   │   ├── errorHandler.js
+│   │   │   ├── validate.js
+│   │   │   └── upload.js
+│   │   │
+│   │   ├── services/                # Business logic (pricing, OTP, email)
+│   │   │   ├── pricingService.js
+│   │   │   ├── otpService.js
+│   │   │   ├── emailService.js
+│   │   │   └── paymentService.js
+│   │   │
+│   │   ├── utils/                   # Pure helpers (logger, asyncHandler, etc.)
+│   │   │   ├── logger.js
+│   │   │   ├── asyncHandler.js
+│   │   │   └── ApiError.js
+│   │   │
+│   │   ├── sockets/                 # Real-time communication
 │   │   │   └── socketServer.js
 │   │   │
-│   │   ├── app.js
-│   │   └── server.js
+│   │   ├── validators/              # Joi/Zod request schemas
+│   │   │
+│   │   ├── constants/               # Server-side enums & messages
+│   │   │
+│   │   ├── app.js                   # Express app setup
+│   │   └── server.js                # HTTP + Socket.IO bootstrap
 │   │
-│   ├── uploads/
+│   ├── uploads/                     # Local file storage (gitignored)
 │   ├── .env
+│   ├── .env.example
+│   ├── .eslintrc.cjs
+│   ├── .gitignore
 │   ├── package.json
+│   ├── package-lock.json
 │   └── README.md
 │
 ├── docs/
 │   ├── api-documentation.md
 │   ├── database-schema.md
-│   └── deployment-guide.md
+│   ├── deployment-guide.md
+│   └── architecture.md
 │
 ├── .gitignore
+├── .editorconfig
 ├── docker-compose.yml
-└── README.md
+├── package.json                     # Root workspace (concurrently scripts)
+├── README.md
+└── Prompt.md
  
 
 # Project Overview
@@ -151,8 +250,14 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Create a clean modern modal-based authentication system.
  Features:
   - Sign Up User Type Selection dropdown ( Regular, Student & Institute )
-  - Sign In Form ( Email/Username, Password, Remember Me, Forgot Password Button )
-  - Forgot Password Form ( Email/Username, Reset Password Button )
+  - Sign Up Form ( Mobile Number/Username, Password, Password, Sign Up Button )
+  - Sign In Form ( Mobile Number/Username, Password, Remember Me, Forgot Password Button )
+  - Forgot Password Form ( Mobile Number/Username Reset Password Button ) with OTP Verification
+  - Google Login Option
+   - Clickable to login with Google account.
+   - Integrated with Google OAuth API.
+   - Automatically logs in users after successful login.
+   - After successful Sign Up, show the pop to add mobile number.
   - Password Reset Form ( New Password, Confirm Password, Reset Password Button )
  Requirements:
   - Users can register and login without running the backend.
@@ -372,5 +477,9 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Admin dashboard is protected with a password.
   - Admin Email: admin@example.com
   - Admin Password: 123456
-  - Admin Login URL: http://localhost:3000/adminuser/login
-  - Admin Dashboard URL: http://localhost:3000/adminuser/dashboard  
+  - Admin Login URL: http://localhost:5000/adminuser/login
+  - Admin Dashboard URL: http://localhost:5000/adminuser/dashboard  
+- Frontend run "npm run dev" to start the frontend server.
+- Backend run "npm run dev" to start the backend server.
+- Both the frontend and backend servers should be running to access the application locally npm run dev:server.
+- The application is accessible at http://localhost:5000.
