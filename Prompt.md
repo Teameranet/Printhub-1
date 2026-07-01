@@ -257,8 +257,8 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 ## Authentication Modal (Sign Up/Sign In)
 - Create a clean modern modal-based authentication system.
  Features:
-  - Sign Up User Type Selection dropdown ( Regular, Student & Institute )
   - Sign Up Form ( Mobile Number/Username, Password, Password, Sign Up Button )
+   - Sign Up User Type Selection dropdown ( Regular, Student & Institute )
   - Sign In Form ( Mobile Number/Username, Password, Remember Me, Forgot Password Button )
   - Forgot Password Form ( Mobile Number/Username Reset Password Button ) with OTP Verification
   - Google Login Option
