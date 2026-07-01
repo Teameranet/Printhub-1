@@ -232,8 +232,9 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Clickable to navigate to the Cart Page.
   - Dropdown menu for users to access the user's profile, order history, and settings.
 - Hero Section
-  - Placeholder: "What would you like to print?"
-- Normal Print  Section Drag and Drop Document Upload Feature
+  - Search bar with a placeholder "What would you like to print?"
+  - Search button to trigger the search action.
+- Normal Print Section: Drag and Drop Document Upload Feature with Configurator
 - Service Cards
   - Display popular printing services with images and descriptions.
   - Clickable to navigate to service details pages.
@@ -242,8 +243,15 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Display information about the company, its history, and its values.
   - Include a contact form for users to get in touch. 
   - Display social media links for users to follow us.
+- How It Works Section
+  - Display a step-by-step guide on how to use the platform.
+  - Include screenshots or GIFs to illustrate the process.
+  - Provide clear instructions for each step user from upload to payment.
+  - User-friendly interface for ease of use.
 - Footer Section
   - Display company information, contact details, legal notices, and social media links.
+  - play store link.
+  - app store link.
   - Include a copyright notice.
 
 ## Authentication Modal (Sign Up/Sign In)
@@ -481,5 +489,5 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Admin Dashboard URL: http://localhost:5000/adminuser/dashboard  
 - Frontend run "npm run dev" to start the frontend server.
 - Backend run "npm run dev" to start the backend server.
-- Both the frontend and backend servers should be running to access the application locally npm run dev:server.
+- Both the frontend and backend servers should be running to access the application locally npm run dev:server
 - The application is accessible at http://localhost:5000.
