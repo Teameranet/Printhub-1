@@ -268,8 +268,12 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
    - After successful Sign Up, show the pop to add mobile number.
   - Password Reset Form ( New Password, Confirm Password, Reset Password Button )
  Requirements:
+  - Use printHub logo in the modal.
+  - Modal should be responsive and adapt to different screen sizes.
+  - Make tabs for Sign Up and Sign In forms.
   - Users can register and login without running the backend.
   - OTP verification should use randomly generated mock OTPs until backend integration is added.
+  - Make proper scrolling for mobile devices to ensure a smooth user experience.
 
 ## User Profile Dashboard
 - Display user information, order history, and settings.

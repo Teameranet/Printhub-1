@@ -3,8 +3,8 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Auth from './pages/Auth';
 import Dashboard from './pages/user/Dashboard';
+import NormalPrint from './pages/user/NormalPrint';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminUsers from './pages/admin/AdminUsers';
@@ -23,13 +23,11 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<Auth />} />
-              
               {/* User Routes */}
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/print/normal" element={<NormalPrint />} />
               
               {/* Admin Routes */}
-              <Route path="/adminuser/login" element={<Auth />} />
               <Route path="/adminuser/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/products" element={<AdminProducts />} />
               <Route path="/admin/users" element={<AdminUsers />} />
