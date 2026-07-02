@@ -5,6 +5,9 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Dashboard from './pages/user/Dashboard';
 import NormalPrint from './pages/user/NormalPrint';
+import Profile from './pages/user/Profile';
+import Orders from './pages/user/Orders';
+import Settings from './pages/user/Settings';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminUsers from './pages/admin/AdminUsers';
@@ -26,6 +29,9 @@ function App() {
               {/* User Routes */}
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/print/normal" element={<NormalPrint />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/settings" element={<Settings />} />
               
               {/* Admin Routes */}
               <Route path="/adminuser/dashboard" element={<AdminDashboard />} />

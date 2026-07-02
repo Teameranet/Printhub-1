@@ -244,9 +244,9 @@ const Navbar = () => {
                         </div>
                       </div>
                       <div className="profile-menu-body">
-                        <a href="#profile" className="profile-item" role="menuitem"><UserIcon />    Profile</a>
-                        <a href="#orders" className="profile-item" role="menuitem"><PackageIcon /> Orders</a>
-                        <a href="#settings" className="profile-item" role="menuitem"><SettingsIcon />Settings</a>
+                        <Link to="/profile" className="profile-item" role="menuitem"><UserIcon />    Profile</Link>
+                        <Link to="/orders" className="profile-item" role="menuitem"><PackageIcon /> Orders</Link>
+                        <Link to="/settings" className="profile-item" role="menuitem"><SettingsIcon />Settings</Link>
                       </div>
                       <div className="profile-menu-footer">
                         <button className="profile-item profile-item--danger" onClick={logout} role="menuitem">

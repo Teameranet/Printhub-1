@@ -344,7 +344,25 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
               className="np-step-input"
               value={spec.copies}
               min={1} max={9999}
-              onChange={e => set('copies', Math.max(1, Number(e.target.value)||1))}
+              onChange={e => {
+                const val = e.target.value;
+                if (val === '') {
+                  set('copies', '');
+                } else {
+                  const num = parseInt(val, 10);
+                  if (!isNaN(num)) {
+                    set('copies', num);
+                  }
+                }
+              }}
+              onBlur={e => {
+                const num = parseInt(e.target.value, 10);
+                if (isNaN(num) || num < 1) {
+                  set('copies', 1);
+                } else {
+                  set('copies', Math.min(9999, num));
+                }
+              }}
             />
             <button type="button" className="np-step-btn" onClick={() => set('copies', Math.min(9999, (spec.copies||1)+1))} aria-label="Increase">+</button>
           </div>

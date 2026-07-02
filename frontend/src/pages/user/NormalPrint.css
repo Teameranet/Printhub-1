@@ -5,9 +5,9 @@
 
 /* ── Page shell ─────────────────────────────────────── */
 .np-page {
-  min-height: calc(100vh - var(--nav-h, 72px));
+  min-height: calc(100vh - var(--navbar-h, 70px));
   background: var(--bg, #F7F4FC);
-  padding-top: calc(var(--nav-h, 72px) + 32px);
+  padding-top: calc(var(--topbar-h, 38px) + var(--navbar-h, 70px) + 32px);
   padding-bottom: 140px; /* space for sticky bar */
 }
 

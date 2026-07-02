@@ -217,6 +217,28 @@ const NormalPrinting = () => {
             />
           </div>
         </div>
+
+        <div className="upload-guidelines-box">
+          <h4 className="upload-guidelines-title">Upload Guidelines &amp; Help</h4>
+          <div className="upload-guidelines-grid">
+            <div className="upload-guidelines-field">
+              <label>File Guidelines</label>
+              <ul className="upload-guidelines-list">
+                <li><strong>Supported formats:</strong> PDF, DOCX, JPG, PNG</li>
+                <li><strong>Maximum file size:</strong> 50 MB per file</li>
+                <li>Ensure all fonts are embedded in PDFs</li>
+                <li>Minimum resolution for images: 300 DPI</li>
+              </ul>
+            </div>
+            
+            <div className="upload-guidelines-field">
+              <label>Processing Time</label>
+              <p className="upload-guidelines-text">
+                Standard orders ship within 24 hours. Same-day express printing is available for orders placed before 11 AM in select cities.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
