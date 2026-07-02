@@ -94,6 +94,7 @@
   flex-direction: row;
   gap: 20px;
   text-align: left;
+  justify-content: center;
 }
 
 .np-drop--compact .np-drop-chips,
@@ -358,32 +359,50 @@
 .np-act-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  border-radius: var(--r-sm);
-  font-size: 12px;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
-  border: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  border: 1.5px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  white-space: nowrap;
 }
 
 .np-act-btn--view {
-  background: var(--primary-soft);
+  background: transparent;
   color: var(--primary-ink);
+  border-color: var(--primary-border);
 }
+
 .np-act-btn--view:hover {
-  background: var(--primary);
-  color: var(--text-on-primary);
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.np-act-btn--view:active {
+  transform: scale(0.97);
 }
 
 .np-act-btn--del {
-  background: rgba(220, 38, 38, 0.07);
+  background: transparent;
   color: var(--danger);
+  border-color: rgba(220, 38, 38, 0.2);
   padding: 6px 10px;
 }
+
 .np-act-btn--del:hover {
-  background: rgba(220, 38, 38, 0.16);
+  background: rgba(220, 38, 38, 0.08);
+  border-color: var(--danger);
+  transform: translateY(-1px);
+}
+
+.np-act-btn--del:active {
+  transform: scale(0.97);
 }
 
 /* Spec grid */
@@ -815,6 +834,11 @@
   flex-shrink: 0;
 }
 
+.np-modal-hd > div {
+  min-width: 0;
+  flex: 1;
+}
+
 .np-modal-fname {
   font-size: 15px;
   font-weight: 600;
@@ -822,7 +846,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 500px;
+  max-width: 100%;
 }
 
 .np-modal-fmeta {
@@ -838,18 +862,28 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--r-sm);
-  background: var(--bg-elev-2);
-  border: none;
+  border-radius: 10px;
+  background: transparent;
   color: var(--text-muted);
+  border: 1px solid transparent;
+  transition:
+    background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease;
   flex-shrink: 0;
 }
 
 .np-modal-close:hover {
-  background: rgba(220,38,38,0.08);
-  color: var(--danger);
+  background: var(--primary-softer);
+  border-color: var(--border);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.np-modal-close:active {
+  transform: scale(0.95);
 }
 
 .np-modal-body {

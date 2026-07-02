@@ -459,12 +459,18 @@
 .order-file-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   padding: 8px 10px;
-  font-size: 13px;
-  color: var(--text-muted);
   border-radius: var(--r-md);
   transition: background 0.18s;
+}
+
+.order-file-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 .order-file-row:hover {
@@ -551,11 +557,7 @@
 }
 
 /* ── Responsive ──────────────────────────────────────── */
-@media (max-width: 768px) {
-  .orders-page {
-    padding-top: calc(var(--navbar-h, 70px) + 28px);
-  }
-
+@media (max-width: 1024px) {
   .orders-stats-row {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -569,6 +571,16 @@
     border-bottom: 1px solid var(--divider);
   }
 
+  .order-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .orders-page {
+    padding-top: calc(var(--navbar-h, 70px) + 28px);
+  }
+
   .orders-toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -576,15 +588,19 @@
 
   .orders-filters {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .order-card-header {
     padding: 14px 16px;
     gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .order-card-left {
     min-width: unset;
+    width: 100%;
   }
 
   .order-files-preview {
@@ -593,9 +609,43 @@
 
   .order-card-right {
     gap: 8px;
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
   }
+}
 
+@media (max-width: 480px) {
+  .orders-stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .orders-stat {
+    border-right: none !important;
+    border-bottom: 1px solid var(--divider);
+  }
+  
+  .orders-stat:last-child {
+    border-bottom: none;
+  }
+  
   .order-detail-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+  
+  .order-file-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .order-card-actions {
+    flex-direction: column;
+  }
+  
+  .order-card-actions .ph-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

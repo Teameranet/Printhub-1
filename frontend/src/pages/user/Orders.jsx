@@ -19,6 +19,12 @@ const FileIcon = () => (
     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" />
   </svg>
 );
+const EyeIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+);
 const ChevronRightIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="m9 18 6-6-6-6" />
@@ -323,8 +329,20 @@ const Orders = () => {
                         <div className="order-detail-label" style={{ marginBottom: '10px' }}>Files</div>
                         {order.files.map((f) => (
                           <div className="order-file-row" key={f}>
-                            <FileIcon />
-                            <span>{f}</span>
+                            <div className="order-file-info">
+                              <FileIcon />
+                              <span>{f}</span>
+                            </div>
+                            <button
+                              className="ph-btn ph-btn--ghost ph-btn--sm"
+                              title="View File"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(`/uploads/${f}`, '_blank');
+                              }}
+                            >
+                              <EyeIcon /> View
+                            </button>
                           </div>
                         ))}
                       </div>
