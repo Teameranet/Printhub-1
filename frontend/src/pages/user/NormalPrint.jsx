@@ -578,7 +578,7 @@ export default function NormalPrint() {
         <section aria-label="Upload documents">
           <div
             id="np-dropzone"
-            className={`np-drop${drag ? ' np-drop--active' : ''}${files.length ? ' np-drop--compact' : ''}`}
+            className={`np-drop${drag ? ' np-drop--active' : ''}`}
             onDragOver={onDragOver}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
@@ -591,7 +591,7 @@ export default function NormalPrint() {
             <div className={`np-drop-icon${drag ? ' np-drop-icon--bounce' : ''}`}><Icons.Upload /></div>
             <div className="np-drop-text">
               <strong>{drag ? 'Release to upload' : 'Drag & drop your files here'}</strong>
-              <span>or <em onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}>click to browse</em> from your device</span>
+              <span> or <em onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}>click to browse</em> from your device</span>
             </div>
             <div className="np-drop-chips">
               {['PDF', 'DOCX', 'DOC', 'PPT', 'PPTX', 'JPG', 'JPEG', 'PNG'].map(t => (
