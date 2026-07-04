@@ -132,22 +132,7 @@ const Profile = () => {
                   Joined {joinDate}
                 </span>
               </div>
-              <div className="profile-hero-stats">
-                <div className="ph-stat">
-                  <span className="ph-stat-value">12</span>
-                  <span className="ph-stat-label">Orders</span>
-                </div>
-                <div className="ph-stat-divider" />
-                <div className="ph-stat">
-                  <span className="ph-stat-value">4.8</span>
-                  <span className="ph-stat-label flex-center"><StarIcon />Rating</span>
-                </div>
-                <div className="ph-stat-divider" />
-                <div className="ph-stat">
-                  <span className="ph-stat-value">3</span>
-                  <span className="ph-stat-label">Active</span>
-                </div>
-              </div>
+
             </div>
 
             {/* Edit toggle */}

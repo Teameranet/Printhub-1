@@ -470,9 +470,8 @@ const TrackStrip = () => {
             onChange={(e) => setOrderId(e.target.value)}
             aria-label="Order ID"
           />
-          <button className="btn btn-primary" type="submit">Track</button>
+          <button className="hero-search-btn" type="submit">Track</button>
         </form>
-        <a href="#track-page" className="track-link">Open full tracking →</a>
       </div>
     </section>
   );
@@ -509,7 +508,6 @@ const AboutContact = () => {
         </div>
 
         <div className="contact-card" id="contact">
-          <span className="section-eyebrow"><Icon.Star /> Contact us</span>
           <h2 className="contact-title">Send us a message</h2>
           <p className="contact-sub">We usually reply within 4 working hours.</p>
           <form className="contact-form" onSubmit={onSubmit}>
@@ -531,9 +529,11 @@ const AboutContact = () => {
               <label htmlFor="cmsg">Message</label>
               <textarea id="cmsg" required rows="4" className="input textarea" placeholder="Tell us about your project or question…" />
             </div>
-            <button className="btn btn-primary btn-block btn-lg" type="submit">
-              {sent ? 'Message sent ✓' : 'Send message'} {!sent && <Icon.Arrow />}
-            </button>
+            <div className="contact-form-actions">
+              <button className="btn btn-primary" type="submit">
+                {sent ? 'Message sent ✓' : 'Send message'} {!sent && <Icon.Arrow />}
+              </button>
+            </div>
           </form>
 
           <div className="socials">

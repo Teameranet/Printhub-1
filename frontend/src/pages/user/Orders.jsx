@@ -259,6 +259,12 @@ const Orders = () => {
                           <span>{orderDate} · {orderTime}</span>
                         </div>
                       </div>
+                      {order.eta && (
+                        <span className="order-eta order-eta--mobile">
+                          <ClockIcon />
+                          {order.eta}
+                        </span>
+                      )}
                     </div>
 
                     {/* Center: files preview */}
@@ -276,7 +282,7 @@ const Orders = () => {
                     {/* Right: amount + status */}
                     <div className="order-card-right">
                       {order.eta && (
-                        <span className="order-eta">
+                        <span className="order-eta order-eta--desktop">
                           <ClockIcon />
                           {order.eta}
                         </span>

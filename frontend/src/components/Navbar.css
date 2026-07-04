@@ -821,13 +821,13 @@
     gap: 12px;
   }
 
+  /* Keep short name & chevron visible on mobile */
   .profile-trigger .profile-name-short,
   .profile-trigger .chevron {
-    display: none;
+    display: inline-flex;
   }
 
   .profile-trigger {
-    padding: 4px;
     border-radius: var(--r-full);
   }
 }

@@ -110,7 +110,6 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const profileRef = useRef(null);
   const location = useLocation();
@@ -124,24 +123,10 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
     setProfileOpen(false);
   }, [location.pathname]);
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    };
-  }, [mobileOpen]);
+
 
   useEffect(() => {
     const onOutsideClick = (e) => {
@@ -155,6 +140,8 @@ const Navbar = () => {
   const initials = displayName !== 'Account'
     ? displayName.split(/[\s.]+/).map((s) => s[0]).slice(0, 2).join('').toUpperCase()
     : 'PH';
+  const firstWord = displayName.split(' ')[0];
+  const shortName = firstWord.length > 6 ? firstWord.slice(0, 6) + '..' : firstWord;
 
   return (
     <>
@@ -203,7 +190,7 @@ const Navbar = () => {
 
           {/* Primary nav — desktop/tablet */}
           <nav className="navbar-nav" aria-label="Primary navigation">
-            <Link to="/print/normal" className={`nav-link${location.pathname === '/print/normal' ? ' nav-link--active' : ''}`}>Normal Print</Link>
+            {/* <Link to="/print/normal" className={`nav-link${location.pathname === '/print/normal' ? ' nav-link--active' : ''}`}>Normal Print</Link> */}
             <a href="#about" className="nav-link">About Us</a>
             <a href="#services" className="nav-link">Services</a>
             <a href="#contact" className="nav-link">Contact</a>
@@ -230,7 +217,7 @@ const Navbar = () => {
                     aria-label="Open account menu"
                   >
                     <span className="profile-avatar">{initials}</span>
-                    <span className="profile-name-short">{displayName.split(' ')[0]}</span>
+                    <span className="profile-name-short">{shortName}</span>
                     <span className={`chevron${profileOpen ? ' chevron--up' : ''}`}><ChevronDown /></span>
                   </button>
 
@@ -272,55 +259,13 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* Mobile hamburger */}
-            <button
-              className={`hamburger${mobileOpen ? ' hamburger--active' : ''}`}
-              aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-menu"
-              onClick={() => setMobileOpen(v => !v)}
-            >
-              <span className="hamburger-bar" />
-              <span className="hamburger-bar" />
-              <span className="hamburger-bar" />
-            </button>
+
           </div>
         </div>
 
       </header>
 
-      {/* ── Mobile drawer ── */}
-      <div
-        id="mobile-menu"
-        className={`mobile-menu${mobileOpen ? ' mobile-menu--open' : ''}`}
-        aria-hidden={!mobileOpen}
-      >
-        <div className="mobile-menu-inner">
-          <nav className="mobile-nav" aria-label="Mobile navigation">
-            <a href="#about" className="mobile-link" onClick={() => setMobileOpen(false)}>About Us</a>
-            <a href="#services" className="mobile-link" onClick={() => setMobileOpen(false)}>Services</a>
-            <a href="#contact" className="mobile-link" onClick={() => setMobileOpen(false)}>Contact</a>
-          </nav>
 
-          {user && (
-            <>
-              <div className="mobile-menu-divider" role="separator" />
-              <div className="mobile-profile-section">
-                <div className="mobile-profile-info">
-                  <div className="profile-avatar profile-avatar--md">{initials}</div>
-                  <div>
-                    <div className="mobile-profile-name">{user.name || 'Account'}</div>
-                    <div className="mobile-profile-email">{user.email || ''}</div>
-                  </div>
-                </div>
-                <button className="mobile-signout" onClick={() => { logout(); setMobileOpen(false); }}>
-                  <SignOutIcon /> Sign Out
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
 
       {/* ── Auth modal ── */}
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />

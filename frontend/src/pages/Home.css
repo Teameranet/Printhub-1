@@ -231,6 +231,8 @@
   font-size: 14px;
   font-weight: 600;
   border-radius: var(--r-full);
+  border: none;
+  cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -1418,9 +1420,14 @@
   background: var(--bg-elev-1);
   border: 1px solid var(--border-strong);
   border-radius: var(--r-full);
-  padding: 6px 6px 6px 18px;
+  padding: 8px;
   gap: 12px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease;
+}
+
+.track-form:focus-within {
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--primary-soft);
 }
 
 .track-form-tag {
@@ -1434,13 +1441,14 @@
 
 .track-input {
   flex: 1;
-  height: 38px;
+  height: 44px;
   background: transparent;
   border: none;
   outline: none;
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
   font-family: var(--font-mono);
+  padding: 0 8px;
 }
 
 .track-input:focus,
@@ -1583,6 +1591,11 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.contact-form-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .socials {

@@ -8,6 +8,7 @@ import NormalPrint from './pages/user/NormalPrint';
 import Profile from './pages/user/Profile';
 import Orders from './pages/user/Orders';
 import Settings from './pages/user/Settings';
+import Cart from './pages/user/Cart';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminUsers from './pages/admin/AdminUsers';
@@ -32,6 +33,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/cart" element={<Cart />} />
               
               {/* Admin Routes */}
               <Route path="/adminuser/dashboard" element={<AdminDashboard />} />

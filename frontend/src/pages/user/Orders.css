@@ -344,6 +344,10 @@
   white-space: nowrap;
 }
 
+.order-eta--mobile {
+  display: none;
+}
+
 .order-amount {
   font-family: var(--font-display);
   font-size: 16px;
@@ -578,22 +582,39 @@
 
 @media (max-width: 768px) {
   .orders-page {
-    padding-top: calc(var(--navbar-h, 70px) + 28px);
+    padding-top: calc(var(--navbar-h, 70px) + 20px);
+  }
+
+  .orders-wrap {
+    padding: 0 16px;
   }
 
   .orders-toolbar {
     flex-direction: column;
     align-items: stretch;
+    gap: 16px;
+  }
+
+  .orders-search-wrap {
+    min-width: 100%;
   }
 
   .orders-filters {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .orders-filters::-webkit-scrollbar {
+    display: none;
   }
 
   .order-card-header {
-    padding: 14px 16px;
-    gap: 10px;
+    padding: 16px;
+    gap: 12px;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -608,11 +629,30 @@
   }
 
   .order-card-right {
-    gap: 8px;
+    gap: 10px;
     margin-left: 0;
     width: 100%;
-    justify-content: space-between;
-    margin-top: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .order-eta--desktop {
+    display: none;
+  }
+
+  .order-eta--mobile {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .order-amount {
+    margin-right: auto;
+  }
+
+  .order-chevron {
+    margin-left: 4px;
   }
 }
 

@@ -348,7 +348,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 ## Cart Page
 - Display the items in the cart, including document details, specifications, and total price (INR).
 - Allow users to update the quantity of items in the cart.
-- Allow users to edit the specifications of items from the cart page.
+- Allow users to View file & Edit the specifications of items from the cart page.
 - Provide users with a clear total price (INR) for the items in the cart.
 - Enable users to remove items from the cart.
 - Clickable to navigate to the Checkout Page.
