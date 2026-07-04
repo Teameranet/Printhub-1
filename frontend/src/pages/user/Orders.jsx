@@ -50,17 +50,37 @@ const ClockIcon = () => (
     <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
   </svg>
 );
-const FilterIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+/* FilterIcon removed */
+const SlidersIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="4" x2="4" y1="21" y2="14" /><line x1="4" x2="4" y1="10" y2="3" />
+    <line x1="12" x2="12" y1="21" y2="12" /><line x1="12" x2="12" y1="8" y2="3" />
+    <line x1="20" x2="20" y1="21" y2="16" /><line x1="20" x2="20" y1="12" y2="3" />
+    <line x1="2" x2="6" y1="14" y2="14" /><line x1="10" x2="14" y1="8" y2="8" /><line x1="18" x2="22" y1="16" y2="16" />
+  </svg>
+);
+const SortIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="m15 18-3 3-3-3" /><path d="m9 6 3-3 3 3" /><path d="M12 3v18" />
+  </svg>
+);
+const RefreshIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M16 3h5v5" />
+    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 21H3v-5" />
+  </svg>
+);
+const CloseIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M18 6 6 18" /><path d="m6 6 12 12" />
   </svg>
 );
 
 /* ─── Mock Order Data ───────────────────────────────────────── */
 const MOCK_ORDERS = [
   {
-    id: 'ORD-2024-001',
-    date: '2024-06-28T10:30:00',
+    id: 'ORD-2026-001',
+    date: '2026-06-28T10:30:00',
     status: 'delivered',
     type: 'Normal Print',
     files: ['thesis_chapter1.pdf', 'thesis_chapter2.pdf'],
@@ -72,8 +92,8 @@ const MOCK_ORDERS = [
     eta: null,
   },
   {
-    id: 'ORD-2024-002',
-    date: '2024-07-01T14:00:00',
+    id: 'ORD-2026-002',
+    date: '2026-07-01T14:00:00',
     status: 'processing',
     type: 'Normal Print',
     files: ['presentation_deck.pdf'],
@@ -85,8 +105,8 @@ const MOCK_ORDERS = [
     eta: '~45 min',
   },
   {
-    id: 'ORD-2024-003',
-    date: '2024-07-02T09:15:00',
+    id: 'ORD-2026-003',
+    date: '2026-07-02T09:15:00',
     status: 'ready',
     type: 'Normal Print',
     files: ['assignment_cs101.pdf'],
@@ -98,8 +118,8 @@ const MOCK_ORDERS = [
     eta: 'Ready now',
   },
   {
-    id: 'ORD-2024-004',
-    date: '2024-06-20T11:00:00',
+    id: 'ORD-2026-004',
+    date: '2026-06-20T11:00:00',
     status: 'cancelled',
     type: 'Normal Print',
     files: ['report_draft.docx'],
@@ -111,8 +131,8 @@ const MOCK_ORDERS = [
     eta: null,
   },
   {
-    id: 'ORD-2024-005',
-    date: '2024-06-15T16:30:00',
+    id: 'ORD-2026-005',
+    date: '2026-06-15T16:30:00',
     status: 'delivered',
     type: 'Normal Print',
     files: ['notes_sem4.pdf'],
@@ -132,25 +152,94 @@ const STATUS_CONFIG = {
   cancelled: { label: 'Cancelled', cls: 'status--danger' },
   pending: { label: 'Pending', cls: 'status--muted' },
 };
-
-const FILTERS = ['All', 'Processing', 'Ready', 'Delivered', 'Cancelled'];
-
+/* FILTERS removed */
 /* ─── Orders Page ────────────────────────────────────────────── */
 const Orders = () => {
   const { user } = useAuth();
-  const [filter, setFilter] = useState('All');
-  const [search, setSearch] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    status: 'all',
+    color: 'all',
+    binding: 'all',
+    dateRange: 'all',
+    priceRange: 'all',
+  });
+  const [sortBy, setSortBy] = useState('date-desc');
   const [expanded, setExpanded] = useState(null);
 
   if (!user) return <Navigate to="/auth" />;
 
-  const filteredOrders = MOCK_ORDERS.filter((o) => {
-    const matchFilter = filter === 'All' || o.status === filter.toLowerCase().replace(/ /g, '_');
-    const matchSearch =
-      !search ||
-      o.id.toLowerCase().includes(search.toLowerCase()) ||
-      o.files.some((f) => f.toLowerCase().includes(search.toLowerCase()));
-    return matchFilter && matchSearch;
+  const activeFiltersCount = Object.keys(filters).reduce((count, key) => {
+    return filters[key] !== 'all' ? count + 1 : count;
+  }, 0);
+
+  const resetFilters = () => {
+    setFilters({
+      status: 'all',
+      color: 'all',
+      binding: 'all',
+      dateRange: 'all',
+      priceRange: 'all',
+    });
+    setSearchQuery('');
+  };
+
+  /* ─── Filtering Logic ────────────────────────────────────── */
+  const filteredOrders = MOCK_ORDERS.filter((order) => {
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const matchId = order.id.toLowerCase().includes(q);
+      const matchFile = order.files.some((f) => f.toLowerCase().includes(q));
+      if (!matchId && !matchFile) return false;
+    }
+    if (filters.status !== 'all' && order.status !== filters.status) {
+      return false;
+    }
+    if (filters.color !== 'all') {
+      const isColor = filters.color === 'color';
+      if (order.color !== isColor) return false;
+    }
+    if (filters.binding !== 'all' && order.binding.toLowerCase() !== filters.binding.toLowerCase()) {
+      return false;
+    }
+    if (filters.dateRange !== 'all') {
+      const orderTime = new Date(order.date).getTime();
+      const now = Date.now();
+      if (filters.dateRange === '7days' && orderTime < now - 7 * 24 * 3600 * 1000) return false;
+      if (filters.dateRange === '30days' && orderTime < now - 30 * 24 * 3600 * 1000) return false;
+      if (filters.dateRange === '90days' && orderTime < now - 90 * 24 * 3600 * 1000) return false;
+    }
+    if (filters.priceRange !== 'all') {
+      if (filters.priceRange === 'under100' && order.amount >= 100) return false;
+      if (filters.priceRange === '100to250' && (order.amount < 100 || order.amount > 250)) return false;
+      if (filters.priceRange === 'over250' && order.amount <= 250) return false;
+    }
+    return true;
+  });
+
+  /* ─── Sorting Logic ──────────────────────────────────────── */
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
+    switch (sortBy) {
+      case 'date-desc':
+        return new Date(b.date) - new Date(a.date);
+      case 'date-asc':
+        return new Date(a.date) - new Date(b.date);
+      case 'id-asc':
+        return a.id.localeCompare(b.id);
+      case 'id-desc':
+        return b.id.localeCompare(a.id);
+      case 'amount-asc':
+        return a.amount - b.amount;
+      case 'amount-desc':
+        return b.amount - a.amount;
+      case 'files-desc':
+        return b.files.length - a.files.length;
+      case 'files-asc':
+        return a.files.length - b.files.length;
+      default:
+        return 0;
+    }
   });
 
   const totalSpent = MOCK_ORDERS.reduce((s, o) => s + (o.status !== 'cancelled' ? o.amount : 0), 0);
@@ -182,51 +271,197 @@ const Orders = () => {
           ))}
         </div>
 
-        {/* ── Toolbar ── */}
-        <div className="orders-toolbar fade-up">
-          {/* Search */}
-          <div className="orders-search-wrap">
-            <SearchIcon />
+        {/* ── Search & Filter Controls ── */}
+        <div className="orders-controls-row fade-up">
+          <div className="orders-search-box">
+            <span className="orders-search-icon"><SearchIcon /></span>
             <input
-              className="orders-search"
-              type="search"
-              placeholder="Search by order ID or filename…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              className="orders-search-input"
+              placeholder="Search by order ID or filename..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               aria-label="Search orders"
             />
+            {searchQuery && (
+              <button
+                className="orders-clear-search"
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+              >
+                <CloseIcon />
+              </button>
+            )}
           </div>
 
-          {/* Filter pills */}
-          <div className="orders-filters" role="group" aria-label="Filter orders">
-            <FilterIcon />
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                className={`orders-filter-pill${filter === f ? ' orders-filter-pill--active' : ''}`}
-                onClick={() => setFilter(f)}
+          <div className="orders-actions-group">
+            <button
+              className={`orders-filter-toggle${showFilters || activeFiltersCount > 0 ? ' orders-filter-toggle--active' : ''}`}
+              onClick={() => setShowFilters(!showFilters)}
+              aria-expanded={showFilters}
+            >
+              <SlidersIcon />
+              <span>Filters</span>
+              {activeFiltersCount > 0 && (
+                <span className="orders-filter-badge">{activeFiltersCount}</span>
+              )}
+            </button>
+
+            <div className="orders-sort-box">
+              <span className="orders-sort-icon"><SortIcon /></span>
+              <select
+                className="orders-sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                aria-label="Sort orders"
               >
-                {f}
-              </button>
-            ))}
+                <option value="date-desc">Date: Newest</option>
+                <option value="date-asc">Date: Oldest</option>
+                <option value="id-asc">Order ID: A-Z</option>
+                <option value="id-desc">Order ID: Z-A</option>
+                <option value="amount-desc">Price: High to Low</option>
+                <option value="amount-asc">Price: Low to High</option>
+                <option value="files-desc">Files: Most</option>
+                <option value="files-asc">Files: Least</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        {/* ── Orders List ── */}
-        {filteredOrders.length === 0 ? (
-          <div className="orders-empty fade-up">
-            <div className="orders-empty-icon"><PackageIcon /></div>
-            <div className="orders-empty-title">No orders found</div>
-            <div className="orders-empty-sub">
-              {search ? 'Try a different search term.' : 'Place your first print order!'}
+        {/* ── Advanced Filters Panel (Collapsible) ── */}
+        <div className={`orders-filters-panel${showFilters ? ' orders-filters-panel--open' : ''}`}>
+          <div className="orders-filters-grid">
+            {/* Filter Group: Status */}
+            <div className="orders-filter-group">
+              <label>Order Status</label>
+              <div className="orders-filter-chips">
+                {[
+                  { value: 'all', label: 'All' },
+                  { value: 'processing', label: 'Processing' },
+                  { value: 'ready', label: 'Ready' },
+                  { value: 'delivered', label: 'Delivered' },
+                  { value: 'cancelled', label: 'Cancelled' }
+                ].map((chip) => (
+                  <button
+                    key={chip.value}
+                    type="button"
+                    className={`orders-chip${filters.status === chip.value ? ' orders-chip--active' : ''}`}
+                    onClick={() => setFilters(f => ({ ...f, status: chip.value }))}
+                  >
+                    {chip.label}
+                  </button>
+                ))}
+              </div>
             </div>
-            <Link to="/print/normal" className="ph-btn ph-btn--primary">
-              <PrinterIcon /> Start Printing
-            </Link>
+
+            {/* Filter Group: Color Mode */}
+            <div className="orders-filter-group">
+              <label htmlFor="filter-color">Color Mode</label>
+              <select
+                id="filter-color"
+                className="orders-select"
+                value={filters.color}
+                onChange={(e) => setFilters(f => ({ ...f, color: e.target.value }))}
+              >
+                <option value="all">All Modes</option>
+                <option value="bw">Black & White</option>
+                <option value="color">Color</option>
+              </select>
+            </div>
+
+            {/* Filter Group: Binding */}
+            <div className="orders-filter-group">
+              <label htmlFor="filter-binding">Binding Type</label>
+              <select
+                id="filter-binding"
+                className="orders-select"
+                value={filters.binding}
+                onChange={(e) => setFilters(f => ({ ...f, binding: e.target.value }))}
+              >
+                <option value="all">All Binding</option>
+                <option value="None">None</option>
+                <option value="Spiral">Spiral</option>
+                <option value="Staple">Staple</option>
+                <option value="Glue">Glue</option>
+              </select>
+            </div>
+
+            {/* Filter Group: Date Range */}
+            <div className="orders-filter-group">
+              <label htmlFor="filter-date">Date Range</label>
+              <select
+                id="filter-date"
+                className="orders-select"
+                value={filters.dateRange}
+                onChange={(e) => setFilters(f => ({ ...f, dateRange: e.target.value }))}
+              >
+                <option value="all">All Time</option>
+                <option value="7days">Last 7 Days</option>
+                <option value="30days">Last 30 Days</option>
+                <option value="90days">Last 90 Days</option>
+              </select>
+            </div>
+
+            {/* Filter Group: Price Range */}
+            <div className="orders-filter-group">
+              <label htmlFor="filter-price">Order Value</label>
+              <select
+                id="filter-price"
+                className="orders-select"
+                value={filters.priceRange}
+                onChange={(e) => setFilters(f => ({ ...f, priceRange: e.target.value }))}
+              >
+                <option value="all">All Values</option>
+                <option value="under100">Under ₹100</option>
+                <option value="100to250">₹100 - ₹250</option>
+                <option value="over250">Over ₹250</option>
+              </select>
+            </div>
+          </div>
+
+          {(activeFiltersCount > 0 || searchQuery) && (
+            <div className="orders-filters-foot">
+              <span className="orders-filters-summary-text">
+                Found {sortedOrders.length} matching order{sortedOrders.length !== 1 ? 's' : ''}
+              </span>
+              <button
+                type="button"
+                className="orders-filter-reset-btn"
+                onClick={resetFilters}
+              >
+                <RefreshIcon /> Reset Filters
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ── Orders List ── */}
+        {sortedOrders.length === 0 ? (
+          <div className="orders-empty fade-up">
+            <div className="orders-empty-icon">
+              {searchQuery || activeFiltersCount > 0 ? <SearchIcon /> : <PackageIcon />}
+            </div>
+            <div className="orders-empty-title">
+              {searchQuery || activeFiltersCount > 0 ? 'No matching orders found' : 'No orders found'}
+            </div>
+            <div className="orders-empty-sub">
+              {searchQuery || activeFiltersCount > 0 
+                ? 'Try adjusting your search query or filters.' 
+                : 'Place your first print order!'}
+            </div>
+            {(searchQuery || activeFiltersCount > 0) ? (
+              <button type="button" className="orders-reset-all-btn" onClick={resetFilters}>
+                <RefreshIcon /> Clear Search & Filters
+              </button>
+            ) : (
+              <Link to="/print/normal" className="ph-btn ph-btn--primary">
+                <PrinterIcon /> Start Printing
+              </Link>
+            )}
           </div>
         ) : (
           <div className="orders-list">
-            {filteredOrders.map((order) => {
+            {sortedOrders.map((order) => {
               const statusConf = STATUS_CONFIG[order.status] || STATUS_CONFIG.pending;
               const isExpanded = expanded === order.id;
               const orderDate = new Date(order.date).toLocaleDateString('en-IN', {

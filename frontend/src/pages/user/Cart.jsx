@@ -146,6 +146,30 @@ const Icons = {
       <path d="M19 17V5a2 2 0 0 0-2-2H4" />
     </svg>
   ),
+  Search: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8" /><line x1="21" x2="16.65" y1="21" y2="16.65" />
+    </svg>
+  ),
+  Sliders: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="4" x2="4" y1="21" y2="14" /><line x1="4" x2="4" y1="10" y2="3" />
+      <line x1="12" x2="12" y1="21" y2="12" /><line x1="12" x2="12" y1="8" y2="3" />
+      <line x1="20" x2="20" y1="21" y2="16" /><line x1="20" x2="20" y1="12" y2="3" />
+      <line x1="2" x2="6" y1="14" y2="14" /><line x1="10" x2="14" y1="8" y2="8" /><line x1="18" x2="22" y1="16" y2="16" />
+    </svg>
+  ),
+  Sort: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m15 18-3 3-3-3" /><path d="m9 6 3-3 3 3" /><path d="M12 3v18" />
+    </svg>
+  ),
+  Refresh: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M16 3h5v5" />
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 21H3v-5" />
+    </svg>
+  ),
 };
 
 /* ─── Pricing (mirrors NormalPrint.jsx) ──────────────────────── */
@@ -731,6 +755,15 @@ function CartEmpty() {
 }
 
 /* ─── Page ───────────────────────────────────────────────────── */
+function getFormatCategory(filename) {
+  const ext = (filename || '').split('.').pop().toLowerCase();
+  if (ext === 'pdf') return 'pdf';
+  if (['jpg', 'jpeg', 'png'].includes(ext)) return 'image';
+  if (['doc', 'docx'].includes(ext)) return 'word';
+  if (['ppt', 'pptx'].includes(ext)) return 'ppt';
+  return 'other';
+}
+
 export default function Cart() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -739,6 +772,101 @@ export default function Cart() {
   const [editItem, setEditItem] = useState(null);
   const [removeTarget, setRemoveTarget] = useState(null);
   const [removed, setRemoved] = useState(null);
+
+  /* ─── Search, Filter, Sort States ────────────────────────── */
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    format: 'all',
+    color: 'all',
+    paperSize: 'all',
+    paperType: 'all',
+    sides: 'all',
+    lamination: 'all',
+    binding: 'all',
+  });
+  const [sortBy, setSortBy] = useState('added-desc');
+
+  const activeFiltersCount = Object.keys(filters).reduce((count, key) => {
+    return filters[key] !== 'all' ? count + 1 : count;
+  }, 0);
+
+  const resetFilters = useCallback(() => {
+    setFilters({
+      format: 'all',
+      color: 'all',
+      paperSize: 'all',
+      paperType: 'all',
+      sides: 'all',
+      lamination: 'all',
+      binding: 'all',
+    });
+    setSearchQuery('');
+  }, []);
+
+  /* ─── Filtering Logic ────────────────────────────────────── */
+  const filteredItems = items.filter((item) => {
+    if (searchQuery.trim() && !item.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+      return false;
+    }
+    if (filters.format !== 'all') {
+      const formatCat = getFormatCategory(item.name);
+      if (filters.format !== formatCat) return false;
+    }
+    if (filters.color !== 'all' && item.spec.color !== filters.color) {
+      return false;
+    }
+    if (filters.paperSize !== 'all' && item.spec.paperSize !== filters.paperSize) {
+      return false;
+    }
+    if (filters.paperType !== 'all' && item.spec.paperType !== filters.paperType) {
+      return false;
+    }
+    if (filters.sides !== 'all' && item.spec.sides !== filters.sides) {
+      return false;
+    }
+    if (filters.lamination !== 'all' && item.spec.lamination !== filters.lamination) {
+      return false;
+    }
+    if (filters.binding !== 'all' && item.spec.binding !== filters.binding) {
+      return false;
+    }
+    return true;
+  });
+
+  /* ─── Sorting Logic ──────────────────────────────────────── */
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    switch (sortBy) {
+      case 'added-desc':
+        return new Date(b.addedAt) - new Date(a.addedAt);
+      case 'added-asc':
+        return new Date(a.addedAt) - new Date(b.addedAt);
+      case 'name-asc':
+        return a.name.localeCompare(b.name);
+      case 'name-desc':
+        return b.name.localeCompare(a.name);
+      case 'size-asc':
+        return a.size - b.size;
+      case 'size-desc':
+        return b.size - a.size;
+      case 'pages-asc':
+        return a.pages - b.pages;
+      case 'pages-desc':
+        return b.pages - a.pages;
+      case 'price-asc': {
+        const costA = calcCost(a.spec, a.pages).total;
+        const costB = calcCost(b.spec, b.pages).total;
+        return costA - costB;
+      }
+      case 'price-desc': {
+        const costA = calcCost(a.spec, a.pages).total;
+        const costB = calcCost(b.spec, b.pages).total;
+        return costB - costA;
+      }
+      default:
+        return 0;
+    }
+  });
 
   const updateCopies = useCallback((id, copies) => {
     setItems((prev) =>
@@ -839,19 +967,228 @@ export default function Cart() {
                 </p>
               </div>
 
-              <div className="cart-items-list">
-                {items.map((item, i) => (
-                  <CartItemCard
-                    key={item.id}
-                    item={item}
-                    index={i}
-                    onUpdateCopies={updateCopies}
-                    onUpdateSpec={updateSpec}
-                    onRemove={setRemoveTarget}
-                    onPreview={setPreviewItem}
-                    onEdit={setEditItem}
+              {/* ── Search & Filter Controls ── */}
+              <div className="cart-controls-row">
+                <div className="cart-search-box">
+                  <span className="cart-search-icon"><Icons.Search /></span>
+                  <input
+                    type="text"
+                    className="cart-search-input"
+                    placeholder="Search documents by name..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                ))}
+                  {searchQuery && (
+                    <button
+                      className="cart-clear-search"
+                      onClick={() => setSearchQuery('')}
+                      aria-label="Clear search"
+                    >
+                      <Icons.Close />
+                    </button>
+                  )}
+                </div>
+
+                <div className="cart-actions-group">
+                  <button
+                    className={`cart-filter-toggle${showFilters || activeFiltersCount > 0 ? ' cart-filter-toggle--active' : ''}`}
+                    onClick={() => setShowFilters(!showFilters)}
+                    aria-expanded={showFilters}
+                  >
+                    <Icons.Sliders />
+                    <span>Filters</span>
+                    {activeFiltersCount > 0 && (
+                      <span className="cart-filter-badge">{activeFiltersCount}</span>
+                    )}
+                  </button>
+
+                  <div className="cart-sort-box">
+                    <span className="cart-sort-icon"><Icons.Sort /></span>
+                    <select
+                      className="cart-sort-select"
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      aria-label="Sort items"
+                    >
+                      <option value="added-desc">Date Added: Newest</option>
+                      <option value="added-asc">Date Added: Oldest</option>
+                      <option value="name-asc">Name: A-Z</option>
+                      <option value="name-desc">Name: Z-A</option>
+                      <option value="size-desc">File Size: Largest</option>
+                      <option value="size-asc">File Size: Smallest</option>
+                      <option value="pages-desc">Pages: Most</option>
+                      <option value="pages-asc">Pages: Least</option>
+                      <option value="price-desc">Cost: Highest</option>
+                      <option value="price-asc">Cost: Lowest</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Advanced Filters Panel (Collapsible) ── */}
+              <div className={`cart-filters-panel${showFilters ? ' cart-filters-panel--open' : ''}`}>
+                <div className="cart-filters-grid">
+                  {/* Filter Group: Format */}
+                  <div className="cart-filter-group">
+                    <label>File Format</label>
+                    <div className="cart-filter-chips">
+                      {[
+                        { value: 'all', label: 'All' },
+                        { value: 'pdf', label: 'PDF' },
+                        { value: 'image', label: 'Images' },
+                        { value: 'word', label: 'Word' },
+                        { value: 'ppt', label: 'PPT' },
+                        { value: 'other', label: 'Others' }
+                      ].map((chip) => (
+                        <button
+                          key={chip.value}
+                          type="button"
+                          className={`cart-chip${filters.format === chip.value ? ' cart-chip--active' : ''}`}
+                          onClick={() => setFilters(f => ({ ...f, format: chip.value }))}
+                        >
+                          {chip.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Filter Group: Color */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-color">Color Mode</label>
+                    <select
+                      id="filter-color"
+                      className="cart-select"
+                      value={filters.color}
+                      onChange={(e) => setFilters(f => ({ ...f, color: e.target.value }))}
+                    >
+                      <option value="all">All Modes</option>
+                      <option value="bw">Black & White</option>
+                      <option value="color">Color</option>
+                    </select>
+                  </div>
+
+                  {/* Filter Group: Paper Size */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-size">Paper Size</label>
+                    <select
+                      id="filter-size"
+                      className="cart-select"
+                      value={filters.paperSize}
+                      onChange={(e) => setFilters(f => ({ ...f, paperSize: e.target.value }))}
+                    >
+                      <option value="all">All Sizes</option>
+                      {['A4', 'A3', 'A5', 'Letter', 'Legal'].map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Filter Group: Paper Type */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-type">Paper Type</label>
+                    <select
+                      id="filter-type"
+                      className="cart-select"
+                      value={filters.paperType}
+                      onChange={(e) => setFilters(f => ({ ...f, paperType: e.target.value }))}
+                    >
+                      <option value="all">All Types</option>
+                      {['Bond', 'Glossy', 'Matte', 'Cardstock'].map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Filter Group: Sides */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-sides">Printing Sides</label>
+                    <select
+                      id="filter-sides"
+                      className="cart-select"
+                      value={filters.sides}
+                      onChange={(e) => setFilters(f => ({ ...f, sides: e.target.value }))}
+                    >
+                      <option value="all">All Sides</option>
+                      <option value="single">Single-Sided</option>
+                      <option value="double">Double-Sided</option>
+                    </select>
+                  </div>
+
+                  {/* Filter Group: Lamination */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-lam">Lamination</label>
+                    <select
+                      id="filter-lam"
+                      className="cart-select"
+                      value={filters.lamination}
+                      onChange={(e) => setFilters(f => ({ ...f, lamination: e.target.value }))}
+                    >
+                      <option value="all">All Lamination</option>
+                      <option value="None">None</option>
+                      <option value="Glossy Lamination">Glossy</option>
+                      <option value="Matte Lamination">Matte</option>
+                    </select>
+                  </div>
+
+                  {/* Filter Group: Binding */}
+                  <div className="cart-filter-group">
+                    <label htmlFor="filter-bind">Binding</label>
+                    <select
+                      id="filter-bind"
+                      className="cart-select"
+                      value={filters.binding}
+                      onChange={(e) => setFilters(f => ({ ...f, binding: e.target.value }))}
+                    >
+                      <option value="all">All Binding</option>
+                      <option value="None">None</option>
+                      <option value="Spiral">Spiral</option>
+                      <option value="Stapled">Stapled</option>
+                    </select>
+                  </div>
+                </div>
+
+                {(activeFiltersCount > 0 || searchQuery) && (
+                  <div className="cart-filters-foot">
+                    <span className="cart-filters-summary-text">
+                      Found {filteredItems.length} matching document{filteredItems.length !== 1 ? 's' : ''}
+                    </span>
+                    <button
+                      type="button"
+                      className="cart-filter-reset-btn"
+                      onClick={resetFilters}
+                    >
+                      <Icons.Refresh /> Reset Filters
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <div className="cart-items-list">
+                {sortedItems.length === 0 ? (
+                  <div className="cart-no-results fade-up">
+                    <div className="cart-no-results-icon">
+                      <Icons.Search />
+                    </div>
+                    <h3>No matching documents</h3>
+                    <p>We couldn't find any documents matching "{searchQuery}" or your selected filters.</p>
+                    <button type="button" className="cart-reset-all-btn" onClick={resetFilters}>
+                      <Icons.Refresh /> Clear Search & Filters
+                    </button>
+                  </div>
+                ) : (
+                  sortedItems.map((item, i) => (
+                    <CartItemCard
+                      key={item.id}
+                      item={item}
+                      index={i}
+                      onUpdateCopies={updateCopies}
+                      onUpdateSpec={updateSpec}
+                      onRemove={setRemoveTarget}
+                      onPreview={setPreviewItem}
+                      onEdit={setEditItem}
+                    />
+                  ))
+                )}
               </div>
             </section>
 
