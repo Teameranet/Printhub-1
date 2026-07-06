@@ -13,7 +13,6 @@
     "@react-oauth/google": "^0.13.5",
     "axios": "^1.18.1",
     "lucide-react": "^1.23.0",
-    "printhub": "file:..",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1"
