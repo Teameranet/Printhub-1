@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +27,15 @@ app.use('/api/products', productRoutes);
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'PrintHub API is running.' });
 });
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
+  });
+}
 
 // Basic Error handler
 app.use((err, req, res, next) => {
