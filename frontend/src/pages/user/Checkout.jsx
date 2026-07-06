@@ -701,9 +701,14 @@ function OrderSidebar({ items, method, pickupData, deliveryData }) {
 
       <div className="co-sidebar-divider" />
 
-      <div className="co-sidebar-secure">
+      <p className="cart-summary-note" style={{ marginTop: 0, marginBottom: '16px' }}>
+        <Icons.Info /> Prices include 18% GST. Final amount confirmed at checkout.
+      </p>
+
+
+      {/* <div className="co-sidebar-secure">
         <Icons.Lock /> Secured by 256-bit SSL encryption
-      </div>
+      </div> */}
     </aside>
   );
 }
@@ -929,7 +934,7 @@ export default function Checkout() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    
+
     setShowPaymentModal(true);
   };
 
@@ -999,13 +1004,13 @@ export default function Checkout() {
             <h3 className="co-modal-title">Payment Simulation</h3>
             <p className="co-modal-sub">Choose the outcome of the payment for testing.</p>
             <div className="co-modal-actions">
-              <button 
+              <button
                 className="co-btn co-btn--primary"
                 onClick={() => processOrder(true)}
               >
                 Payment successfully
               </button>
-              <button 
+              <button
                 className="co-btn co-btn--ghost"
                 onClick={() => processOrder(false)}
               >
@@ -1062,9 +1067,7 @@ export default function Checkout() {
               )}
             </div>
 
-            <div className="dropzone-info-box" style={{ marginTop: '24px', marginBottom: '8px' }}>
-              <Icons.Info /> Prices include 18% GST. Final amount confirmed at checkout.
-            </div>
+
 
             {/* ── Navigation Buttons ── */}
             <div className="co-nav-btns">
@@ -1099,12 +1102,7 @@ export default function Checkout() {
         {/* ── Mobile Sticky Bar (matches Cart Page) ── */}
         <div className="co-mobile-bar">
           <div className="co-mobile-bar-inner">
-            <div className="co-mobile-stats">
-              <div className="co-mobile-stat">
-                <span className="co-mobile-stat-label">Grand Total</span>
-                <span className="co-mobile-stat-val co-mobile-stat-val--price">₹{grandTotal.toFixed(2)}</span>
-              </div>
-            </div>
+
             <div className="co-mobile-actions">
               <Link to="/cart" className="co-btn co-btn--ghost co-mobile-btn" id="co-btn-back-to-cart-mobile">
                 <Icons.ChevronLeft /> Back to Cart
@@ -1118,7 +1116,7 @@ export default function Checkout() {
                 {isPlacing ? (
                   <><span className="co-spinner" aria-hidden="true" /> Placing…</>
                 ) : (
-                  <><Icons.Check /> Place Order</>
+                  <><Icons.Check /> Place Order · ₹{grandTotal.toFixed(2)}</>
                 )}
               </button>
             </div>

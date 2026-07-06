@@ -1201,29 +1201,14 @@ export default function Cart() {
         {items.length > 0 && (
           <div className="cart-mobile-bar" role="complementary" aria-label="Order summary">
             <div className="cart-mobile-bar-inner">
-              <div className="cart-mobile-stats">
-                <div className="cart-mobile-stat">
-                  <span className="cart-mobile-stat-label">Total Files</span>
-                  <span className="cart-mobile-stat-val">{items.length}</span>
-                </div>
-                <div className="cart-mobile-stat-div" />
-                <div className="cart-mobile-stat">
-                  <span className="cart-mobile-stat-label">Total Sheets</span>
-                  <span className="cart-mobile-stat-val">{totalSheets}</span>
-                </div>
-                <div className="cart-mobile-stat-div" />
-                <div className="cart-mobile-stat">
-                  <span className="cart-mobile-stat-label">Grand Total</span>
-                  <span className="cart-mobile-stat-val cart-mobile-stat-val--price">₹{(grandTotal + gst).toFixed(2)}</span>
-                </div>
-              </div>
+
               <div className="cart-mobile-actions">
                 <p className="cart-mobile-note">Includes 18% GST</p>
                 <button
                   className="cart-checkout-btn cart-checkout-btn--mobile"
                   onClick={handleCheckout}
                 >
-                  <Icons.Checkout /> Checkout · ₹{(grandTotal + gst).toFixed(2)}
+                  <Icons.Checkout /> Proceed to Checkout · ₹{(grandTotal + gst).toFixed(2)}
                 </button>
               </div>
             </div>

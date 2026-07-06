@@ -593,11 +593,7 @@ export default function NormalPrint() {
               <strong>{drag ? 'Release to upload' : 'Drag & drop your files here'}</strong>
               <span> or <em onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}>click to browse</em> from your device</span>
             </div>
-            <div className="np-drop-chips">
-              {['PDF', 'DOCX', 'DOC', 'PPT', 'PPTX', 'JPG', 'JPEG', 'PNG'].map(t => (
-                <span key={t} className="np-drop-chip">{t}</span>
-              ))}
-            </div>
+            <div className="np-drop-meta">PDF, DOCX, JPG, PNG & PPT files are only allowed.</div>
             <div className="np-drop-limit">
               <Icons.Info />
               Max total size: <strong>50 MB</strong>&ensp;·&ensp;Multiple files supported

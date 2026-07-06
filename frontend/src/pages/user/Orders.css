@@ -657,19 +657,7 @@
 }
 
 @media (max-width: 480px) {
-  .orders-stats-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .orders-stat {
-    border-right: none !important;
-    border-bottom: 1px solid var(--divider);
-  }
-  
-  .orders-stat:last-child {
-    border-bottom: none;
-  }
-  
+
   .order-detail-grid {
     grid-template-columns: 1fr;
   }

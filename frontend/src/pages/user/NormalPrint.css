@@ -96,7 +96,7 @@
   justify-content: center;
 }
 
-.np-drop--compact .np-drop-chips,
+.np-drop--compact .np-drop-meta,
 .np-drop--compact .np-drop-limit { display: none; }
 
 .np-drop--compact .np-drop-icon {
@@ -136,24 +136,12 @@
   cursor: pointer;
 }
 
-.np-drop-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.np-drop-chip {
-  padding: 4px 10px;
-  background: var(--bg-elev-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r-full);
+.np-drop-meta {
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
   letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin-top: 4px;
 }
 
 .np-drop-limit {

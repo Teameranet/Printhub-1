@@ -3014,3 +3014,8 @@
   justify-content: center;
   width: 100%;
 }
+@media (max-width: 540px) {
+  .co-pickup-grid {
+    grid-template-columns: 1fr;
+  }
+}
