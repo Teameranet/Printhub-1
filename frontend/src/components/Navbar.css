@@ -383,7 +383,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #c97a0b, #e8980d);
+  background: #7e57c2;
   color: #fff;
   font-family: var(--font-mono);
   font-size: 10px;

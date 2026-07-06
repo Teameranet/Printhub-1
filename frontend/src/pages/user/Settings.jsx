@@ -99,32 +99,10 @@ const Settings = () => {
     sms: true,
   });
 
-  /* ── Print defaults ── */
-  const [printDefaults, setPrintDefaults] = useState({
-    color: 'bw',          // 'bw' | 'color'
-    sides: 'single',      // 'single' | 'double'
-    orientation: 'portrait', // 'portrait' | 'landscape'
-    paperSize: 'A4',
-    binding: 'none',
-    copies: 1,
-  });
-
   /* ── Security ── */
   const [pwForm, setPwForm] = useState({ current: '', next: '', confirm: '' });
   const [pwError, setPwError] = useState('');
   const [pwSuccess, setPwSuccess] = useState(false);
-
-  /* ── Privacy ── */
-  const [privacy, setPrivacy] = useState({
-    analytics: true,
-    saveHistory: true,
-  });
-
-  /* ── Appearance ── */
-  const [appearance, setAppearance] = useState({
-    theme: 'system',  // 'light' | 'dark' | 'system'
-    density: 'comfortable', // 'comfortable' | 'compact'
-  });
 
   /* ── Saved toast ── */
   const [toast, setToast] = useState(null);
@@ -137,8 +115,6 @@ const Settings = () => {
   };
 
   const handleSaveNotifs = () => showToast('Notification preferences saved.');
-  const handleSavePrint = () => showToast('Default print settings saved.');
-  const handleSaveAppearance = () => showToast('Appearance settings saved.');
 
   const handlePasswordChange = (e) => {
     e.preventDefault();
@@ -156,14 +132,6 @@ const Settings = () => {
       setPwError(result.error || 'Failed to update password.');
     }
   };
-
-  const PAPER_SIZES = ['A4', 'A3', 'Letter', 'Legal'];
-  const BINDING_OPTIONS = ['None', 'Staple', 'Spiral', 'Glue'];
-  const THEME_OPTIONS = [
-    { value: 'light', label: 'Light' },
-    { value: 'dark', label: 'Dark' },
-    { value: 'system', label: 'System' },
-  ];
 
   return (
     <div className="settings-page">
@@ -183,7 +151,7 @@ const Settings = () => {
           </div>
         )}
 
-        <div className="settings-grid">
+        <div className="settings-grid animate-fade-in">
 
           {/* ── Notifications ── */}
           <SettingsSection icon={<BellIcon />} iconCls="ph-card-icon--primary" title="Notifications" sub="Control how PrintHub keeps you informed">
@@ -195,151 +163,6 @@ const Settings = () => {
             <div className="settings-section-footer">
               <button className="ph-btn ph-btn--primary ph-btn--sm" onClick={handleSaveNotifs}>
                 <SaveIcon /> Save Preferences
-              </button>
-            </div>
-          </SettingsSection>
-
-          {/* ── Print Defaults ── */}
-          <SettingsSection icon={<PrinterIcon />} iconCls="ph-card-icon--accent" title="Print Defaults" sub="Pre-fill settings when placing new orders">
-            {/* Color Mode */}
-            <div className="settings-field-row">
-              <div className="settings-field-info">
-                <div className="settings-field-label">Color Mode</div>
-                <div className="settings-field-sub">Default print color preference</div>
-              </div>
-              <div className="settings-pill-group">
-                {[{ v: 'bw', l: 'B&W' }, { v: 'color', l: 'Color' }].map(({ v, l }) => (
-                  <button
-                    key={v}
-                    className={`settings-pill${printDefaults.color === v ? ' settings-pill--active' : ''}`}
-                    onClick={() => setPrintDefaults(p => ({ ...p, color: v }))}
-                  >{l}</button>
-                ))}
-              </div>
-            </div>
-
-            {/* Sides */}
-            <div className="settings-field-row">
-              <div className="settings-field-info">
-                <div className="settings-field-label">Sides</div>
-                <div className="settings-field-sub">Single or double-sided printing</div>
-              </div>
-              <div className="settings-pill-group">
-                {[{ v: 'single', l: 'Single' }, { v: 'double', l: 'Double' }].map(({ v, l }) => (
-                  <button
-                    key={v}
-                    className={`settings-pill${printDefaults.sides === v ? ' settings-pill--active' : ''}`}
-                    onClick={() => setPrintDefaults(p => ({ ...p, sides: v }))}
-                  >{l}</button>
-                ))}
-              </div>
-            </div>
-
-            {/* Orientation */}
-            <div className="settings-field-row">
-              <div className="settings-field-info">
-                <div className="settings-field-label">Orientation</div>
-                <div className="settings-field-sub">Page orientation</div>
-              </div>
-              <div className="settings-pill-group">
-                {[{ v: 'portrait', l: 'Portrait' }, { v: 'landscape', l: 'Landscape' }].map(({ v, l }) => (
-                  <button
-                    key={v}
-                    className={`settings-pill${printDefaults.orientation === v ? ' settings-pill--active' : ''}`}
-                    onClick={() => setPrintDefaults(p => ({ ...p, orientation: v }))}
-                  >{l}</button>
-                ))}
-              </div>
-            </div>
-
-            {/* Paper size + Binding */}
-            <div className="settings-inline-grid">
-              <div className="settings-field-col">
-                <label className="settings-field-label" htmlFor="paper-size">Paper Size</label>
-                <select
-                  id="paper-size"
-                  className="settings-select"
-                  value={printDefaults.paperSize}
-                  onChange={(e) => setPrintDefaults(p => ({ ...p, paperSize: e.target.value }))}
-                >
-                  {PAPER_SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
-                </select>
-              </div>
-              <div className="settings-field-col">
-                <label className="settings-field-label" htmlFor="binding-type">Binding</label>
-                <select
-                  id="binding-type"
-                  className="settings-select"
-                  value={printDefaults.binding}
-                  onChange={(e) => setPrintDefaults(p => ({ ...p, binding: e.target.value }))}
-                >
-                  {BINDING_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
-                </select>
-              </div>
-              <div className="settings-field-col">
-                <label className="settings-field-label" htmlFor="default-copies">Default Copies</label>
-                <input
-                  id="default-copies"
-                  type="number"
-                  min={1}
-                  max={99}
-                  className="settings-input"
-                  value={printDefaults.copies}
-                  onChange={(e) => setPrintDefaults(p => ({ ...p, copies: Number(e.target.value) }))}
-                />
-              </div>
-            </div>
-
-            <div className="settings-section-footer">
-              <button className="ph-btn ph-btn--primary ph-btn--sm" onClick={handleSavePrint}>
-                <SaveIcon /> Save Defaults
-              </button>
-            </div>
-          </SettingsSection>
-
-          {/* ── Appearance ── */}
-          <SettingsSection icon={<LayoutIcon />} iconCls="ph-card-icon--info" title="Appearance" sub="Customize the look and feel of PrintHub">
-            {/* Theme */}
-            <div className="settings-field-row">
-              <div className="settings-field-info">
-                <div className="settings-field-label">Theme</div>
-                <div className="settings-field-sub">Light, dark, or follow system</div>
-              </div>
-              <div className="settings-theme-group">
-                {THEME_OPTIONS.map(({ value, label }) => (
-                  <button
-                    key={value}
-                    className={`settings-theme-btn${appearance.theme === value ? ' settings-theme-btn--active' : ''}`}
-                    onClick={() => setAppearance(a => ({ ...a, theme: value }))}
-                  >
-                    <span className={`settings-theme-swatch settings-theme-swatch--${value}`} />
-                    {label}
-                    {appearance.theme === value && <CheckIcon />}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Density */}
-            <div className="settings-field-row">
-              <div className="settings-field-info">
-                <div className="settings-field-label">Density</div>
-                <div className="settings-field-sub">Adjust spacing across the app</div>
-              </div>
-              <div className="settings-pill-group">
-                {[{ v: 'comfortable', l: 'Comfortable' }, { v: 'compact', l: 'Compact' }].map(({ v, l }) => (
-                  <button
-                    key={v}
-                    className={`settings-pill${appearance.density === v ? ' settings-pill--active' : ''}`}
-                    onClick={() => setAppearance(a => ({ ...a, density: v }))}
-                  >{l}</button>
-                ))}
-              </div>
-            </div>
-
-            <div className="settings-section-footer">
-              <button className="ph-btn ph-btn--primary ph-btn--sm" onClick={handleSaveAppearance}>
-                <SaveIcon /> Save Appearance
               </button>
             </div>
           </SettingsSection>
@@ -393,17 +216,6 @@ const Settings = () => {
                 </button>
               </div>
             </form>
-          </SettingsSection>
-
-          {/* ── Privacy ── */}
-          <SettingsSection icon={<ShieldIcon />} iconCls="ph-card-icon--muted" title="Privacy" sub="Manage your data and history">
-            <ToggleRow id="priv-analytics" label="Usage Analytics"  sub="Help improve PrintHub by sharing anonymous data"    checked={privacy.analytics}    onChange={(v) => setPrivacy(p => ({ ...p, analytics: v }))} />
-            <ToggleRow id="priv-history"   label="Save Print History" sub="Store order history for quick reordering"        checked={privacy.saveHistory}  onChange={(v) => setPrivacy(p => ({ ...p, saveHistory: v }))} />
-            <div className="settings-section-footer">
-              <button className="ph-btn ph-btn--ghost ph-btn--sm" onClick={() => showToast('Privacy settings saved.')}>
-                <SaveIcon /> Save Privacy
-              </button>
-            </div>
           </SettingsSection>
 
           {/* ── Danger Zone ── */}
