@@ -117,10 +117,11 @@ const Hero = () => {
       </div>
       <div className="container hero-inner">
         <div className="hero-eyebrow">
-          <span className="hero-dot" /> Online print studio · Open 24×7
+          <span className="hero-dot" /> Online printing service · Open 24×7
         </div>
         <h1 id="hero-title" className="hero-title">
-          Fast, easy online printing —<br />
+          Fast, easy online printing <br />
+          {/* — */}
           <span className="hero-title-accent">upload, configure, order in minutes.</span>
         </h1>
         <p className="hero-sub">
