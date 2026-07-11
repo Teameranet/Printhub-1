@@ -151,12 +151,12 @@ const Navbar = () => {
           <div className="topbar-contact">
             <a href="tel:+18005557768" className="topbar-link">
               <PhoneIcon />
-              <span>+1 (800) 555-PRNT</span>
+              <span>+91 8669727070</span>
             </a>
             <span className="topbar-dot" aria-hidden="true" />
-            <a href="mailto:support@printhub.com" className="topbar-link">
+            <a href="mailto:01Printhub@gmail.com" className="topbar-link">
               <MailIcon />
-              <span>support@printhub.com</span>
+              <span>01Printhub@gmail.com</span>
             </a>
           </div>
 

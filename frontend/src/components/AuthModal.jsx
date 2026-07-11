@@ -415,9 +415,7 @@ const AuthModal = ({ open, onClose, defaultMode = 'signin' }) => {
           <div className="auth-brand-inner">
             <div className="auth-brand-head">
               <img src="/Printhub_logo.png" alt="printHub" className="auth-brand-logo" />
-              <span className="auth-brand-tag">
-                <span className="auth-brand-dot" /> printHub · v1
-              </span>
+
             </div>
 
             <div className="auth-brand-body">
@@ -680,29 +678,7 @@ const AuthModal = ({ open, onClose, defaultMode = 'signin' }) => {
                     <span>Continue with Google</span>
                   </button>
 
-                  <p className="auth-foot-note">
-                    {mode === 'signin' ? (
-                      <>New to printHub?{' '}
-                        <button
-                          type="button"
-                          className="auth-textlink auth-textlink--inline"
-                          onClick={() => { setErrors({}); setMode('signup'); }}
-                        >
-                          Create an account
-                        </button>
-                      </>
-                    ) : (
-                      <>Already have an account?{' '}
-                        <button
-                          type="button"
-                          className="auth-textlink auth-textlink--inline"
-                          onClick={() => { setErrors({}); setMode('signin'); }}
-                        >
-                          Sign in
-                        </button>
-                      </>
-                    )}
-                  </p>
+
                 </form>
               </>
             )}

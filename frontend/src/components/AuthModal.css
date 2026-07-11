@@ -132,29 +132,7 @@
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
 }
 
-.auth-brand-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: var(--auth-ink-stamp);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid var(--auth-rule);
-  padding: 5px 10px;
-  border-radius: 999px;
-}
 
-.auth-brand-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
-}
 
 .auth-brand-body { display: flex; flex-direction: column; gap: 14px; }
 

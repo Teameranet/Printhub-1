@@ -334,13 +334,10 @@ const Services = () => {
   return (
     <section className="services-section section" id="services" aria-labelledby="services-title">
       <div className="container">
-        <div className="section-head section-head--row">
-          <div>
-            <span className="section-eyebrow"><Icon.Star /> Popular services</span>
-            <h2 id="services-title" className="section-title">Built for the things you print most</h2>
-            <p className="section-sub">Pick a starting point — every service opens a tailored configurator with the right defaults.</p>
-          </div>
-          <a href="#all-services" className="text-link">Browse all services <Icon.Arrow /></a>
+        <div className="section-head section-head--center">
+          <span className="section-eyebrow"><Icon.Star /> Popular services</span>
+          <h2 id="services-title" className="section-title">Built for the things you print most</h2>
+          <p className="section-sub">Pick a starting point — every service opens a tailored configurator with the right defaults.</p>
         </div>
 
         <div className="services-grid">
@@ -363,6 +360,10 @@ const Services = () => {
               </div>
             </a>
           ))}
+        </div>
+
+        <div className="how-cta">
+          <a href="#all-services" className="text-link">Browse all services <Icon.Arrow /></a>
         </div>
       </div>
     </section>
