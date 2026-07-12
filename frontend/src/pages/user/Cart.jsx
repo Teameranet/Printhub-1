@@ -773,6 +773,11 @@ export default function Cart() {
   const [removeTarget, setRemoveTarget] = useState(null);
   const [removed, setRemoved] = useState(null);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
+
   /* ─── Search, Filter, Sort States ────────────────────────── */
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);

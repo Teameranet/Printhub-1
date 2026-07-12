@@ -371,6 +371,10 @@
   gap: 20px;
 }
 
+.settings-pw-form .settings-section-footer {
+  margin: 0 -28px;
+}
+
 .settings-pw-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -202,7 +202,12 @@ const Navbar = () => {
             {user ? (
               <>
                 {/* Cart */}
-                <Link to="/cart" className="icon-btn cart-btn" aria-label={`Cart — ${cartCount} items`}>
+                <Link
+                  to="/cart"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                  className="icon-btn cart-btn"
+                  aria-label={`Cart — ${cartCount} items`}
+                >
                   <CartIcon />
                   {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
                 </Link>
@@ -231,9 +236,9 @@ const Navbar = () => {
                         </div>
                       </div>
                       <div className="profile-menu-body">
-                        <Link to="/profile" className="profile-item" role="menuitem"><UserIcon />    Profile</Link>
-                        <Link to="/orders" className="profile-item" role="menuitem"><PackageIcon /> Orders</Link>
-                        <Link to="/settings" className="profile-item" role="menuitem"><SettingsIcon />Settings</Link>
+                        <Link to="/profile" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })} className="profile-item" role="menuitem"><UserIcon />    Profile</Link>
+                        <Link to="/orders" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })} className="profile-item" role="menuitem"><PackageIcon /> Orders</Link>
+                        <Link to="/settings" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })} className="profile-item" role="menuitem"><SettingsIcon />Settings</Link>
                       </div>
                       <div className="profile-menu-footer">
                         <button className="profile-item profile-item--danger" onClick={logout} role="menuitem">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Profile.css';
@@ -76,6 +76,10 @@ const Profile = () => {
     mobile: user?.mobile || user?.identifier || '',
   });
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   if (!user) return <Navigate to="/auth" />;
 

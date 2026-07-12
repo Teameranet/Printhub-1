@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Orders.css';
@@ -167,6 +167,10 @@ const Orders = () => {
   });
   const [sortBy, setSortBy] = useState('date-desc');
   const [expanded, setExpanded] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   if (!user) return <Navigate to="/auth" />;
 
