@@ -1123,7 +1123,7 @@
 .steps::before {
   content: '';
   position: absolute;
-  top: 56px;
+  top: 32px;
   left: 12.5%;
   right: 12.5%;
   height: 1px;
@@ -1250,6 +1250,11 @@
   box-shadow: 0 6px 14px var(--primary-glow);
 }
 
+.step-cloud svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* Step 2: configurator */
 .step-cfg {
   width: 110px;
@@ -1276,8 +1281,8 @@
 
 .step-cfg-row--price {
   margin-top: 4px;
-  background: var(--accent);
-  color: #FFFFFF;
+  background: var(--primary);
+  color: var(--text-on-primary);
   height: 18px;
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1339,13 +1344,12 @@
   align-items: center;
   justify-content: center;
   color: var(--primary);
-  margin-bottom: 8px;
 }
 
 .step-track {
   display: flex;
   gap: 4px;
-  margin-top: 4px;
+  margin-left: 12px;
 }
 
 .step-track span {

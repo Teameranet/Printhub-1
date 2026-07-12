@@ -314,6 +314,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Display detailed information about each printing service.
 
 ## Advanced Printing Page (Document Upload & Specifications)
+- Display detailed information about each printing service.
 - Allow users to upload documents for printing.
 - Drag and Drop Document Upload Feature
 - Select document file types (jpg, jpeg, png, pdf, DOC, DOCX, PPT, PPTX,CDR, AI)

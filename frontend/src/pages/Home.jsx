@@ -442,7 +442,6 @@ const HowItWorks = () => (
 
       <div className="how-cta">
         <a href="#faq" className="text-link">Read the FAQ <Icon.Arrow /></a>
-        <a href="#print" className="btn btn-primary btn-lg">Start a print <Icon.Arrow /></a>
       </div>
     </div>
   </section>
