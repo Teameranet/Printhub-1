@@ -333,7 +333,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Black & White Printing
   - Color Printing
   - Allow admin user to manage the fields as per service details page set by admin user.
-  - Clickable to navigate to the Checkout Page.
+  - Clickable to navigate to the Cart & Checkout Page.
 - Calculate real-time pricing based on the selected specifications (INR).
 - Enable users to place orders.
 - Display a success message after the order is placed.
