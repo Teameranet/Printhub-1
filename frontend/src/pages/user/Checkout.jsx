@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Checkout.css';
 
@@ -865,7 +865,13 @@ function StepIndicator({ currentStep, method }) {
 /* ─── Main Checkout Page ──────────────────────────────────────── */
 export default function Checkout() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Single step checkout
   const [method, setMethod] = useState('pickup');
   const [isPlacing, setIsPlacing] = useState(false);
@@ -892,7 +898,7 @@ export default function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
-  const items = MOCK_CART;
+  const items = location.state?.files?.length > 0 ? location.state.files : MOCK_CART;
 
   const subtotal = items.reduce((s, item) => s + calcCost(item.spec, item.pages).total, 0);
   const gst = subtotal * 0.18;

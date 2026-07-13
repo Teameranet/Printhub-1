@@ -1039,7 +1039,7 @@
 }
 
 /* ── Success toast ───────────────────────────────────── */
-.np-toast {
+/* .np-toast {
   position: fixed;
   top: calc(var(--nav-h, 72px) + 16px);
   right: 20px;
@@ -1111,7 +1111,7 @@
 .np-toast-x:hover {
   background: var(--bg-elev-3);
   color: var(--text-muted);
-}
+} */
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 768px) {

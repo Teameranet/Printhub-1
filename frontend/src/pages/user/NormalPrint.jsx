@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './NormalPrint.css';
 
 /* ─── Icons ───────────────────────────────────────────────────── */
@@ -435,22 +435,23 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
 }
 
 /* ─── Success Toast ──────────────────────────────────────────── */
-function SuccessToast({ onClose }) {
-  useEffect(() => { const t = setTimeout(onClose, 6000); return () => clearTimeout(t); }, [onClose]);
-  return (
-    <div className="np-toast" role="alert" aria-live="polite">
-      <div className="np-toast-check"><Icons.Check /></div>
-      <div className="np-toast-body">
-        <strong>Order Placed Successfully!</strong>
-        <span>Your print job is being processed. You'll receive a confirmation shortly.</span>
-      </div>
-      <button className="np-toast-x" onClick={onClose} aria-label="Dismiss"><Icons.Close /></button>
-    </div>
-  );
-}
+// function SuccessToast({ onClose }) {
+//   useEffect(() => { const t = setTimeout(onClose, 6000); return () => clearTimeout(t); }, [onClose]);
+//   return (
+//     <div className="np-toast" role="alert" aria-live="polite">
+//       <div className="np-toast-check"><Icons.Check /></div>
+//       <div className="np-toast-body">
+//         <strong>Order Placed Successfully!</strong>
+//         <span>Your print job is being processed. You'll receive a confirmation shortly.</span>
+//       </div>
+//       <button className="np-toast-x" onClick={onClose} aria-label="Dismiss"><Icons.Close /></button>
+//     </div>
+//   );
+// }
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function NormalPrint() {
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [drag, setDrag] = useState(false);
   const [previewFile, setPreviewFile] = useState(null);
@@ -522,9 +523,7 @@ export default function NormalPrint() {
     await new Promise(r => setTimeout(r, 1800));
     setPlacing(false);
     setSuccess(true);
-    // revoke all blob URLs
-    files.forEach(f => { if (f.previewUrl) URL.revokeObjectURL(f.previewUrl); });
-    setFiles([]);
+    navigate('/checkout', { state: { files } });
   };
 
   const prevFilesLength = useRef(0);
