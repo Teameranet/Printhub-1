@@ -897,7 +897,7 @@ const ServiceDetail = () => {
   const FILE_TYPES = ['JPG', 'JPEG', 'PNG', 'PDF', 'DOC', 'DOCX', 'PPT', 'PPTX', 'CDR', 'AI', 'PS'];
 
   return (
-    <div className="sdet-page">
+    <div className={`sdet-page${files.length > 0 ? ' sdet-page--has-cart' : ''}`}>
       {previewFile && <PreviewModal file={previewFile} onClose={() => setPreviewFile(null)} />}
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}

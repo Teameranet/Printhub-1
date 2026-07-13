@@ -1093,10 +1093,15 @@
   border-right: 1px solid var(--border);
   font-family: var(--font-mono);
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .sdet-step-input::-webkit-outer-spin-button,
-.sdet-step-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.sdet-step-input::-webkit-inner-spin-button { 
+  -webkit-appearance: none; 
+  appearance: none;
+  margin: 0; 
+}
 
 .sdet-step-input:focus { outline: none; }
 
@@ -1729,26 +1734,71 @@
 .slart--sticker { position: relative; }
 
 /* ── RESPONSIVE TWEAKS ───────────────────────────────────────────────────── */
+/* Extra space for the sticky cart bar when active */
+.sdet-page--has-cart { padding-bottom: 120px; }
+
+@media (max-width: 1024px) {
+  .sdet-hero-content { grid-template-columns: 1fr; }
+  .sdet-hero-art { display: none; }
+}
+
+@media (max-width: 960px) {
+  .sdet-info-grid { grid-template-columns: 1fr; }
+  .sdet-features-card { position: static; margin-bottom: 24px; }
+  .sdet-info-section { padding-top: 48px; }
+}
+
+@media (max-width: 768px) {
+  .sdet-hero {
+    padding-top: calc(var(--navbar-h, 70px) + 24px);
+    padding-bottom: 48px;
+  }
+  .sdet-upload-section, .sdet-specs-section, .sdet-related {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .sdet-page--has-cart { padding-bottom: 160px; }
+}
+
 @media (max-width: 640px) {
-  .sdet-seg-row { gap: 14px; }
-  .sdet-seg-group { min-width: 0; }
+  .sdet-page--has-cart { padding-bottom: 200px; }
+  .sdet-hero-title { font-size: clamp(28px, 6vw, 36px); }
+  
+  .sdet-specs { flex-direction: column; }
+  .sdet-spec { padding: 12px 18px; flex-direction: row; justify-content: space-between; align-items: center; }
+  .sdet-spec-divider { width: auto; height: 1px; margin: 0 16px; }
+  
+  .sdet-seg-row { gap: 14px; flex-direction: column; }
+  .sdet-seg-group { min-width: 0; width: 100%; }
+  
   .sdet-fcard-acts .sdet-act-btn--view span { display: none; }
+  
   .sdet-cart-bar-inner { flex-direction: column; gap: 12px; align-items: stretch; }
-  .sdet-cart-stats { justify-content: space-around; }
+  .sdet-cart-stats { justify-content: space-between; width: 100%; }
   .sdet-cart-actions { align-items: stretch; }
   .sdet-cart-btn { justify-content: center; }
   .sdet-cart-note { text-align: center; }
+  
   .sdet-upload-title { font-size: 24px; }
   .sdet-specs-title { font-size: 20px; }
-  .sdet-modal { border-radius: var(--r-xl); }
+  .sdet-modal { border-radius: var(--r-xl); margin: 0 12px; width: auto; }
 }
 
 @media (max-width: 480px) {
-  .sdet-hero-title { font-size: 28px; }
-  .sdet-mat-grid { grid-template-columns: repeat(2, 1fr); }
-  .sdet-size-grid { grid-template-columns: repeat(2, 1fr); }
+  .sdet-hero-title { font-size: 26px; }
+  .sdet-actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .sdet-actions .btn { width: 100%; justify-content: center; }
+  
+  .sdet-mat-grid { grid-template-columns: 1fr; }
+  .sdet-size-grid { grid-template-columns: 1fr; }
+  
   .sdet-fcard-hd { flex-wrap: wrap; }
-  .sdet-fcard-acts { width: 100%; justify-content: flex-end; }
+  .sdet-fcard-acts { width: 100%; justify-content: flex-end; margin-top: 8px; }
+  
+  .sdet-drop { padding: 40px 20px; }
+  .sdet-drop-text strong { font-size: 15px; }
+  
+  .sdet-cstat-div { margin: 0 10px; }
 }
 
 /* ── SVCP CLASSES (re-used by related cards) ─────────────────────────────── */
