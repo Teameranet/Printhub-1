@@ -1100,7 +1100,6 @@
 .sdet-step-input::-webkit-inner-spin-button { 
   -webkit-appearance: none; 
   appearance: none;
-  margin: 0; 
 }
 
 .sdet-step-input:focus { outline: none; }
