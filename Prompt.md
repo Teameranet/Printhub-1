@@ -314,13 +314,14 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Display detailed information about each printing service.
 
 ## Advanced Printing Page (Document Upload & Specifications)
-- Display detailed information about each printing service.
+- Display detailed information about each printing service (Available Papers Types, 
+Available Document Sizes, Available Pricing & Overview ).
 - Allow users to upload documents for printing.
 - Drag and Drop Document Upload Feature
-- Select document file types (jpg, jpeg, png, pdf, DOC, DOCX, PPT, PPTX,CDR, AI)
+- Select document file types (jpg, jpeg, png, pdf, DOC, DOCX, PPT, PPTX, CDR, AI & PS)
 - Allow users to upload multiple documents at once.
 - Display file size limit (e.g.,500MB)
-- Live Preview of uploaded documents with supported file types (jpg, jpeg, png, pdf, DOC, DOCX, PPT, PPTX,CDR, AI)
+- Live Preview of uploaded documents with supported file types (jpg, jpeg, png, pdf, DOC, DOCX, PPT, PPTX, CDR, AI & PS)
 - Provide a form to input printing specifications as per service details page set by admin user.
   - Paper Size
   - Paper Type
