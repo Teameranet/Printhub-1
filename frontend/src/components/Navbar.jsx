@@ -192,7 +192,7 @@ const Navbar = () => {
           <nav className="navbar-nav" aria-label="Primary navigation">
             {/* <Link to="/print/normal" className={`nav-link${location.pathname === '/print/normal' ? ' nav-link--active' : ''}`}>Normal Print</Link> */}
             <a href="#about" className="nav-link">About Us</a>
-            <a href="#services" className="nav-link">Services</a>
+            <Link to="/services" className={`nav-link${location.pathname.startsWith('/services') ? ' nav-link--active' : ''}`}>Services</Link>
             <a href="#contact" className="nav-link">Contact</a>
           </nav>
 

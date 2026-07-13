@@ -1072,6 +1072,40 @@
   color: var(--text-muted);
   line-height: 1.55;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.svc-meta {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+
+.svc-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.svc-meta-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.svc-meta-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .svc-foot {

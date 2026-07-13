@@ -72,6 +72,7 @@ const Icon = {
 /* ---------- HERO ---------- */
 const Hero = () => {
   const [q, setQ] = useState('');
+  const navigate = useNavigate();
 
   const placeholders = [
     "What would you like to print?",
@@ -108,6 +109,15 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [currentPlaceholder, isDeleting, placeholderIndex]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (q.trim()) {
+      navigate(`/services?q=${encodeURIComponent(q.trim())}`);
+    } else {
+      navigate('/services');
+    }
+  };
+
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-bg" aria-hidden="true">
@@ -127,7 +137,7 @@ const Hero = () => {
         <p className="hero-sub">
           Drop your file, pick your specs, watch the price update in real time. We handle the rest — pickup, print, deliver.
         </p>
-        <form className="hero-search" onSubmit={(e) => e.preventDefault()} role="search">
+        <form className="hero-search" onSubmit={handleSubmit} role="search">
           <span className="hero-search-icon"><Icon.Search /></span>
           <input
             className="hero-search-input"
@@ -141,12 +151,12 @@ const Hero = () => {
         </form>
         <div className="hero-examples" aria-label="Popular search examples">
           <span className="hero-examples-label">Try:</span>
-          {['PDF', 'DOCX', 'Poster', 'Letterhead', 'Business cards', 'Banners'].map((t) => (
+          {['DOCX', 'Jumbo Print', 'Poster', 'Letterhead', 'Business cards', 'Photo paper'].map((t) => (
             <button
               key={t}
               type="button"
               className="hero-chip"
-              onClick={() => setQ(t)}
+              onClick={() => navigate(`/services?q=${encodeURIComponent(t)}`)}
             >{t}</button>
           ))}
         </div>
@@ -246,6 +256,7 @@ const NormalPrinting = () => {
 /* ---------- SERVICES ---------- */
 const SERVICES = [
   {
+    id: 'business-cards',
     title: 'Business cards',
     desc: 'Premium cards on 350 gsm matte or gloss stock with rounded corners.',
     price: 'from ₹149',
@@ -253,8 +264,11 @@ const SERVICES = [
     tagType: 'accent',
     icon: <Icon.Id />,
     art: 'cards',
+    turnaround: '24 hrs',
+    minQty: '50 pcs',
   },
   {
+    id: 'posters',
     title: 'Posters & prints',
     desc: 'Vibrant large-format prints on satin paper, from A3 up to A0.',
     price: 'from ₹89',
@@ -262,16 +276,22 @@ const SERVICES = [
     tagType: 'primary',
     icon: <Icon.Image />,
     art: 'poster',
+    turnaround: '12 hrs',
+    minQty: '1 pc',
   },
   {
+    id: 'letterhead',
     title: 'Letterhead & stationery',
     desc: 'Crisp letterheads, envelopes and notepads with full-bleed color.',
     price: 'from ₹249',
     tag: null,
     icon: <Icon.File />,
     art: 'doc',
+    turnaround: '24 hrs',
+    minQty: '100 pcs',
   },
   {
+    id: 'banners',
     title: 'Banners & signage',
     desc: 'Indoor and outdoor flex and vinyl banners with metal grommets.',
     price: 'from ₹399',
@@ -279,6 +299,8 @@ const SERVICES = [
     tagType: 'green',
     icon: <Icon.Bolt />,
     art: 'banner',
+    turnaround: '48 hrs',
+    minQty: '1 pc',
   },
 ];
 
@@ -342,29 +364,38 @@ const Services = () => {
         </div>
 
         <div className="services-grid">
-          {SERVICES.map((s, i) => (
-            <a className="svc-card" key={s.title} href={`#service-${i}`} aria-label={`${s.title}, ${s.price}`}>
+          {SERVICES.map((s) => (
+            <Link className="svc-card" key={s.title} to={`/services/${s.id}`} aria-label={`${s.title}, ${s.price}`}>
               <ServiceArt kind={s.art} />
               {s.tag && (
                 <span className={`svc-tag svc-tag--${s.tagType}`}>{s.tag}</span>
               )}
               <div className="svc-body">
                 <div className="svc-head">
-                  <span className="svc-icon">{s.icon}</span>
                   <h3 className="svc-title">{s.title}</h3>
                 </div>
                 <p className="svc-desc">{s.desc}</p>
+                <div className="svc-meta" style={{ margin: 'auto 0 10px', paddingTop: '10px' }}>
+                  <div className="svc-meta-item">
+                    <span className="svc-meta-label">Turnaround</span>
+                    <span className="svc-meta-val">{s.turnaround}</span>
+                  </div>
+                  <div className="svc-meta-item">
+                    <span className="svc-meta-label">Min. Qty</span>
+                    <span className="svc-meta-val">{s.minQty}</span>
+                  </div>
+                </div>
                 <div className="svc-foot">
                   <span className="svc-price">{s.price}</span>
                   <span className="svc-cta">View service <Icon.Arrow /></span>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="how-cta">
-          <a href="#all-services" className="text-link">Browse all services <Icon.Arrow /></a>
+          <Link to="/services" className="text-link">Browse all services <Icon.Arrow /></Link>
         </div>
       </div>
     </section>

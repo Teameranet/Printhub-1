@@ -10,6 +10,8 @@ import Orders from './pages/user/Orders';
 import Settings from './pages/user/Settings';
 import Cart from './pages/user/Cart';
 import Checkout from './pages/user/Checkout';
+import ServicesPage from './pages/user/Services';
+import ServiceDetail from './pages/user/ServiceDetail';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminUsers from './pages/admin/AdminUsers';
@@ -36,6 +38,8 @@ function App() {
               <Route path="/settings" element={<Settings />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:id" element={<ServiceDetail />} />
               
               {/* Admin Routes */}
               <Route path="/adminuser/dashboard" element={<AdminDashboard />} />
