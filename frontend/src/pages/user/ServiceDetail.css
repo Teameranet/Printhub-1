@@ -35,7 +35,7 @@
 .sdet-hero-grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(126,87,194,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(126, 87, 194, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 10%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 10%, transparent 75%);
@@ -49,7 +49,7 @@
   left: 40%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(ellipse, var(--cat-light, rgba(126,87,194,0.10)) 0%, transparent 70%);
+  background: radial-gradient(ellipse, var(--cat-light, rgba(126, 87, 194, 0.10)) 0%, transparent 70%);
   filter: blur(50px);
 }
 
@@ -74,7 +74,9 @@
   transition: color 0.15s;
 }
 
-.sdet-breadcrumb a:hover { color: var(--primary); }
+.sdet-breadcrumb a:hover {
+  color: var(--primary);
+}
 
 .sdet-breadcrumb span[aria-hidden] {
   color: var(--border-strong);
@@ -90,11 +92,18 @@
 }
 
 @media (max-width: 1024px) {
-  .sdet-hero-content { grid-template-columns: 1fr; }
-  .sdet-hero-art { display: none; }
+  .sdet-hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sdet-hero-art {
+    display: none;
+  }
 }
 
-.sdet-hero-text { max-width: 660px; }
+.sdet-hero-text {
+  max-width: 660px;
+}
 
 .sdet-cat-label {
   display: inline-block;
@@ -313,7 +322,9 @@
   scrollbar-width: none;
 }
 
-.sdet-tabs::-webkit-scrollbar { display: none; }
+.sdet-tabs::-webkit-scrollbar {
+  display: none;
+}
 
 .sdet-tab {
   display: inline-flex;
@@ -639,8 +650,13 @@
 }
 
 @keyframes sdet-bounce {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-10px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-10px);
+  }
 }
 
 .sdet-drop-text {
@@ -703,7 +719,7 @@
   font-size: 12.5px;
   color: var(--text-dim);
   padding: 7px 14px;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--border);
   border-radius: var(--r-full);
   margin-top: 4px;
@@ -718,8 +734,8 @@
 .sdet-error-box {
   max-width: 800px;
   margin: 16px auto 0;
-  background: rgba(220,38,38,0.06);
-  border: 1px solid rgba(220,38,38,0.25);
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.25);
   border-radius: var(--r-lg);
   padding: 16px 20px;
   display: flex;
@@ -751,7 +767,9 @@
   transition: opacity 0.15s;
 }
 
-.sdet-error-dismiss:hover { opacity: 0.7; }
+.sdet-error-dismiss:hover {
+  opacity: 0.7;
+}
 
 /* ── FILE SPEC CARDS SECTION ─────────────────────────────────────────────── */
 .sdet-specs-section {
@@ -878,7 +896,9 @@
   font-family: var(--font-mono);
 }
 
-.sdet-dot { color: var(--border-strong); }
+.sdet-dot {
+  color: var(--border-strong);
+}
 
 /* Action buttons */
 .sdet-fcard-acts {
@@ -902,7 +922,9 @@
   font-family: inherit;
 }
 
-.sdet-act-btn:active { transform: scale(0.96); }
+.sdet-act-btn:active {
+  transform: scale(0.96);
+}
 
 .sdet-act-btn--view {
   color: var(--primary-ink);
@@ -917,14 +939,14 @@
 
 .sdet-act-btn--del {
   color: var(--danger);
-  background: rgba(220,38,38,0.06);
-  border-color: rgba(220,38,38,0.22);
+  background: rgba(220, 38, 38, 0.06);
+  border-color: rgba(220, 38, 38, 0.22);
   padding: 7px 10px;
 }
 
 .sdet-act-btn--del:hover {
-  background: rgba(220,38,38,0.12);
-  border-color: rgba(220,38,38,0.38);
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.38);
 }
 
 /* Segmented controls row */
@@ -979,13 +1001,13 @@
 
 .sdet-seg-btn:hover:not(.sdet-seg-btn--on) {
   color: var(--text);
-  background: rgba(126,87,194,0.07);
+  background: rgba(126, 87, 194, 0.07);
 }
 
 .sdet-seg-btn--on {
   background: var(--bg-elev-1);
   color: var(--primary-ink);
-  box-shadow: 0 1px 4px rgba(60,40,110,0.12), 0 0 0 1px var(--primary-border);
+  box-shadow: 0 1px 4px rgba(60, 40, 110, 0.12), 0 0 0 1px var(--primary-border);
 }
 
 /* Spec grid */
@@ -997,11 +1019,15 @@
 }
 
 @media (max-width: 640px) {
-  .sdet-spec-grid { grid-template-columns: 1fr 1fr; }
+  .sdet-spec-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 420px) {
-  .sdet-spec-grid { grid-template-columns: 1fr; }
+  .sdet-spec-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .sdet-field {
@@ -1097,12 +1123,14 @@
 }
 
 .sdet-step-input::-webkit-outer-spin-button,
-.sdet-step-input::-webkit-inner-spin-button { 
-  -webkit-appearance: none; 
+.sdet-step-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   appearance: none;
 }
 
-.sdet-step-input:focus { outline: none; }
+.sdet-step-input:focus {
+  outline: none;
+}
 
 /* Cost footer */
 .sdet-fcard-cost {
@@ -1199,13 +1227,20 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
-  animation: sdet-modal-in 0.25s cubic-bezier(0.34,1.56,0.64,1) both;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  animation: sdet-modal-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes sdet-modal-in {
-  from { opacity: 0; transform: scale(0.93) translateY(16px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.93) translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .sdet-modal-hd {
@@ -1251,9 +1286,9 @@
 }
 
 .sdet-modal-close:hover {
-  background: rgba(220,38,38,0.1);
+  background: rgba(220, 38, 38, 0.1);
   color: var(--danger);
-  border-color: rgba(220,38,38,0.25);
+  border-color: rgba(220, 38, 38, 0.25);
 }
 
 .sdet-modal-body {
@@ -1410,8 +1445,17 @@
   gap: 20px;
 }
 
-@media (max-width: 900px) { .sdet-related-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 540px) { .sdet-related-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) {
+  .sdet-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .sdet-related-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .sdet-related-card {
   display: flex;
@@ -1456,12 +1500,19 @@
   z-index: 200;
   padding: 0 24px 16px;
   pointer-events: none;
-  animation: sdet-bar-in 0.35s cubic-bezier(0.34,1.4,0.64,1) both;
+  animation: sdet-bar-in 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) both;
 }
 
 @keyframes sdet-bar-in {
-  from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .sdet-cart-bar-inner {
@@ -1474,7 +1525,7 @@
   background: var(--bg-elev-1);
   border: 1px solid var(--border);
   border-radius: var(--r-xl);
-  box-shadow: 0 8px 40px rgba(60,40,110,0.18), 0 0 0 1px var(--primary-border);
+  box-shadow: 0 8px 40px rgba(60, 40, 110, 0.18), 0 0 0 1px var(--primary-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   pointer-events: all;
@@ -1629,14 +1680,25 @@
   width: 155px;
   height: 96px;
   border-radius: 8px;
-  box-shadow: 0 10px 28px rgba(60,40,110,0.22);
+  box-shadow: 0 10px 28px rgba(60, 40, 110, 0.22);
   top: 16px;
   left: 17px;
 }
 
-.slart-card--back  { transform: rotate(-11deg) translate(-30px, 14px); }
-.slart-card--mid   { background: var(--bg-elev-1); border: 2px solid var(--border-strong); z-index: 1; }
-.slart-card--front { transform: rotate(9deg) translate(30px, -14px); z-index: 2; }
+.slart-card--back {
+  transform: rotate(-11deg) translate(-30px, 14px);
+}
+
+.slart-card--mid {
+  background: var(--bg-elev-1);
+  border: 2px solid var(--border-strong);
+  z-index: 1;
+}
+
+.slart-card--front {
+  transform: rotate(9deg) translate(30px, -14px);
+  z-index: 2;
+}
 
 /* Doc */
 .slart-page {
@@ -1661,7 +1723,7 @@
 .slart-line {
   height: 4px;
   border-radius: 2px;
-  background: rgba(26,20,38,0.12);
+  background: rgba(26, 20, 38, 0.12);
 }
 
 /* Poster */
@@ -1686,14 +1748,14 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
 }
 
 .slart-banner-line {
   position: absolute;
   height: 4px;
   width: 70%;
-  background: rgba(255,255,255,0.35);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 2px;
   top: 40%;
   left: 15%;
@@ -1712,7 +1774,9 @@
 }
 
 /* Brochure */
-.slart--brochure { gap: 6px; }
+.slart--brochure {
+  gap: 6px;
+}
 
 .slart-panel {
   width: 82px;
@@ -1727,24 +1791,44 @@
 }
 
 /* Notebook */
-.slart--notebook { gap: 0; }
+.slart--notebook {
+  gap: 0;
+}
 
 /* Sticker */
-.slart--sticker { position: relative; }
+.slart--sticker {
+  position: relative;
+}
 
 /* ── RESPONSIVE TWEAKS ───────────────────────────────────────────────────── */
 /* Extra space for the sticky cart bar when active */
-.sdet-page--has-cart { padding-bottom: 120px; }
+.sdet-page--has-cart {
+  padding-bottom: 120px;
+}
 
 @media (max-width: 1024px) {
-  .sdet-hero-content { grid-template-columns: 1fr; }
-  .sdet-hero-art { display: none; }
+  .sdet-hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sdet-hero-art {
+    display: none;
+  }
 }
 
 @media (max-width: 960px) {
-  .sdet-info-grid { grid-template-columns: 1fr; }
-  .sdet-features-card { position: static; margin-bottom: 24px; }
-  .sdet-info-section { padding-top: 48px; }
+  .sdet-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sdet-features-card {
+    position: static;
+    margin-bottom: 24px;
+  }
+
+  .sdet-info-section {
+    padding-top: 48px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1752,52 +1836,142 @@
     padding-top: calc(var(--navbar-h, 70px) + 24px);
     padding-bottom: 48px;
   }
-  .sdet-upload-section, .sdet-specs-section, .sdet-related {
+
+  .sdet-upload-section,
+  .sdet-specs-section,
+  .sdet-related {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .sdet-page--has-cart { padding-bottom: 160px; }
+
+  .sdet-page--has-cart {
+    padding-bottom: 160px;
+  }
 }
 
 @media (max-width: 640px) {
-  .sdet-page--has-cart { padding-bottom: 200px; }
-  .sdet-hero-title { font-size: clamp(28px, 6vw, 36px); }
-  
-  .sdet-specs { flex-direction: column; }
-  .sdet-spec { padding: 12px 18px; flex-direction: row; justify-content: space-between; align-items: center; }
-  .sdet-spec-divider { width: auto; height: 1px; margin: 0 16px; }
-  
-  .sdet-seg-row { gap: 14px; flex-direction: column; }
-  .sdet-seg-group { min-width: 0; width: 100%; }
-  
-  .sdet-fcard-acts .sdet-act-btn--view span { display: none; }
-  
-  .sdet-cart-bar-inner { flex-direction: column; gap: 12px; align-items: stretch; }
-  .sdet-cart-stats { justify-content: space-between; width: 100%; }
-  .sdet-cart-actions { align-items: stretch; }
-  .sdet-cart-btn { justify-content: center; }
-  .sdet-cart-note { text-align: center; }
-  
-  .sdet-upload-title { font-size: 24px; }
-  .sdet-specs-title { font-size: 20px; }
-  .sdet-modal { border-radius: var(--r-xl); margin: 0 12px; width: auto; }
+  .sdet-page--has-cart {
+    padding-bottom: 200px;
+  }
+
+  .sdet-hero-title {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .sdet-specs {
+    flex-direction: column;
+  }
+
+  .sdet-spec {
+    padding: 12px 18px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sdet-spec-divider {
+    width: auto;
+    height: 1px;
+    margin: 0 16px;
+  }
+
+  .sdet-seg-row {
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .sdet-seg-group {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .sdet-fcard-acts .sdet-act-btn--view span {
+    display: none;
+  }
+
+  .sdet-cart-bar-inner {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .sdet-cart-stats {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sdet-cart-actions {
+    align-items: stretch;
+  }
+
+  .sdet-cart-btn {
+    justify-content: center;
+  }
+
+  .sdet-cart-note {
+    text-align: center;
+  }
+
+  .sdet-upload-title {
+    font-size: 24px;
+  }
+
+  .sdet-specs-title {
+    font-size: 20px;
+  }
+
+  .sdet-modal {
+    border-radius: var(--r-xl);
+    margin: 0 12px;
+    width: auto;
+  }
 }
 
 @media (max-width: 480px) {
-  .sdet-hero-title { font-size: 26px; }
-  .sdet-actions { flex-direction: column; align-items: stretch; width: 100%; }
-  .sdet-actions .btn { width: 100%; justify-content: center; }
-  
-  .sdet-mat-grid { grid-template-columns: 1fr; }
-  .sdet-size-grid { grid-template-columns: 1fr; }
-  
-  .sdet-fcard-hd { flex-wrap: wrap; }
-  .sdet-fcard-acts { width: 100%; justify-content: flex-end; margin-top: 8px; }
-  
-  .sdet-drop { padding: 40px 20px; }
-  .sdet-drop-text strong { font-size: 15px; }
-  
-  .sdet-cstat-div { margin: 0 10px; }
+  .sdet-hero-title {
+    font-size: 26px;
+  }
+
+  .sdet-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .sdet-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sdet-mat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sdet-size-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sdet-fcard-hd {
+    flex-wrap: wrap;
+  }
+
+  .sdet-fcard-acts {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .sdet-drop {
+    padding: 40px 20px;
+  }
+
+  .sdet-drop-text strong {
+    font-size: 15px;
+  }
+
+  .sdet-cstat-div {
+    margin: 0 10px;
+  }
 }
 
 /* ── SVCP CLASSES (re-used by related cards) ─────────────────────────────── */
@@ -1816,9 +1990,20 @@
   z-index: 2;
 }
 
-.svcp-badge--accent  { background: var(--accent);  color: #1A1100; }
-.svcp-badge--primary { background: var(--primary); color: #fff; }
-.svcp-badge--green   { background: var(--success); color: #fff; }
+.svcp-badge--accent {
+  background: var(--accent);
+  color: #1A1100;
+}
+
+.svcp-badge--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.svcp-badge--green {
+  background: var(--success);
+  color: #fff;
+}
 
 .svcp-cat-pill {
   display: inline-block;
@@ -1834,7 +2019,9 @@
   margin-bottom: 4px;
 }
 
-.svcp-cat-pill--sm { font-size: 9.5px; }
+.svcp-cat-pill--sm {
+  font-size: 9.5px;
+}
 
 .svcp-title {
   font-family: var(--font-display);
@@ -1869,7 +2056,11 @@
   transition: gap 0.15s;
 }
 
-.sdet-related-card:hover .svcp-cta { gap: 7px; }
+.sdet-related-card:hover .svcp-cta {
+  gap: 7px;
+}
 
 /* ── UTILITY ─────────────────────────────────────────────────────────────── */
-.fade-up { animation: fadeUp 0.5s ease-out both; }
+.fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}

@@ -373,9 +373,9 @@ const SERVICES = [
    CATEGORY COLORS
 ═══════════════════════════════════════════════════════════ */
 const catColor = (category) => ({
-  Marketing:      { bg: 'var(--primary)',  light: 'rgba(126,87,194,0.10)' },
-  Stationery:     { bg: 'var(--accent)',   light: 'rgba(201,122,11,0.10)' },
-  'Large Format': { bg: '#0D9488',         light: 'rgba(13,148,136,0.10)' },
+  Marketing: { bg: 'var(--primary)', light: 'rgba(126,87,194,0.10)' },
+  Stationery: { bg: 'var(--accent)', light: 'rgba(201,122,11,0.10)' },
+  'Large Format': { bg: '#0D9488', light: 'rgba(13,148,136,0.10)' },
 }[category] || { bg: 'var(--primary)', light: 'rgba(126,87,194,0.10)' });
 
 /* ═══════════════════════════════════════════════════════════
@@ -385,17 +385,17 @@ const SUPPORTED_EXTS = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'ppt', 'pptx
 const MAX_TOTAL_MB = 500;
 
 const FILE_TYPE_COLORS = {
-  jpg:  { color: '#16A34A', bg: 'rgba(22,163,74,0.10)' },
+  jpg: { color: '#16A34A', bg: 'rgba(22,163,74,0.10)' },
   jpeg: { color: '#16A34A', bg: 'rgba(22,163,74,0.10)' },
-  png:  { color: '#16A34A', bg: 'rgba(22,163,74,0.10)' },
-  pdf:  { color: '#DC2626', bg: 'rgba(220,38,38,0.10)' },
-  doc:  { color: '#2563EB', bg: 'rgba(37,99,235,0.10)' },
+  png: { color: '#16A34A', bg: 'rgba(22,163,74,0.10)' },
+  pdf: { color: '#DC2626', bg: 'rgba(220,38,38,0.10)' },
+  doc: { color: '#2563EB', bg: 'rgba(37,99,235,0.10)' },
   docx: { color: '#2563EB', bg: 'rgba(37,99,235,0.10)' },
-  ppt:  { color: '#C97A0B', bg: 'rgba(201,122,11,0.10)' },
+  ppt: { color: '#C97A0B', bg: 'rgba(201,122,11,0.10)' },
   pptx: { color: '#C97A0B', bg: 'rgba(201,122,11,0.10)' },
-  cdr:  { color: '#7E57C2', bg: 'rgba(126,87,194,0.10)' },
-  ai:   { color: '#FF6B35', bg: 'rgba(255,107,53,0.10)' },
-  ps:   { color: '#7E57C2', bg: 'rgba(126,87,194,0.10)' },
+  cdr: { color: '#7E57C2', bg: 'rgba(126,87,194,0.10)' },
+  ai: { color: '#FF6B35', bg: 'rgba(255,107,53,0.10)' },
+  ps: { color: '#7E57C2', bg: 'rgba(126,87,194,0.10)' },
 };
 
 function getFileIcon(name) {
@@ -433,8 +433,8 @@ function estimatePages(file) {
    PRICING ENGINE
 ═══════════════════════════════════════════════════════════ */
 const PRICING = {
-  bw:   { A4: 2, A3: 4, A5: 1.5, Letter: 2.5, Legal: 3, Standard: 3, Square: 3, Slim: 2.5, default: 2 },
-  color:{ A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12, Standard: 12, Square: 12, Slim: 9, default: 8 },
+  bw: { A4: 2, A3: 4, A5: 1.5, Letter: 2.5, Legal: 3, Standard: 3, Square: 3, Slim: 2.5, default: 2 },
+  color: { A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12, Standard: 12, Square: 12, Slim: 9, default: 8 },
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5, Satin: 2, Canvas: 8, Vinyl: 4, Flex: 3 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
   lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
@@ -890,8 +890,8 @@ const ServiceDetail = () => {
 
   const TABS = [
     { key: 'papers', label: 'Paper Types', icon: <Icon.Layers /> },
-    { key: 'sizes',  label: 'Document Sizes', icon: <Icon.Ruler /> },
-    { key: 'pricing',label: 'Pricing Overview', icon: <Icon.Tag /> },
+    { key: 'sizes', label: 'Document Sizes', icon: <Icon.Ruler /> },
+    { key: 'pricing', label: 'Pricing Overview', icon: <Icon.Tag /> },
   ];
 
   const FILE_TYPES = ['JPG', 'JPEG', 'PNG', 'PDF', 'DOC', 'DOCX', 'PPT', 'PPTX', 'CDR', 'AI', 'PS'];
@@ -1285,7 +1285,6 @@ const ServiceDetail = () => {
               </div>
             </div>
             <div className="sdet-cart-actions">
-              <p className="sdet-cart-note">Per configured specs · GST applicable at checkout</p>
               <button
                 id={`sdet-add-to-cart-${service.id}`}
                 className="sdet-cart-btn"
@@ -1295,6 +1294,7 @@ const ServiceDetail = () => {
                 <Icon.Cart />
                 Add to Cart · ₹{grandTotal.toFixed(2)}
               </button>
+              <p className="sdet-cart-note">Per configured specs · GST applicable at checkout</p>
             </div>
           </div>
         </div>

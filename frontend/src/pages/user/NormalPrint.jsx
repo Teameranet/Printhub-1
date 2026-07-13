@@ -181,7 +181,7 @@ function estimatePages(file) {
 const DEFAULT_SPEC = {
   paperSize: 'A4',
   paperType: 'Bond',
-  pageRange: 'all',
+  pageRange: 'All',
   orientation: 'Portrait',
   pagesPerSheet: 1,
   copies: 1,
@@ -336,7 +336,7 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
             className="np-input"
             value={spec.pageRange}
             onChange={e => set('pageRange', e.target.value)}
-            placeholder='all · 1-5 · 1,3,7'
+            placeholder='e.g. All, (1,2,3 & 1-10)'
           />
         </div>
 
@@ -405,7 +405,7 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
       <div className="np-card-cost">
         <div className="np-cost-items">
           <span className="np-ci">
-            <span className="np-ci-label">Print</span>
+            <span className="np-ci-label">Print Cost</span>
             <span className="np-ci-val">₹{cost.printCost.toFixed(2)}</span>
           </span>
           {cost.laminationCost > 0 && (
@@ -694,7 +694,6 @@ export default function NormalPrint() {
               </div>
             </div>
             <div className="np-order-actions">
-              <p className="np-order-note">Prices as per configured rates · GST applicable at checkout</p>
               <button
                 className="np-order-btn"
                 onClick={placeOrder}
@@ -707,6 +706,7 @@ export default function NormalPrint() {
                   <><Icons.ShoppingCart />Place Order · ₹{grandTotal.toFixed(2)}</>
                 )}
               </button>
+              <p className="np-order-note">Prices as per configured rates · GST applicable at checkout</p>
             </div>
           </div>
         </div>
