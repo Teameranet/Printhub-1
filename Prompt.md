@@ -390,23 +390,41 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Add a logout button in the dashboard header.
 - Add a navigation menu in the dashboard header.
 - Add links to navigate to the following pages:
-  - User Management
   - Dashboard Page
   - User Management
   - Order Management
   - Service Management
-  - Invoice Generation.
+  - Paper Size Management
+  - Paper Type Management
+  - Binding Type Management
+  - Lamination Management
+  - Printing Service Management
 
 ## Admin User Management
 - Display a list of all registered users.
 - Allow admin to view user details, including registration information, login history, and order history.
 - Enable admin to manage user accounts, including deleting inactive users.
-- Super Admin User Management: Allow admin add, delete, and update manage super admin users, including adding, deleting, and updating super admin users.
+- Super Admin User Management: Allow to add admin users, delete, and update manage by super admin users.
   - Display a list of all super admin users.
   - Allow admin to view super admin details, including registration information, login history, and order history.
   - Enable admin to manage super admin accounts, including deleting inactive super admin users.
   - Add any additional fields as per super admin user details page set by admin user & set user Privileges as per admin user.
 
+## Admin Order Management
+- Display a list of all orders, including order details, user information, and payment status.
+- Allow admin to view order details, including multiple document details with specifications, and total price (INR).
+- Enable admin to manage orders, including updating order status, processing payments, and canceling orders.
+  - Order cancellation reason field.
+  - Allow admin to cancel the order refund the payment.
+- Display a success message after the order status is updated or the payment is processed.
+- Search feature to find specific orders.
+- Sorting feature to sort orders by order ID, user ID, or payment status.
+- Pagination for large lists.
+- Display a summary of total orders, total users, and total revenue (INR).
+- Update the summary in real-time as orders are processed.
+- Display a summary of total orders, total users, and total revenue (INR).
+- Update the summary in real-time as orders are processed.
+- Invoice Generation Allow Admin to download invoices of the order details in PDF format.
 
 ## Admin Service Management
 - Display a list of all available printing services, including normal print and advanced printing.
@@ -469,27 +487,13 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Sorting feature to sort lamination types by name or type.
 - Selection feature to select lamination types for printing.
 
-## Admin Order Management
-- Display a list of all orders, including order details, user information, and payment status.
-- Allow admin to view order details, including document details, specifications, and total price (INR).
-- Enable admin to manage orders, including updating order status, processing payments, and canceling orders.
-- Display a success message after the order status is updated or the payment is processed.
-- Search feature to find specific orders.
-- Sorting feature to sort orders by order ID, user ID, or payment status.
-- Pagination for large lists.
-- Display a summary of total orders, total users, and total revenue (INR).
-- Update the summary in real-time as orders are processed.
-- Display a summary of total orders, total users, and total revenue (INR).
-- Update the summary in real-time as orders are processed.
-- Invoice Generation Allow Admin to download invoices of the order details in PDF format.
-
 # Note
 - Responsive design for mobile and desktop devices.
 - Loading indicator while loading the page.
 - Link the "Admin Portal" in footer section on user side.
 - Admin dashboard is accessible only to admin users.
 - Admin dashboard is protected with a password.
-  - Admin Email: admin@example.com
+  - Admin Email: printhub@gmail.com
   - Admin Password: 123456
   - Admin Login URL: http://localhost:5000/adminuser/login
   - Admin Dashboard URL: http://localhost:5000/adminuser/dashboard  
