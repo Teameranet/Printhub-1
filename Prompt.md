@@ -486,6 +486,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 # Note
 - Responsive design for mobile and desktop devices.
 - Loading indicator while loading the page.
+- Link the "Admin Portal" in footer section on user side.
 - Admin dashboard is accessible only to admin users.
 - Admin dashboard is protected with a password.
   - Admin Email: admin@example.com
