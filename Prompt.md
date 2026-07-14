@@ -490,13 +490,13 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 # Note
 - Responsive design for mobile and desktop devices.
 - Loading indicator while loading the page.
-- Link the "Admin Portal" in footer section on user side.
 - Admin dashboard is accessible only to admin users.
 - Admin dashboard is protected with a password.
   - Admin Email: printhub@gmail.com
   - Admin Password: 123456
   - Admin Login URL: http://localhost:5000/adminuser/login
-  - Admin Dashboard URL: http://localhost:5000/adminuser/dashboard  
+  - Admin Dashboard URL: http://localhost:5000/adminuser/dashboard 
+- Link the "Admin" in footer section on user side that rediract to Admin login page. 
 - Frontend run "npm run dev" to start the frontend server.
 - Backend run "npm run dev" to start the backend server.
 - Both the frontend and backend servers should be running to access the application locally npm run dev:server

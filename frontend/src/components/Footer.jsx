@@ -69,6 +69,7 @@ const Footer = () => {
               <li><a href="#pricing">Pricing</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#track">Track Order</a></li>
+              <li><a href="#">Admin Portal</a></li>
             </ul>
           </div>
 
