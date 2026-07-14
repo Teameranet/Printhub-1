@@ -91,16 +91,16 @@
 
 .svcp-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(30px, 4.8vw, 60px);
-  font-weight: 700;
-  line-height: 1.07;
+  font-size: clamp(32px, 5.2vw, 64px);
+  font-weight: 600;
+  line-height: 1.06;
   letter-spacing: -0.025em;
   color: var(--text);
   margin: 20px 0 18px;
 }
 
 .svcp-hero-accent {
-  background: linear-gradient(120deg, var(--primary) 0%, #583A95 45%, var(--accent) 100%);
+  background: linear-gradient(120deg, var(--primary) 0%, var(--primary-hover) 50%, var(--primary-active) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

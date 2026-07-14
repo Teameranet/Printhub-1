@@ -1,5 +1,5 @@
 /* PrintHub — Design Tokens & Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* Brand — Azure Purple */
@@ -39,9 +39,9 @@
   --text-on-primary: #FFFFFF;
 
   /* Typography */
-  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* Radii */
   --r-xs: 4px;
