@@ -387,8 +387,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Display a success message after the admin user logs in.
 - Display a success message after the admin user logs out.
 - Display the current admin user's information in the dashboard header.
-- Add a logout button in the dashboard header.
-- Add a navigation menu in the dashboard header.
+- Add a navigation menu & logout button in the dashboard header.
 - Add links to navigate to the following pages:
   - Dashboard Page
   - User Management
