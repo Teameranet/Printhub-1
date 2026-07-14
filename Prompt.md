@@ -393,6 +393,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Dashboard Page
   - User Management
   - Order Management
+  - Normal Print Management
   - Service Management
   - Paper Size Management
   - Paper Type Management
@@ -425,6 +426,19 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Display a summary of total orders, total users, and total revenue (INR).
 - Update the summary in real-time as orders are processed.
 - Invoice Generation Allow Admin to download invoices of the order details in PDF format.
+
+## Admin Normal Print Management
+- Allow to Add ,Edit & Delete Price for Normal Print Service.
+- Admin user can able to set a price rules (Page Range) as per: 
+  - User type ( Regular,Student & Institute).
+  - Paper Size.
+  - Paper Type.
+  - Pages Per Sheet.
+  - Number of Copies.
+  - Single Side Printing.
+  - Double Side Printing.
+  - Black & White Printing.
+  - Color Printing.
 
 ## Admin Service Management
 - Display a list of all available printing services, including normal print and advanced printing.
