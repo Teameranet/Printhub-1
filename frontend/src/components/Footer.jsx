@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import './Footer.css';
 
 const Facebook = () => (
@@ -69,7 +70,7 @@ const Footer = () => {
               <li><a href="#pricing">Pricing</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#track">Track Order</a></li>
-              <li><a href="#">Admin Portal</a></li>
+              <li><Link to="/adminuser/login">Admin Portal</Link></li>
             </ul>
           </div>
 
