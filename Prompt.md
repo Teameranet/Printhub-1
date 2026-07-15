@@ -394,11 +394,11 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Order Management
   - Normal Print Management
   - Service Management
+  - Service Price Management
   - Paper Size Management
   - Paper Type Management
   - Binding Type Management
   - Lamination Management
-  - Printing Service Management
 
 ## Admin User Management
 - Display a list of all registered users.
@@ -472,7 +472,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Sorting feature to sort paper types by name or type.
 - Selection feature to select paper types for printing.
 
-## Admin Pricing Management
+## Admin Service Price Management
 - Display a list of all pricing options, including paper sizes, paper types, binding types, and color options.
 - Display separate pricing details for each paper size, paper type, binding type, and color option for normal print.
 - Allow admin to view pricing details, including paper sizes, paper types, binding types, and color  as per service details page.
