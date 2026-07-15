@@ -4,11 +4,11 @@ import { createContext, useState, useContext, useCallback, useEffect } from 'rea
 const ADMIN_SESSION_KEY = 'printhub.admin.session';
 
 /* Hard-coded admin credentials (front-end only — no real server auth) */
-const ADMIN_EMAIL    = 'printhub@gmail.com';
-const ADMIN_PASSWORD = '123456';
+const ADMIN_EMAIL    = 'p@gmail.com';
+const ADMIN_PASSWORD = 'p';
 const ADMIN_USER     = {
   id:    'admin_1',
-  name:  'PrintHub Admin',
+  name:  'PrintHub',
   email: ADMIN_EMAIL,
   role:  'admin',
   avatar: 'PA',

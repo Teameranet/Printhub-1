@@ -12,6 +12,19 @@ const Icon = ({ d, size = 18 }) => (
 );
 
 const GridIcon       = () => <Icon d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" />;
+const AdminIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <circle cx="19" cy="11" r="2"/>
+    <path d="M19 8v1"/>
+    <path d="M19 13v1"/>
+    <path d="m21.6 9.5-.87.5"/>
+    <path d="m17.27 12-.87.5"/>
+    <path d="m21.6 12.5-.87-.5"/>
+    <path d="m17.27 10-.87-.5"/>
+  </svg>
+);
 const UsersIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -137,6 +150,7 @@ const NAV_GROUPS = [
     title: 'General',
     items: [
       { id: 'overview',     label: 'Dashboard',               Icon: GridIcon },
+      { id: 'admins',       label: 'Admin Management',        Icon: AdminIcon },
       { id: 'users',        label: 'User Management',         Icon: UsersIcon },
       { id: 'orders',       label: 'Order Management',        Icon: ShoppingBagIcon },
     ]
@@ -208,7 +222,7 @@ const OverviewSection = ({ admin }) => {
 
       <div className="ad-welcome-badge">
         <ShieldIcon />
-        <span>Administrator</span>
+        <span>Super Administrator</span>
       </div>
     </div>
 
@@ -242,6 +256,7 @@ const OverviewSection = ({ admin }) => {
 
 const SECTION_MAP = {
   'overview':     (admin) => <OverviewSection admin={admin} />,
+  'admins':       () => <PlaceholderSection title="Admin Management"         description="Manage administrator accounts and permissions." />,
   'users':        () => <PlaceholderSection title="User Management"          description="View, edit and manage all registered users." />,
   'orders':       () => <PlaceholderSection title="Order Management"         description="Track and process customer print orders." />,
   'normal-print': () => <PlaceholderSection title="Normal Print Management"  description="Configure and manage normal print jobs." />,
@@ -341,7 +356,7 @@ const AdminDashboard = () => {
           <div className="ad-sidebar-avatar" aria-hidden="true">{admin.avatar}</div>
           <div className="ad-sidebar-info">
             <div className="ad-sidebar-name">{admin.name}</div>
-            <div className="ad-sidebar-role">Administrator</div>
+            <div className="ad-sidebar-role">Super Administrator</div>
           </div>
         </div>
 
