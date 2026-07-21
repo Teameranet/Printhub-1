@@ -400,6 +400,37 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
   - Binding Type Management
   - Lamination Management
 
+## Admin Management
+Design Super Admin User Management system with the following specifications & Based On Current Design System : 
+  ### Core Functional Requirements 
+  1. **Admin Account Lifecycle Management**: 
+     - Enable super admin users to create, delete, and modify admin user accounts with full CRUD (Create, Read, Update, Delete) capabilities 
+     - Implement a bulk action feature that allows super admins to delete multiple inactive admin accounts simultaneously, with confirmation prompts to prevent accidental data loss 
+     - Add validation checks to block super admins from deleting or modifying their own account to avoid system access gaps 
+  
+  2. **Detailed Admin Information Visibility**: 
+     - Develop a centralized dashboard for super admins to view complete profiles of all admin users, including: 
+       - Full registration metadata (account creation timestamp, IP address at registration, verification status, and original registration source) 
+       - Comprehensive login history (all login timestamps, IP addresses, device/browser information, failed login attempts, and session duration logs) 
+       - Admin-specific order history (all orders processed by the admin, order IDs, transaction timestamps, and action taken on each order) 
+  
+  3. **Dynamic Customization and Privilege Control**: 
+     - Build a flexible profile editor that lets super admins add, modify, or remove custom fields on the super admin user details page as required, with support for field types including text, dropdown, date, and boolean 
+     - Implement a granular privilege assignment system that allows super admins to set, update, and revoke specific access permissions for each admin user, aligned with role-based access control (RBAC) standards 
+     - Add privilege inheritance logic to streamline role assignment, while allowing custom overrides for individual admin accounts 
+
+  4. **User Privilege Management**: 
+     - In manage role model Enable super admins to assign and manage user privileges for each admin account, with clear visibility into each account's access rights and permissions 
+     - Implement a privilege hierarchy system that allows super admins to set up a multi-layered access control structure, with top-level admins having full control over all admin accounts and settings 
+     - Add a privilege inheritance feature that allows super admins to set default privileges for new admin accounts, while still allowing individual overrides for each account 
+  
+  ### Technical and Quality Requirements 
+  - Ensure all account modification actions are logged with timestamps and the super admin's user ID for audit trail compliance 
+  - Implement input validation and sanitization for all admin account updates to prevent injection attacks and data corruption 
+  - Add pagination and search/filter functionality to the admin user list to enable efficient management of large admin user bases 
+  - Conduct end-to-end testing to verify all super admin permissions work as intended, including cross-checking that regular admin users cannot access super admin-only management features 
+  - Ensure the system maintains data integrity by cascading appropriate actions (such as revoking active sessions) when an admin user's account is deleted or privileges are modified
+
 ## Admin User Management
 - Display a list of all registered users.
 - Allow admin to view user details, including registration information, login history, and order history.
