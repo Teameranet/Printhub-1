@@ -423,6 +423,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
    - Name: Generates the internal role ID (e.g., "Marketing").
    - Description: A brief summary of the role.
    - Privilege Grid: A checklist grid mapped over all available permission modules to define the default permissions for this new role (e.g. `orders: ['view', 'edit']`). 
+   - Updating the Admin Form: The "Add Admin" modal will be updated to accept the dynamic `roles` list via props, ensuring that any newly created roles immediately appear in the Role dropdown when inviting a new team member.
      - In manage role model Enable super admins to assign and manage user privileges for each admin account, with clear visibility into each account's access rights and permissions 
      - Implement a privilege hierarchy system that allows super admins to set up a multi-layered access control structure, with top-level admins having full control over all admin accounts and settings 
      - Add a privilege inheritance feature that allows super admins to set default privileges for new admin accounts, while still allowing individual overrides for each account 
