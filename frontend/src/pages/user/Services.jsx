@@ -212,9 +212,9 @@ const SORT_OPTIONS = [
 
 /* ─── CAT COLORS ─────────────────────────────────────────────────────────── */
 const catColor = (category) => ({
-  Marketing:      { bg: 'var(--primary)',   light: 'rgba(126,87,194,0.12)' },
-  Stationery:     { bg: 'var(--accent)',    light: 'rgba(201,122,11,0.12)' },
-  'Large Format': { bg: '#0D9488',          light: 'rgba(13,148,136,0.12)' },
+  Marketing: { bg: 'var(--primary)', light: 'rgba(126,87,194,0.12)' },
+  Stationery: { bg: 'var(--accent)', light: 'rgba(201,122,11,0.12)' },
+  'Large Format': { bg: '#0D9488', light: 'rgba(13,148,136,0.12)' },
 }[category] || { bg: 'var(--primary)', light: 'rgba(126,87,194,0.12)' });
 
 /* ─── SERVICE ART ────────────────────────────────────────────────────────── */
@@ -235,7 +235,7 @@ const ServiceArt = ({ kind, category }) => {
     <div className="sart sart--doc">
       <div className="sart-page">
         <div className="sart-page-header" style={{ background: c.bg }} />
-        {[90,100,75,85,60,80].map((w,i) => (
+        {[90, 100, 75, 85, 60, 80].map((w, i) => (
           <div key={i} className="sart-line" style={{ width: `${w}%` }} />
         ))}
       </div>
@@ -276,9 +276,9 @@ const ServiceArt = ({ kind, category }) => {
 
   if (kind === 'brochure') return (
     <div className="sart sart--brochure">
-      {[0,1,2].map(i => (
-        <div key={i} className="sart-panel" style={i===1 ? { background: c.light, borderColor: c.bg } : {}}>
-          <div className="sart-panel-bar" style={i===1 ? { background: c.bg } : {}} />
+      {[0, 1, 2].map(i => (
+        <div key={i} className="sart-panel" style={i === 1 ? { background: c.light, borderColor: c.bg } : {}}>
+          <div className="sart-panel-bar" style={i === 1 ? { background: c.bg } : {}} />
           <div className="sart-panel-line" />
           <div className="sart-panel-line sart-panel-line--short" />
         </div>
@@ -292,7 +292,7 @@ const ServiceArt = ({ kind, category }) => {
         <div className="sart-notebook-spine" style={{ background: c.bg }} />
         <div className="sart-notebook-cover" style={{ borderColor: c.bg }}>
           <div className="sart-notebook-logo" style={{ background: c.bg }} />
-          {[80,60,70].map((w,i) => (
+          {[80, 60, 70].map((w, i) => (
             <div key={i} className="sart-notebook-line" style={{ width: `${w}%` }} />
           ))}
         </div>
@@ -470,13 +470,13 @@ const ServicesHero = ({ query, setQuery, inputRef }) => {
           <Icon.Printer /> Print Services
         </span>
         <h1 id="svcp-hero-title" className="svcp-hero-title">
-          Everything you need to
+          Everything You Need To
           <br />
-          <span className="svcp-hero-accent">print, publish &amp; promote.</span>
+          <span className="svcp-hero-accent">Print, Publish &amp; Promote.</span>
         </h1>
         <p className="svcp-hero-sub">
           From business cards to jumbo prints — every service has tailored specs,
-          instant pricing, and fast delivery across India.
+          instant pricing, and fast delivery across Maharashtra.
         </p>
 
         <form
@@ -538,9 +538,9 @@ const ServicesPage = () => {
   const initialQuery = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQuery);
   const [category, setCategory] = useState('All');
-  const [sort,     setSort]     = useState('popular');
+  const [sort, setSort] = useState('popular');
   const [viewMode, setViewMode] = useState('grid');
-  const inputRef                = useRef(null);
+  const inputRef = useRef(null);
 
   // Sync state if URL query param changes
   useEffect(() => {
@@ -577,10 +577,10 @@ const ServicesPage = () => {
     }
 
     switch (sort) {
-      case 'price-asc':  list = list.sort((a, b) => a.priceNum - b.priceNum);              break;
-      case 'price-desc': list = list.sort((a, b) => b.priceNum - a.priceNum);              break;
-      case 'name':       list = list.sort((a, b) => a.title.localeCompare(b.title));       break;
-      default:           list = list.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0)); break;
+      case 'price-asc': list = list.sort((a, b) => a.priceNum - b.priceNum); break;
+      case 'price-desc': list = list.sort((a, b) => b.priceNum - a.priceNum); break;
+      case 'name': list = list.sort((a, b) => a.title.localeCompare(b.title)); break;
+      default: list = list.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0)); break;
     }
 
     return list;
