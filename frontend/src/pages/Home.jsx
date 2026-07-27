@@ -127,12 +127,12 @@ const Hero = () => {
       </div>
       <div className="container hero-inner">
         <div className="hero-eyebrow">
-          <span className="hero-dot" /> Online printing service · Open 24×7
+          <span className="hero-dot" /> Online Printing Service · Open 24×7
         </div>
         <h1 id="hero-title" className="hero-title">
-          Fast, easy online printing <br />
+          Fast, Easy Online Printing <br />
           {/* — */}
-          <span className="hero-title-accent">upload, configure, order in minutes.</span>
+          <span className="hero-title-accent">Upload, Configure, Order in Minutes.</span>
         </h1>
         <p className="hero-sub">
           Drop your file, pick your specs, watch the price update in real time. We handle the rest — pickup, print, deliver.

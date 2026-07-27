@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
+import AdminManagementSection from './AdminManagement';
 import './AdminDashboard.css';
 
 /* ─── Icons ──────────────────────────────────────────────────── */
@@ -222,7 +223,7 @@ const OverviewSection = ({ admin }) => {
 
       <div className="ad-welcome-badge">
         <ShieldIcon />
-        <span>Super Administrator</span>
+        <span>{admin?.role === 'super_admin' ? 'Super Administrator' : 'Administrator'}</span>
       </div>
     </div>
 
@@ -256,7 +257,7 @@ const OverviewSection = ({ admin }) => {
 
 const SECTION_MAP = {
   'overview':     (admin) => <OverviewSection admin={admin} />,
-  'admins':       () => <PlaceholderSection title="Admin Management"         description="Manage administrator accounts and permissions." />,
+  'admins':       () => <AdminManagementSection />,
   'users':        () => <PlaceholderSection title="User Management"          description="View, edit and manage all registered users." />,
   'orders':       () => <PlaceholderSection title="Order Management"         description="Track and process customer print orders." />,
   'normal-print': () => <PlaceholderSection title="Normal Print Management"  description="Configure and manage normal print jobs." />,
@@ -356,7 +357,7 @@ const AdminDashboard = () => {
           <div className="ad-sidebar-avatar" aria-hidden="true">{admin.avatar}</div>
           <div className="ad-sidebar-info">
             <div className="ad-sidebar-name">{admin.name}</div>
-            <div className="ad-sidebar-role">Super Administrator</div>
+            <div className="ad-sidebar-role">{admin?.role === 'super_admin' ? 'Super Administrator' : 'Administrator'}</div>
           </div>
         </div>
 

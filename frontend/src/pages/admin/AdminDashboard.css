@@ -813,7 +813,7 @@ body:has(.ad-root) #root {
   }
 
   .ad-content {
-    padding: 20px 16px 40px;
+    padding: 20px 16px 90px;
   }
 
   .ad-breadcrumb {

@@ -6,9 +6,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Route imports
-const authRoutes = require('./api/auth');
-const userRoutes = require('./api/users');
+const authRoutes    = require('./api/auth');
+const userRoutes    = require('./api/users');
 const productRoutes = require('./api/products');
+const adminRoutes   = require('./api/admins');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -18,9 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
+app.use('/api/auth',    authRoutes);
+app.use('/api/users',   userRoutes);
+app.use('/api/products',productRoutes);
+app.use('/api/admins',  adminRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

@@ -1555,6 +1555,8 @@
   font-size: 14px;
   font-family: var(--font-body);
   padding: 0 32px 0 8px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .cart-search-input:focus,
@@ -1579,13 +1581,13 @@
   display: flex;
   align-items: center;
   padding: 4px;
-  border-radius: var(--r-sm);
-  transition: all 0.18s;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
 }
 
 .cart-clear-search:hover {
-  background: var(--bg-elev-3);
   color: var(--text);
+  background: var(--primary-softer);
 }
 
 .cart-actions-group {
@@ -1596,20 +1598,23 @@
 }
 
 .cart-filter-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   height: 44px;
   padding: 0 18px;
   background: var(--bg-elev-1);
-  border: 1.5px solid var(--border);
-  border-radius: var(--r-xl);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-full);
   color: var(--text-muted);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
   box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .cart-filter-toggle:hover {
@@ -1883,27 +1888,47 @@
 }
 
 /* Responsive adjustments for controls */
+@media (max-width: 1024px) {
+  .cart-search-box {
+    min-width: 0;
+    flex: 1;
+    height: 44px;
+    box-sizing: border-box;
+  }
+}
+
 @media (max-width: 768px) {
   .cart-controls-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
   }
 
   .cart-search-box {
-    width: 100%;
-    min-width: unset;
+    flex: 1 1 200px;
+    min-width: 0;
+    height: 44px;
+    box-sizing: border-box;
   }
 
   .cart-actions-group {
-    width: 100%;
-    justify-content: space-between;
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: auto;
   }
 
-  .cart-filter-toggle,
+  .cart-filter-toggle {
+    flex-shrink: 0;
+  }
+
   .cart-sort-box {
     flex: 1;
+    min-width: 160px;
   }
 
   .cart-sort-select {

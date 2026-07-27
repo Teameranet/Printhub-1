@@ -549,11 +549,13 @@
   font-weight: 600;
   white-space: nowrap;
 }
+
 .badge--accent {
   background: var(--accent-soft);
   color: var(--accent);
   border: 1px solid rgba(201, 122, 11, 0.25);
 }
+
 .badge--muted {
   background: var(--bg-elev-2);
   color: var(--text-muted);
@@ -563,16 +565,35 @@
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 1024px) {
   .orders-stats-row {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    margin-bottom: 20px;
   }
 
-  .orders-stat:nth-child(2) {
-    border-right: none;
+  .orders-stat {
+    background: var(--bg-elev-1);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 16px 14px;
+    border-right: 1.5px solid var(--border) !important;
+    box-shadow: 0 4px 14px rgba(60, 40, 110, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
 
-  .orders-stat:nth-child(1),
-  .orders-stat:nth-child(2) {
-    border-bottom: 1px solid var(--divider);
+  .orders-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(60, 40, 110, 0.08);
   }
 
   .order-detail-grid {
@@ -657,21 +678,37 @@
 }
 
 @media (max-width: 480px) {
+  .orders-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .orders-stat {
+    padding: 14px 10px;
+  }
+
+  .orders-stat-value {
+    font-size: 22px;
+  }
+
+  .orders-stat-label {
+    font-size: 10.5px;
+  }
 
   .order-detail-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .order-file-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
-  
+
   .order-card-actions {
     flex-direction: column;
   }
-  
+
   .order-card-actions .ph-btn {
     width: 100%;
     justify-content: center;
@@ -734,6 +771,8 @@
   font-size: 14px;
   font-family: var(--font-body);
   padding: 0 32px 0 8px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .orders-search-input:focus,
@@ -758,13 +797,13 @@
   display: flex;
   align-items: center;
   padding: 4px;
-  border-radius: var(--r-sm);
-  transition: all 0.18s;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
 }
 
 .orders-clear-search:hover {
-  background: var(--bg-elev-3);
   color: var(--text);
+  background: var(--primary-softer);
 }
 
 .orders-actions-group {
@@ -775,20 +814,23 @@
 }
 
 .orders-filter-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   height: 44px;
   padding: 0 18px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--r-xl);
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-full);
   color: var(--text-muted);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
   box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .orders-filter-toggle:hover {
@@ -900,7 +942,7 @@
 }
 
 /* format filter chip rows should span full columns */
-.orders-filters-grid > .orders-filter-group:first-child {
+.orders-filters-grid>.orders-filter-group:first-child {
   grid-column: 1 / -1;
 }
 
@@ -1049,27 +1091,50 @@
 }
 
 /* Responsive adjustments for controls */
+@media (max-width: 1024px) {
+  .orders-search-box {
+    min-width: 0;
+    flex: 1;
+    height: 44px;
+    box-sizing: border-box;
+  }
+}
+
 @media (max-width: 768px) {
   .orders-controls-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
   }
+
   .orders-search-box {
-    width: 100%;
-    min-width: unset;
+    flex: 1 1 200px;
+    min-width: 0;
+    height: 44px;
+    box-sizing: border-box;
   }
+
   .orders-actions-group {
-    width: 100%;
-    justify-content: space-between;
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: auto;
   }
-  .orders-filter-toggle,
+
+  .orders-filter-toggle {
+    flex-shrink: 0;
+  }
+
   .orders-sort-box {
     flex: 1;
+    min-width: 160px;
   }
+
   .orders-sort-select {
     width: 100%;
   }
 }
-
