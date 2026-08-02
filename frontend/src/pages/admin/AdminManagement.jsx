@@ -120,10 +120,10 @@ const StatsRow = ({ admins }) => {
   const sessions = admins.filter(a => a.sessionActive).length;
 
   const stats = [
-    { label: 'Total Admins', value: total, color: 'var(--primary)', icon: <UsersIcon /> },
-    { label: 'Active Accounts', value: active, color: '#16a34a', icon: <CheckCircleIcon /> },
-    { label: 'Super Admins', value: superAdms, color: '#c97a0b', icon: <ShieldIcon /> },
-    { label: 'Live Sessions', value: sessions, color: '#2563eb', icon: <KeyIcon /> },
+    { label: 'Total Admins', value: total, color: '#6366f1', bg: 'rgba(99, 102, 241, 0.1)', border: 'rgba(99, 102, 241, 0.25)', icon: <UsersIcon /> },
+    { label: 'Active Accounts', value: active, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.1)', border: 'rgba(22, 163, 74, 0.25)', icon: <CheckCircleIcon /> },
+    { label: 'Super Admins', value: superAdms, color: '#c97a0b', bg: 'rgba(201, 122, 11, 0.1)', border: 'rgba(201, 122, 11, 0.25)', icon: <ShieldIcon /> },
+    { label: 'Live Sessions', value: sessions, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.1)', border: 'rgba(37, 99, 235, 0.25)', icon: <KeyIcon /> },
   ];
 
   return (
@@ -131,8 +131,8 @@ const StatsRow = ({ admins }) => {
       {stats.map((s, i) => (
         <div key={i} className="am-stat">
           <div className="am-stat-icon" style={{
-            background: `${s.color}18`,
-            border: `1px solid ${s.color}40`,
+            background: s.bg,
+            border: `1px solid ${s.border}`,
             color: s.color,
           }}>
             {s.icon}
