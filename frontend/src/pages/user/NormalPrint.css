@@ -994,33 +994,38 @@
 .np-order-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 9px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-active));
-  color: var(--text-on-primary);
+  background: linear-gradient(135deg, var(--primary), #9b6de0);
+  color: #fff;
   font-size: 15px;
   font-weight: 700;
   font-family: var(--font-display);
   border: none;
   border-radius: var(--r-full);
   cursor: pointer;
-  box-shadow: 0 4px 16px var(--primary-glow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 18px var(--primary-glow);
+  transition: background 0.22s, transform 0.2s, box-shadow 0.22s, opacity 0.2s ease;
   white-space: nowrap;
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 .np-order-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover), #8857d0);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--primary-glow);
+  box-shadow: 0 8px 28px var(--primary-glow);
 }
 
 .np-order-btn:active:not(:disabled) {
-  transform: translateY(0);
+  transform: scale(0.98);
+  box-shadow: 0 2px 10px var(--primary-glow);
 }
 
 .np-order-btn:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+  animation: none;
 }
 
 /* Spinner in button */
@@ -1114,6 +1119,24 @@
 } */
 
 /* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .np-order-bar-inner {
+    padding: 14px 20px;
+    gap: 16px;
+  }
+
+  .np-order-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .np-order-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .np-wrap { padding: 0 16px; }
   .np-page { padding-top: calc(var(--nav-h, 72px) + 16px); }
@@ -1129,8 +1152,8 @@
 
   .np-order-bar-inner { flex-direction: column; align-items: stretch; gap: 14px; }
   .np-order-stats { justify-content: space-around; }
-  .np-order-actions { flex-direction: column; align-items: stretch; }
+  .np-order-actions { flex-direction: column; align-items: stretch; width: 100%; }
   .np-order-note { text-align: center; }
-  .np-order-btn { justify-content: center; }
+  .np-order-btn { justify-content: center; width: 100%; }
 }
 

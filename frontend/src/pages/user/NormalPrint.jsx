@@ -182,7 +182,7 @@ const DEFAULT_SPEC = {
   paperSize: 'A4',
   paperType: 'Bond',
   pageRange: 'All',
-  orientation: 'Portrait',
+  orientation: 'Auto',
   pagesPerSheet: 1,
   copies: 1,
   lamination: 'None',
@@ -311,47 +311,7 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
 
       {/* Specs grid — 4 columns on wide, 2 on tablet, 1 on mobile */}
       <div className="np-spec-grid">
-        <div className="np-field">
-          <label htmlFor={`size-${file.id}`}>Paper Size</label>
-          <select id={`size-${file.id}`} className="np-select" value={spec.paperSize} onChange={e => set('paperSize', e.target.value)}>
-            {['A4', 'A3', 'A5', 'Letter', 'Legal'].map(s => <option key={s}>{s}</option>)}
-          </select>
-        </div>
-
-        <div className="np-field">
-          <label htmlFor={`type-${file.id}`}>Paper Type</label>
-          <select id={`type-${file.id}`} className="np-select" value={spec.paperType} onChange={e => set('paperType', e.target.value)}>
-            {['Bond', 'Glossy', 'Matte', 'Cardstock'].map(t => <option key={t}>{t}</option>)}
-          </select>
-        </div>
-
-        <div className="np-field">
-          <label htmlFor={`range-${file.id}`}>
-            Page Range
-            <span className="np-field-tip" title='e.g. "all", "1-5", "1,3,7-9"'><Icons.Info /></span>
-          </label>
-          <input
-            id={`range-${file.id}`}
-            type="text"
-            className="np-input"
-            value={spec.pageRange}
-            onChange={e => set('pageRange', e.target.value)}
-            placeholder='e.g. All, (1,2,3 & 1-10)'
-          />
-        </div>
-
-        <div className="np-field">
-          <label htmlFor={`orient-${file.id}`}>
-            Orientation
-            <span className="np-optional">Optional</span>
-          </label>
-          <select id={`orient-${file.id}`} className="np-select" value={spec.orientation} onChange={e => set('orientation', e.target.value)}>
-            {['Portrait', 'Landscape', 'Auto'].map(o => <option key={o}>{o}</option>)}
-          </select>
-        </div>
-
-
-
+        {/* 1st: Number of Copies */}
         <div className="np-field">
           <label htmlFor={`copies-${file.id}`}>Number of Copies</label>
           <div className="np-stepper">
@@ -386,17 +346,54 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
           </div>
         </div>
 
+        {/* 2nd: Page Range */}
         <div className="np-field">
-          <label htmlFor={`lam-${file.id}`}>Lamination</label>
-          <select id={`lam-${file.id}`} className="np-select" value={spec.lamination} onChange={e => set('lamination', e.target.value)}>
-            {['None', 'Glossy Lamination', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
+          <label htmlFor={`range-${file.id}`}>
+            Page Range
+            <span className="np-field-tip" title='e.g. "all", "1-5", "1,3,7-9"'><Icons.Info /></span>
+          </label>
+          <input
+            id={`range-${file.id}`}
+            type="text"
+            className="np-input"
+            value={spec.pageRange}
+            onChange={e => set('pageRange', e.target.value)}
+            placeholder='e.g. All, (1,2,3 & 1-10)'
+          />
+        </div>
+
+        {/* 3rd: Paper Size */}
+        <div className="np-field">
+          <label htmlFor={`size-${file.id}`}>Paper Size</label>
+          <select id={`size-${file.id}`} className="np-select" value={spec.paperSize} onChange={e => set('paperSize', e.target.value)}>
+            {['A4', 'A3', 'A5', 'Letter', 'Legal'].map(s => <option key={s}>{s}</option>)}
           </select>
         </div>
 
+        {/* 4th: Orientation */}
+        <div className="np-field">
+          <label htmlFor={`orient-${file.id}`}>
+            Orientation
+            <span className="np-optional">Optional</span>
+          </label>
+          <select id={`orient-${file.id}`} className="np-select" value={spec.orientation || 'Auto'} onChange={e => set('orientation', e.target.value)}>
+            {['Auto', 'Portrait', 'Landscape'].map(o => <option key={o}>{o}</option>)}
+          </select>
+        </div>
+
+        {/* 5th: Binding Type */}
         <div className="np-field">
           <label htmlFor={`bind-${file.id}`}>Binding Type</label>
           <select id={`bind-${file.id}`} className="np-select" value={spec.binding} onChange={e => set('binding', e.target.value)}>
             {['None', 'Spiral', 'Stapled'].map(b => <option key={b}>{b}</option>)}
+          </select>
+        </div>
+
+        {/* 6th (Last): Lamination */}
+        <div className="np-field">
+          <label htmlFor={`lam-${file.id}`}>Lamination</label>
+          <select id={`lam-${file.id}`} className="np-select" value={spec.lamination} onChange={e => set('lamination', e.target.value)}>
+            {['None', 'Glossy Lamination', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
           </select>
         </div>
       </div>
