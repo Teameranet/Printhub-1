@@ -2191,31 +2191,29 @@
 }
 
 .co-sidebar-item-icon {
-  width: 32px;
-  height: 32px;
-  background: var(--primary-soft);
-  border-radius: var(--r-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md, 10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary);
   flex-shrink: 0;
   position: relative;
 }
 
 .co-sidebar-item-ext {
   position: absolute;
-  bottom: -3px;
+  bottom: -4px;
   right: -4px;
-  padding: 1.5px 3.5px;
+  padding: 1.5px 4px;
   border-radius: 4px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, monospace);
   font-size: 7.5px;
-  font-weight: 700;
-  color: #fff;
+  font-weight: 800;
+  color: #ffffff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 1.5px solid var(--bg-elev-1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   line-height: 1;
 }
 

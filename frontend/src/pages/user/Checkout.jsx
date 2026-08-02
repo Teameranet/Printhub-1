@@ -93,6 +93,13 @@ const Icons = {
       <polyline points="14 2 14 8 20 8" /><line x1="9" x2="15" y1="13" y2="13" /><line x1="9" x2="12" y1="17" y2="17" />
     </svg>
   ),
+  FilePpt: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <rect x="9" y="12" width="6" height="5" rx="1" />
+    </svg>
+  ),
   FileGeneric: () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -205,13 +212,15 @@ function calcCost(spec, totalPages) {
 /* ─── File Icon Helper ────────────────────────────────────────── */
 function getFileIcon(name) {
   const ext = (name || '').split('.').pop().toLowerCase();
-  if (['jpg', 'jpeg', 'png'].includes(ext))
-    return { Icon: Icons.FileImage, color: '#16A34A', bg: 'rgba(22,163,74,0.10)', label: ext };
+  if (['jpg', 'jpeg', 'png', 'webp', 'svg', 'gif'].includes(ext))
+    return { Icon: Icons.FileImage, color: '#16A34A', bg: 'rgba(22,163,74,0.10)', label: ext.toUpperCase() };
   if (ext === 'pdf')
-    return { Icon: Icons.FilePdf, color: '#DC2626', bg: 'rgba(220,38,38,0.10)', label: ext };
+    return { Icon: Icons.FilePdf, color: '#DC2626', bg: 'rgba(220,38,38,0.10)', label: 'PDF' };
   if (['doc', 'docx'].includes(ext))
-    return { Icon: Icons.FileDoc, color: '#2563EB', bg: 'rgba(37,99,235,0.10)', label: ext };
-  return { Icon: Icons.FileGeneric, color: '#7E57C2', bg: 'rgba(126,87,194,0.10)', label: ext };
+    return { Icon: Icons.FileDoc, color: '#2563EB', bg: 'rgba(37,99,235,0.10)', label: ext.toUpperCase() };
+  if (['ppt', 'pptx'].includes(ext))
+    return { Icon: Icons.FilePpt, color: '#16A34A', bg: 'rgba(22,163,74,0.10)', label: ext.toUpperCase() };
+  return { Icon: Icons.FileGeneric, color: '#7E57C2', bg: 'rgba(126,87,194,0.10)', label: (ext || 'FILE').toUpperCase() };
 }
 
 /* ─── Mock Cart Data ──────────────────────────────────────────── */

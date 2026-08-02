@@ -154,7 +154,7 @@ function getFileIcon(name) {
   if (['doc', 'docx'].includes(ext))
     return { Icon: Icons.FileDoc, color: '#2563EB', bg: 'rgba(37,99,235,0.10)', label: ext.toUpperCase() };
   if (['ppt', 'pptx'].includes(ext))
-    return { Icon: Icons.FilePpt, color: '#C97A0B', bg: 'rgba(201,122,11,0.10)', label: ext.toUpperCase() };
+    return { Icon: Icons.FilePpt, color: '#16A34A', bg: 'rgba(22,163,74,0.10)', label: ext.toUpperCase() };
   return { Icon: Icons.FileGeneric, color: '#7E57C2', bg: 'rgba(126,87,194,0.10)', label: ext.toUpperCase() };
 }
 
