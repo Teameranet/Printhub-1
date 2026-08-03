@@ -89,6 +89,13 @@ const Icons = {
       <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
     </svg>
   ),
+  Range: () => (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  ),
   Printer: () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
@@ -179,7 +186,7 @@ const PRICING = {
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
   lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
-  binding: { None: 0, Spiral: 50, Stapled: 10 },
+  binding: { None: 0, Spiral: 50, Stapled: 0.5 },
   doubleSideMulti: 0.8,
 };
 
@@ -204,12 +211,11 @@ function calcCost(spec, totalPages) {
   const copies = Math.max(1, Number(spec.copies) || 1);
   const pps = Number(spec.pagesPerSheet) || 1;
   const basePerPage = (spec.color === 'color' ? PRICING.color : PRICING.bw)[spec.paperSize] ?? 2;
-  const typeExtra = PRICING.paperType[spec.paperType] ?? 0;
   const ppsMulti = PRICING.pagesPerSheet[pps] ?? 1;
   const sideMulti = spec.sides === 'double' ? PRICING.doubleSideMulti : 1;
   const laminationCost = (PRICING.lamination[spec.lamination] ?? 0) * copies;
   const bindingCost = (PRICING.binding[spec.binding] ?? 0) * copies;
-  const printCost = (basePerPage + typeExtra) * ppsMulti * sideMulti * pages * copies;
+  const printCost = basePerPage * ppsMulti * sideMulti * pages * copies;
   const sheets = Math.ceil(pages / (spec.sides === 'double' ? 2 : 1) / pps) * copies;
   return {
     printCost: Math.max(0, printCost),
@@ -401,12 +407,6 @@ function EditSpecModal({ item, onSave, onClose }) {
               </select>
             </div>
             <div className="cart-edit-field">
-              <label htmlFor={`edit-type-${item.id}`}>Paper Type</label>
-              <select id={`edit-type-${item.id}`} className="cart-select" value={spec.paperType} onChange={(e) => set('paperType', e.target.value)}>
-                {['Bond', 'Glossy', 'Matte', 'Cardstock'].map((t) => <option key={t}>{t}</option>)}
-              </select>
-            </div>
-            <div className="cart-edit-field">
               <label htmlFor={`edit-range-${item.id}`}>Page Range</label>
               <input
                 id={`edit-range-${item.id}`}
@@ -539,13 +539,20 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
   const cost = calcCost(item.spec, item.pages);
   const spec = item.spec;
 
+  const pageRangeLabel = spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All pages' : `Pages: ${spec.pageRange}`;
+
   const specTags = [
-    { label: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
+    // 1. Page Size
     { label: spec.paperSize, Icon: Icons.File },
-    { label: spec.paperType, Icon: Icons.Scroll },
-    { label: spec.sides === 'double' ? 'Double-sided' : 'Single-sided', Icon: Icons.Copy },
-    spec.lamination !== 'None' ? { label: spec.lamination, Icon: Icons.Sparkles } : null,
+    // 2. Page Range
+    { label: pageRangeLabel, Icon: Icons.Range, isPageRange: true },
+    // 3. Single or Double side
+    { label: spec.sides === 'double' ? 'Double-Sided' : 'Single-Sided', Icon: Icons.Copy },
+    // 4. Colour
+    { label: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
+    // 5. Binding & Lamination
     spec.binding !== 'None' ? { label: spec.binding, Icon: Icons.Book } : null,
+    spec.lamination !== 'None' ? { label: spec.lamination, Icon: Icons.Sparkles } : null,
   ].filter(Boolean);
 
   return (
@@ -590,15 +597,14 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
         {specTags.map((tag) => {
           const TagIcon = tag.Icon || Icons.Tag;
           return (
-            <span key={tag.label} className="cart-tag">
+            <span
+              key={tag.label}
+              className={`cart-tag ${tag.isPageRange ? 'cart-tag--pages' : ''}`}
+            >
               <TagIcon /> {tag.label}
             </span>
           );
         })}
-        <span className="cart-tag cart-tag--pages">
-          <Icons.Info />
-          {spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All pages' : `Pages: ${spec.pageRange}`}
-        </span>
       </div>
 
       {/* ── Quantity & Cost Row ── */}
@@ -668,6 +674,26 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
   );
 }
 
+/* ─── Reusable Proceed to Checkout Component ──────────────────── */
+function ProceedToCheckoutButton({ onCheckout, disabled = false, isMobile = false }) {
+  return (
+    <div className={`cart-checkout-group ${isMobile ? 'cart-checkout-group--mobile' : ''}`}>
+      <button
+        id={isMobile ? 'cart-checkout-btn-mobile' : 'cart-checkout-btn'}
+        className={`cart-checkout-btn ${isMobile ? 'cart-checkout-btn--mobile' : ''}`}
+        onClick={onCheckout}
+        disabled={disabled}
+        aria-label="Proceed to checkout"
+      >
+        <Icons.Checkout /> Proceed to Checkout
+      </button>
+      <p className="cart-summary-note">
+        <Icons.Info /> Prices as per configured rates ·Final amount confirmed at checkout.
+      </p>
+    </div>
+  );
+}
+
 /* ─── Order Summary Panel ────────────────────────────────────── */
 function OrderSummaryPanel({ items, onCheckout }) {
   const subtotal = items.reduce((s, item) => s + calcCost(item.spec, item.pages).total, 0);
@@ -715,19 +741,7 @@ function OrderSummaryPanel({ items, onCheckout }) {
         <span className="cart-summary-total-amt">₹{grandTotal.toFixed(2)}</span>
       </div>
 
-      <button
-        id="cart-checkout-btn"
-        className="cart-checkout-btn"
-        onClick={onCheckout}
-        disabled={items.length === 0}
-        aria-label="Proceed to checkout"
-      >
-        <Icons.Checkout /> Proceed to Checkout
-      </button>
-
-      <p className="cart-summary-note">
-        <Icons.Info /> Prices are estimated. Final amount confirmed at checkout.
-      </p>
+      <ProceedToCheckoutButton onCheckout={onCheckout} disabled={items.length === 0} />
     </aside>
   );
 }
@@ -1088,21 +1102,7 @@ export default function Cart() {
                     </select>
                   </div>
 
-                  {/* Filter Group: Paper Type */}
-                  <div className="cart-filter-group">
-                    <label htmlFor="filter-type">Paper Type</label>
-                    <select
-                      id="filter-type"
-                      className="cart-select"
-                      value={filters.paperType}
-                      onChange={(e) => setFilters(f => ({ ...f, paperType: e.target.value }))}
-                    >
-                      <option value="all">All Types</option>
-                      {['Bond', 'Glossy', 'Matte', 'Cardstock'].map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </div>
+
 
                   {/* Filter Group: Sides */}
                   <div className="cart-filter-group">
@@ -1206,16 +1206,7 @@ export default function Cart() {
         {items.length > 0 && (
           <div className="cart-mobile-bar" role="complementary" aria-label="Order summary">
             <div className="cart-mobile-bar-inner">
-
-              <div className="cart-mobile-actions">
-                <p className="cart-mobile-note">Includes 18% GST</p>
-                <button
-                  className="cart-checkout-btn cart-checkout-btn--mobile"
-                  onClick={handleCheckout}
-                >
-                  <Icons.Checkout /> Proceed to Checkout · ₹{(grandTotal + gst).toFixed(2)}
-                </button>
-              </div>
+              <ProceedToCheckoutButton onCheckout={handleCheckout} isMobile />
             </div>
           </div>
         )}

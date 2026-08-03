@@ -1157,3 +1157,18 @@
   .np-order-btn { justify-content: center; width: 100%; }
 }
 
+.np-order-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.np-order-note svg {
+  flex-shrink: 0;
+}

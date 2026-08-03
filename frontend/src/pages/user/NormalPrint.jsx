@@ -702,7 +702,7 @@ export default function NormalPrint() {
                   <><Icons.ShoppingCart />Place Order · ₹{grandTotal.toFixed(2)}</>
                 )}
               </button>
-              <p className="np-order-note">Prices as per configured rates · GST applicable at checkout</p>
+              <p className="np-order-note"><Icons.Info /> Prices as per configured rates ·Final amount confirmed at checkout.</p>
             </div>
           </div>
         </div>

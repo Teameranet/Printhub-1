@@ -616,6 +616,22 @@
   color: var(--primary-ink);
 }
 
+.cart-checkout-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cart-checkout-group--mobile {
+  align-items: center;
+}
+
+.cart-checkout-group--mobile .cart-summary-note {
+  justify-content: center;
+  margin-top: 6px;
+  text-align: center;
+}
+
 .cart-checkout-btn {
   width: 100%;
   display: flex;
@@ -656,7 +672,7 @@
 
 .cart-summary-note {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
   margin-top: 12px;
   font-size: 12px;
@@ -666,7 +682,6 @@
 
 .cart-summary-note svg {
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
 /* ── Empty State ─────────────────────────────────────── */
@@ -1363,7 +1378,7 @@
     margin-top: 8px;
   }
 
-  .cart-summary .cart-checkout-btn {
+  .cart-summary .cart-checkout-group {
     display: none;
     /* Hide since sticky bar is visible */
   }
