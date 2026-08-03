@@ -590,9 +590,9 @@ export default function NormalPrint() {
               <span> or <em onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}>click to browse</em> from your device</span>
             </div>
             <div className="np-drop-meta">PDF, DOCX, JPG, PNG & PPT files are only allowed.</div>
-            <div className="np-drop-limit">
+            <div className="dropzone-info-box">
               <Icons.Info />
-              Max total size: <strong>50 MB</strong>&ensp;·&ensp;Multiple files supported
+              <span>Max total size: <strong>50 MB</strong> · Multiple files supported</span>
             </div>
             <input
               ref={inputRef}
@@ -702,7 +702,7 @@ export default function NormalPrint() {
                   <><Icons.ShoppingCart />Place Order · ₹{grandTotal.toFixed(2)}</>
                 )}
               </button>
-              <p className="np-order-note"><Icons.Info /> Prices as per configured rates ·Final amount confirmed at checkout.</p>
+              <p className="np-order-note"><Icons.Info /> Prices are based on set rates. The final amount will be shown at checkout.</p>
             </div>
           </div>
         </div>

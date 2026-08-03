@@ -688,7 +688,7 @@ function ProceedToCheckoutButton({ onCheckout, disabled = false, isMobile = fals
         <Icons.Checkout /> Proceed to Checkout
       </button>
       <p className="cart-summary-note">
-        <Icons.Info /> Prices as per configured rates ·Final amount confirmed at checkout.
+        <Icons.Info />Prices are based on set rates. The final amount will be shown at checkout.
       </p>
     </div>
   );

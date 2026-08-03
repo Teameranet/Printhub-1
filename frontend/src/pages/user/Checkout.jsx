@@ -711,7 +711,7 @@ function OrderSidebar({ items, method, pickupData, deliveryData }) {
       <div className="co-sidebar-divider" />
 
       <p className="cart-summary-note" style={{ marginTop: 0, marginBottom: '16px' }}>
-        <Icons.Info /> Prices are estimated. Prices as per configured rates
+        <Icons.Info /> Prices are estimated as per configured rates
       </p>
 
 
