@@ -1,0 +1,23 @@
+{
+  "name": "printhub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2Pexonic/Printhub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2Pexonic/Printhub/issues"
+  },
+  "homepage": "https://github.com/2Pexonic/Printhub#readme",
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
