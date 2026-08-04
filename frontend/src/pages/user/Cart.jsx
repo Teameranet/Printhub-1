@@ -63,6 +63,11 @@ const Icons = {
       <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z" />
     </svg>
   ),
+  ChevronUp: () => (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  ),
   Close: () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 6 6 18" /><path d="m6 6 12 12" />
@@ -256,7 +261,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:10:00',
     spec: {
-      paperSize: 'A4', paperType: 'Bond', pageRange: 'all', orientation: 'Portrait',
+      paperSize: 'A4', paperType: 'Bond', pageRange: 'All', orientation: 'Portrait',
       pagesPerSheet: 1, copies: 2, lamination: 'None', binding: 'Spiral', sides: 'double', color: 'bw',
     },
   },
@@ -268,7 +273,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:12:00',
     spec: {
-      paperSize: 'A4', paperType: 'Glossy', pageRange: 'all', orientation: 'Landscape',
+      paperSize: 'A4', paperType: 'Glossy', pageRange: 'All', orientation: 'Landscape',
       pagesPerSheet: 2, copies: 3, lamination: 'Matte Lamination', binding: 'None', sides: 'single', color: 'color',
     },
   },
@@ -280,7 +285,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:15:00',
     spec: {
-      paperSize: 'A4', paperType: 'Bond', pageRange: 'all', orientation: 'Portrait',
+      paperSize: 'A4', paperType: 'Bond', pageRange: 'All', orientation: 'Portrait',
       pagesPerSheet: 1, copies: 1, lamination: 'Matte Lamination', binding: 'Stapled', sides: 'single', color: 'bw',
     },
   },
@@ -354,155 +359,6 @@ function PreviewModal({ item, onClose }) {
   );
 }
 
-/* ─── Edit Spec Modal ────────────────────────────────────────── */
-function EditSpecModal({ item, onSave, onClose }) {
-  const [spec, setSpec] = useState({ ...item.spec });
-  const cost = calcCost(spec, item.pages);
-  const set = (k, v) => setSpec((s) => ({ ...s, [k]: v }));
-
-  useEffect(() => {
-    const handle = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handle);
-    return () => document.removeEventListener('keydown', handle);
-  }, [onClose]);
-
-  return (
-    <div className="cart-overlay" onClick={onClose} role="dialog" aria-modal aria-label="Edit specifications">
-      <div className="cart-modal cart-modal--edit" onClick={(e) => e.stopPropagation()}>
-        <div className="cart-modal-hd">
-          <div>
-            <div className="cart-modal-fname">Edit Specifications</div>
-            <div className="cart-modal-fmeta">{item.name}</div>
-          </div>
-          <button className="cart-modal-close" onClick={onClose} aria-label="Close">
-            <Icons.Close />
-          </button>
-        </div>
-        <div className="cart-modal-body cart-edit-body">
-
-          {/* Segmented controls */}
-          <div className="cart-edit-segs">
-            <div className="cart-edit-seg-group">
-              <span className="cart-edit-seg-lbl">Printing Side</span>
-              <Seg name="sides" value={spec.sides} onChange={(v) => set('sides', v)} options={[
-                { value: 'single', label: 'Single-Sided' },
-                { value: 'double', label: 'Double-Sided' },
-              ]} />
-            </div>
-            <div className="cart-edit-seg-group">
-              <span className="cart-edit-seg-lbl">Color Mode</span>
-              <Seg name="color" value={spec.color} onChange={(v) => set('color', v)} options={[
-                { value: 'bw', label: 'Black & White' },
-                { value: 'color', label: 'Color' },
-              ]} />
-            </div>
-          </div>
-
-          {/* Spec fields */}
-          <div className="cart-edit-grid">
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-size-${item.id}`}>Paper Size</label>
-              <select id={`edit-size-${item.id}`} className="cart-select" value={spec.paperSize} onChange={(e) => set('paperSize', e.target.value)}>
-                {['A4', 'A3', 'A5', 'Letter', 'Legal'].map((s) => <option key={s}>{s}</option>)}
-              </select>
-            </div>
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-range-${item.id}`}>Page Range</label>
-              <input
-                id={`edit-range-${item.id}`}
-                type="text"
-                className="cart-input"
-                value={spec.pageRange}
-                onChange={(e) => set('pageRange', e.target.value)}
-                placeholder='all · 1-5 · 1,3,7'
-              />
-            </div>
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-orient-${item.id}`}>Orientation</label>
-              <select id={`edit-orient-${item.id}`} className="cart-select" value={spec.orientation} onChange={(e) => set('orientation', e.target.value)}>
-                {['Portrait', 'Landscape', 'Auto'].map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </div>
-
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-copies-${item.id}`}>Copies</label>
-              <div className="cart-stepper">
-                <button type="button" className="cart-step-btn" onClick={() => set('copies', Math.max(1, (spec.copies || 1) - 1))} aria-label="Decrease">−</button>
-                <input
-                  id={`edit-copies-${item.id}`}
-                  type="number"
-                  className="cart-step-input"
-                  value={spec.copies}
-                  min={1} max={9999}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (val === '') set('copies', '');
-                    else { const n = parseInt(val, 10); if (!isNaN(n)) set('copies', n); }
-                  }}
-                  onBlur={(e) => {
-                    const n = parseInt(e.target.value, 10);
-                    set('copies', isNaN(n) || n < 1 ? 1 : Math.min(9999, n));
-                  }}
-                />
-                <button type="button" className="cart-step-btn" onClick={() => set('copies', Math.min(9999, (spec.copies || 1) + 1))} aria-label="Increase">+</button>
-              </div>
-            </div>
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-lam-${item.id}`}>Lamination</label>
-              <select id={`edit-lam-${item.id}`} className="cart-select" value={spec.lamination} onChange={(e) => set('lamination', e.target.value)}>
-                {['None', 'Matte Lamination'].map((l) => <option key={l}>{l}</option>)}
-              </select>
-            </div>
-            <div className="cart-edit-field">
-              <label htmlFor={`edit-bind-${item.id}`}>Binding</label>
-              <select id={`edit-bind-${item.id}`} className="cart-select" value={spec.binding} onChange={(e) => set('binding', e.target.value)}>
-                {['None', 'Spiral', 'Stapled'].map((b) => <option key={b}>{b}</option>)}
-              </select>
-            </div>
-          </div>
-
-          {/* Live cost preview */}
-          <div className="cart-edit-cost">
-            <div className="cart-edit-cost-items">
-              <span className="cart-edit-ci">
-                <span className="cart-edit-ci-label">Print</span>
-                <span className="cart-edit-ci-val">₹{cost.printCost.toFixed(2)}</span>
-              </span>
-              {cost.laminationCost > 0 && (
-                <span className="cart-edit-ci">
-                  <span className="cart-edit-ci-label">Lamination</span>
-                  <span className="cart-edit-ci-val">₹{cost.laminationCost.toFixed(2)}</span>
-                </span>
-              )}
-              {cost.bindingCost > 0 && (
-                <span className="cart-edit-ci">
-                  <span className="cart-edit-ci-label">Binding</span>
-                  <span className="cart-edit-ci-val">₹{cost.bindingCost.toFixed(2)}</span>
-                </span>
-              )}
-              <span className="cart-edit-ci cart-edit-ci--dim">
-                <span className="cart-edit-ci-label">{cost.sheets} sheet{cost.sheets !== 1 ? 's' : ''}</span>
-                <span className="cart-edit-ci-val">{cost.pages} pg</span>
-              </span>
-            </div>
-            <div className="cart-edit-total">
-              <span>Est. Cost</span>
-              <span className="cart-edit-total-amt">₹{cost.total.toFixed(2)}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="cart-modal-foot">
-          <button className="cart-modal-cancel" onClick={onClose}>Cancel</button>
-          <button className="cart-modal-save" onClick={() => onSave(item.id, spec)}>
-            <Icons.Save /> Save Changes
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ─── Remove Confirm Modal ───────────────────────────────────── */
 function RemoveConfirm({ item, onConfirm, onClose }) {
   useEffect(() => {
@@ -518,15 +374,13 @@ function RemoveConfirm({ item, onConfirm, onClose }) {
         <div className="cart-confirm-icon">
           <Icons.Trash />
         </div>
-        <h3 className="cart-confirm-title">Remove Item?</h3>
-        <p className="cart-confirm-sub">
-          <strong>{item.name}</strong> will be removed from your cart. This cannot be undone.
-        </p>
+        <div className="cart-confirm-title">Remove document?</div>
+        <div className="cart-confirm-desc">
+          Are you sure you want to remove <strong>{item.name}</strong> from your cart?
+        </div>
         <div className="cart-confirm-actions">
-          <button className="cart-modal-cancel" onClick={onClose}>Keep Item</button>
-          <button className="cart-confirm-remove" onClick={() => onConfirm(item.id)}>
-            <Icons.Trash /> Remove
-          </button>
+          <button className="cart-modal-cancel" onClick={onClose}>Keep File</button>
+          <button className="cart-modal-del" onClick={() => onConfirm(item.id)}>Remove</button>
         </div>
       </div>
     </div>
@@ -534,7 +388,8 @@ function RemoveConfirm({ item, onConfirm, onClose }) {
 }
 
 /* ─── Cart Item Card ─────────────────────────────────────────── */
-function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onPreview, onEdit }) {
+function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onPreview }) {
+  const [isEditing, setIsEditing] = useState(false);
   const { Icon, color, bg, label } = getFileIcon(item.name);
   const cost = calcCost(item.spec, item.pages);
   const spec = item.spec;
@@ -555,9 +410,11 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
     spec.lamination !== 'None' ? { label: spec.lamination, Icon: Icons.Sparkles } : null,
   ].filter(Boolean);
 
+  const set = (k, v) => onUpdateSpec(item.id, { ...spec, [k]: v });
+
   return (
     <article
-      className="cart-item fade-up"
+      className={`cart-item fade-up${isEditing ? ' cart-item--editing' : ''}`}
       style={{ animationDelay: `${Math.min(index * 0.08, 0.4)}s` }}
       aria-label={`Cart item: ${item.name}`}
     >
@@ -583,8 +440,14 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
               <Icons.Eye /> View
             </button>
           )}
-          <button className="cart-act-btn cart-act-btn--edit" onClick={() => onEdit(item)} title="Edit Specifications" aria-label={`Edit specs for ${item.name}`}>
-            <Icons.Edit /> Edit
+          <button
+            className={`cart-act-btn cart-act-btn--edit${isEditing ? ' cart-act-btn--edit-active' : ''}`}
+            onClick={() => setIsEditing(!isEditing)}
+            title="Edit Specifications"
+            aria-expanded={isEditing}
+            aria-label={`Edit specs for ${item.name}`}
+          >
+            {isEditing ? <><Icons.ChevronUp /> Close</> : <><Icons.Edit /> Edit</>}
           </button>
           <button className="cart-act-btn cart-act-btn--del" onClick={() => onRemove(item)} title="Remove" aria-label={`Remove ${item.name}`}>
             <Icons.Trash />
@@ -607,41 +470,159 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
         })}
       </div>
 
-      {/* ── Quantity & Cost Row ── */}
-      <div className="cart-item-foot">
-        <div className="cart-item-qty">
-          <span className="cart-qty-label">Copies</span>
-          <div className="cart-stepper">
-            <button
-              type="button"
-              className="cart-step-btn"
-              onClick={() => onUpdateCopies(item.id, Math.max(1, (spec.copies || 1) - 1))}
-              aria-label="Decrease copies"
-            >−</button>
-            <input
-              type="number"
-              className="cart-step-input"
-              value={spec.copies}
-              min={1} max={9999}
-              aria-label="Number of copies"
-              onChange={(e) => {
-                const val = e.target.value;
-                if (val === '') onUpdateCopies(item.id, '');
-                else { const n = parseInt(val, 10); if (!isNaN(n)) onUpdateCopies(item.id, n); }
-              }}
-              onBlur={(e) => {
-                const n = parseInt(e.target.value, 10);
-                onUpdateCopies(item.id, isNaN(n) || n < 1 ? 1 : Math.min(9999, n));
-              }}
-            />
-            <button
-              type="button"
-              className="cart-step-btn"
-              onClick={() => onUpdateCopies(item.id, Math.min(9999, (spec.copies || 1) + 1))}
-              aria-label="Increase copies"
-            >+</button>
+      {/* ── Inline Edit Dropdown Panel ── */}
+      {isEditing && (
+        <div className="cart-item-edit-panel">
+          <div className="cart-edit-panel-hd">
+            <span className="cart-edit-panel-title">Edit Specifications</span>
+          </div>
+
+          {/* Segmented controls: Side & Color */}
+          <div className="cart-edit-segs">
+            <div className="cart-edit-seg-group">
+              <span className="cart-edit-seg-lbl">Printing Side</span>
+              <Seg name={`sides-${item.id}`} value={spec.sides} onChange={(v) => set('sides', v)} options={[
+                { value: 'single', label: 'Single-Sided' },
+                { value: 'double', label: 'Double-Sided' },
+              ]} />
+            </div>
+            <div className="cart-edit-seg-group">
+              <span className="cart-edit-seg-lbl">Color Mode</span>
+              <Seg name={`color-${item.id}`} value={spec.color} onChange={(v) => set('color', v)} options={[
+                { value: 'bw', label: 'Black & White' },
+                { value: 'color', label: 'Color' },
+              ]} />
+            </div>
+          </div>
+
+          {/* Spec fields grid */}
+          <div className="cart-edit-grid">
+            {/* 1st: Number of Copies */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-copies-${item.id}`}>Number of Copies</label>
+              <div className="cart-stepper">
+                <button type="button" className="cart-step-btn" onClick={() => set('copies', Math.max(1, (spec.copies || 1) - 1))} aria-label="Decrease">−</button>
+                <input
+                  id={`edit-copies-${item.id}`}
+                  type="number"
+                  className="cart-step-input"
+                  value={spec.copies}
+                  min={1} max={9999}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === '') set('copies', '');
+                    else { const n = parseInt(val, 10); if (!isNaN(n)) set('copies', n); }
+                  }}
+                  onBlur={(e) => {
+                    const n = parseInt(e.target.value, 10);
+                    set('copies', isNaN(n) || n < 1 ? 1 : Math.min(9999, n));
+                  }}
+                />
+                <button type="button" className="cart-step-btn" onClick={() => set('copies', Math.min(9999, (spec.copies || 1) + 1))} aria-label="Increase">+</button>
+              </div>
+            </div>
+
+            {/* 2nd: Page Range */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-range-${item.id}`}>
+                Page Range
+                <span className="cart-field-tip" title='e.g. "All", "1-5", "1,3,7-9"'><Icons.Info /></span>
+              </label>
+              <input
+                id={`edit-range-${item.id}`}
+                type="text"
+                className="cart-input"
+                value={spec.pageRange === 'all' ? 'All' : spec.pageRange}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  set('pageRange', val === 'all' ? 'All' : val);
+                }}
+                placeholder="e.g. All, (1,2,3 & 1-10)"
+              />
+            </div>
+
+            {/* 3rd: Paper Size */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-size-${item.id}`}>Paper Size</label>
+              <select id={`edit-size-${item.id}`} className="cart-select" value={spec.paperSize} onChange={(e) => set('paperSize', e.target.value)}>
+                {['A4', 'A3', 'A5', 'Letter', 'Legal'].map((s) => <option key={s}>{s}</option>)}
+              </select>
+            </div>
+
+            {/* 4th: Orientation */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-orient-${item.id}`}>
+                Orientation
+                <span className="cart-optional">Optional</span>
+              </label>
+              <select id={`edit-orient-${item.id}`} className="cart-select" value={spec.orientation || 'Auto'} onChange={(e) => set('orientation', e.target.value)}>
+                {['Auto', 'Portrait', 'Landscape'].map((o) => <option key={o}>{o}</option>)}
+              </select>
+            </div>
+
+            {/* 5th: Binding Type */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-bind-${item.id}`}>Binding Type</label>
+              <select id={`edit-bind-${item.id}`} className="cart-select" value={spec.binding} onChange={(e) => set('binding', e.target.value)}>
+                {['None', 'Spiral', 'Stapled'].map((b) => <option key={b}>{b}</option>)}
+              </select>
+            </div>
+
+            {/* 6th: Lamination */}
+            <div className="cart-edit-field">
+              <label htmlFor={`edit-lam-${item.id}`}>Lamination</label>
+              <select id={`edit-lam-${item.id}`} className="cart-select" value={spec.lamination} onChange={(e) => set('lamination', e.target.value)}>
+                {['None', 'Matte Lamination'].map((l) => <option key={l}>{l}</option>)}
+              </select>
+            </div>
+          </div>
+
+          {/* Done action */}
+          <div className="cart-edit-panel-foot">
+            <button type="button" className="cart-edit-done-btn" onClick={() => setIsEditing(false)}>
+              <Icons.Check /> Done Editing
+            </button>
           </div>
         </div>
+      )}
+
+      {/* ── Quantity & Cost Row ── */}
+      <div className="cart-item-foot">
+        {!isEditing && (
+          <div className="cart-item-qty">
+            <span className="cart-qty-label">Copies</span>
+            <div className="cart-stepper">
+              <button
+                type="button"
+                className="cart-step-btn"
+                onClick={() => onUpdateCopies(item.id, Math.max(1, (spec.copies || 1) - 1))}
+                aria-label="Decrease copies"
+              >−</button>
+              <input
+                type="number"
+                className="cart-step-input"
+                value={spec.copies}
+                min={1} max={9999}
+                aria-label="Number of copies"
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === '') onUpdateCopies(item.id, '');
+                  else { const n = parseInt(val, 10); if (!isNaN(n)) onUpdateCopies(item.id, n); }
+                }}
+                onBlur={(e) => {
+                  const n = parseInt(e.target.value, 10);
+                  onUpdateCopies(item.id, isNaN(n) || n < 1 ? 1 : Math.min(9999, n));
+                }}
+              />
+              <button
+                type="button"
+                className="cart-step-btn"
+                onClick={() => onUpdateCopies(item.id, Math.min(9999, (spec.copies || 1) + 1))}
+                aria-label="Increase copies"
+              >+</button>
+            </div>
+          </div>
+        )}
 
         <div className="cart-item-cost-breakdown">
           <span className="cart-cost-ci">
@@ -783,7 +764,6 @@ export default function Cart() {
   const navigate = useNavigate();
   const [items, setItems] = useState(MOCK_CART);
   const [previewItem, setPreviewItem] = useState(null);
-  const [editItem, setEditItem] = useState(null);
   const [removeTarget, setRemoveTarget] = useState(null);
   const [removed, setRemoved] = useState(null);
 
@@ -899,7 +879,6 @@ export default function Cart() {
     setItems((prev) =>
       prev.map((item) => (item.id === id ? { ...item, spec } : item))
     );
-    setEditItem(null);
   }, []);
 
   const confirmRemove = useCallback((id) => {
@@ -925,13 +904,6 @@ export default function Cart() {
     <div className="cart-page">
       {/* ── Modals ── */}
       {previewItem && <PreviewModal item={previewItem} onClose={() => setPreviewItem(null)} />}
-      {editItem && (
-        <EditSpecModal
-          item={editItem}
-          onSave={updateSpec}
-          onClose={() => setEditItem(null)}
-        />
-      )}
       {removeTarget && (
         <RemoveConfirm
           item={removeTarget}
@@ -1189,7 +1161,6 @@ export default function Cart() {
                       onUpdateSpec={updateSpec}
                       onRemove={setRemoveTarget}
                       onPreview={setPreviewItem}
-                      onEdit={setEditItem}
                     />
                   ))
                 )}
