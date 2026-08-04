@@ -317,11 +317,11 @@
   opacity: 0.7;
 }
 
-.cart-tag--pages {
+/* .cart-tag--pages {
   background: var(--primary-soft);
   border-color: var(--primary-border);
   color: var(--primary-ink);
-}
+} */
 
 /* Item footer: qty + cost */
 .cart-item-foot {
@@ -349,13 +349,13 @@
   white-space: nowrap;
 }
 
-/* Stepper (shared with modal) */
+/* Stepper (shared with modal, matching NP page) */
 .cart-stepper {
   display: flex;
   align-items: center;
   height: 38px;
-  background: var(--bg-elev-1);
-  border: 1.5px solid var(--border);
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
   border-radius: var(--r-md);
   overflow: hidden;
   transition: border-color 0.2s ease;
@@ -388,9 +388,9 @@
 
 .cart-step-input {
   flex: 1;
-  width: 46px;
+  min-width: 44px;
   height: 100%;
-  background: transparent;
+  background: var(--bg-elev-1);
   border: none;
   text-align: center;
   color: var(--text);
@@ -406,6 +406,11 @@
 .cart-step-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.cart-step-input:focus,
+.cart-step-input:focus-visible {
+  outline: none;
 }
 
 /* Cost breakdown */

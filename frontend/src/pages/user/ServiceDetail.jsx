@@ -167,7 +167,7 @@ const SERVICES = [
     features: ['350 gsm premium stock', 'Matte / Gloss / Soft-touch lamination', 'Rounded corners option', 'Same-day express available', 'Spot UV coating available', 'Bulk pricing for 500+ pcs'],
     sizes: ['Standard 85×55mm', 'Square 55×55mm', 'Slim 85×40mm'],
     materials: ['350 gsm Matte', '350 gsm Gloss', '350 gsm Soft-touch'],
-    finishes: ['Matte Lamination', 'Gloss Lamination', 'Spot UV', 'Foil Stamping'],
+    finishes: ['Matte Lamination', 'Spot UV', 'Foil Stamping'],
     pricing: [
       { qty: '50 pcs', bw: '₹149', color: '₹249' },
       { qty: '100 pcs', bw: '₹249', color: '₹399' },
@@ -215,7 +215,7 @@ const SERVICES = [
     features: ['Up to 60×90 inches', 'Satin / Gloss / Canvas media', 'UV-resistant inks', 'Mounting options available', 'Indoor & outdoor options', 'Frame & standee available'],
     sizes: ['A1 (594×841mm)', 'A0 (841×1189mm)', '48×72 inches', 'Custom sizes'],
     materials: ['Satin Photo Paper', 'Gloss Photo Paper', 'Canvas', 'Backlit Film'],
-    finishes: ['No lamination', 'Matte Lamination', 'Gloss Lamination', 'Mounted on foam board'],
+    finishes: ['No lamination', 'Matte Lamination', 'Mounted on foam board'],
     pricing: [
       { qty: '1 pc (A1)', bw: '₹899', color: '₹1,499' },
       { qty: '1 pc (A0)', bw: '₹1,499', color: '₹2,499' },
@@ -239,7 +239,7 @@ const SERVICES = [
     features: ['A3 to A0 sizes', 'Satin & matte finishes', 'Weather-resistant option', 'Same-day express available', 'Bulk discounts', 'Pantone color matching'],
     sizes: ['A3 (297×420mm)', 'A2 (420×594mm)', 'A1 (594×841mm)', 'A0 (841×1189mm)'],
     materials: ['150 gsm Satin', '200 gsm Satin', '200 gsm Matte', 'Weatherproof Vinyl'],
-    finishes: ['No lamination', 'Gloss Lamination', 'Matte Lamination'],
+    finishes: ['No lamination', 'Matte Lamination'],
     pricing: [
       { qty: '1 pc (A3)', bw: '₹89', color: '₹149' },
       { qty: '1 pc (A2)', bw: '₹149', color: '₹249' },
@@ -287,7 +287,7 @@ const SERVICES = [
     features: ['Tri-fold / Bi-fold / Z-fold', '130–170 gsm coated stock', 'Both sides printing', 'Bulk pricing available', 'High-gloss or matte finish', 'Pantone color matching'],
     sizes: ['A4 (folded)', 'A5 (folded)', 'DL (folded)', 'Square'],
     materials: ['130 gsm Gloss Coated', '150 gsm Silk Coated', '170 gsm Gloss Coated'],
-    finishes: ['Gloss Lamination', 'Matte Lamination', 'Soft-touch Lamination', 'Spot UV'],
+    finishes: ['Matte Lamination', 'Soft-touch Lamination', 'Spot UV'],
     pricing: [
       { qty: '50 pcs', bw: '₹199', color: '₹349' },
       { qty: '100 pcs', bw: '₹349', color: '₹599' },
@@ -437,7 +437,7 @@ const PRICING = {
   color: { A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12, Standard: 12, Square: 12, Slim: 9, default: 8 },
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5, Satin: 2, Canvas: 8, Vinyl: 4, Flex: 3 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
-  lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
+  lamination: { None: 0, 'Matte Lamination': 20 },
   binding: { None: 0, Spiral: 50, Stapled: 10 },
   doubleSideMulti: 0.8,
 };
@@ -695,7 +695,7 @@ function FileSpecCard({ file, service, onChange, onRemove, onPreview, index }) {
             value={spec.lamination}
             onChange={e => set('lamination', e.target.value)}
           >
-            {['None', 'Glossy Lamination', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
+            {['None', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
           </select>
         </div>
 

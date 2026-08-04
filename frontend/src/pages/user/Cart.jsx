@@ -185,7 +185,7 @@ const PRICING = {
   color: { A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12 },
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
-  lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
+  lamination: { None: 0, 'Matte Lamination': 20 },
   binding: { None: 0, Spiral: 50, Stapled: 0.5 },
   doubleSideMulti: 0.8,
 };
@@ -269,7 +269,7 @@ const MOCK_CART = [
     addedAt: '2026-07-03T09:12:00',
     spec: {
       paperSize: 'A4', paperType: 'Glossy', pageRange: 'all', orientation: 'Landscape',
-      pagesPerSheet: 2, copies: 3, lamination: 'Glossy Lamination', binding: 'None', sides: 'single', color: 'color',
+      pagesPerSheet: 2, copies: 3, lamination: 'Matte Lamination', binding: 'None', sides: 'single', color: 'color',
     },
   },
   {
@@ -281,7 +281,7 @@ const MOCK_CART = [
     addedAt: '2026-07-03T09:15:00',
     spec: {
       paperSize: 'A4', paperType: 'Bond', pageRange: 'all', orientation: 'Portrait',
-      pagesPerSheet: 1, copies: 1, lamination: 'None', binding: 'Stapled', sides: 'single', color: 'bw',
+      pagesPerSheet: 1, copies: 1, lamination: 'Matte Lamination', binding: 'Stapled', sides: 'single', color: 'bw',
     },
   },
 ];
@@ -450,7 +450,7 @@ function EditSpecModal({ item, onSave, onClose }) {
             <div className="cart-edit-field">
               <label htmlFor={`edit-lam-${item.id}`}>Lamination</label>
               <select id={`edit-lam-${item.id}`} className="cart-select" value={spec.lamination} onChange={(e) => set('lamination', e.target.value)}>
-                {['None', 'Glossy Lamination', 'Matte Lamination'].map((l) => <option key={l}>{l}</option>)}
+                {['None', 'Matte Lamination'].map((l) => <option key={l}>{l}</option>)}
               </select>
             </div>
             <div className="cart-edit-field">
@@ -599,7 +599,7 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
           return (
             <span
               key={tag.label}
-              className={`cart-tag ${tag.isPageRange ? 'cart-tag--pages' : ''}`}
+              className="cart-tag" /* className={`cart-tag ${tag.isPageRange ? 'cart-tag--pages' : ''}`} */
             >
               <TagIcon /> {tag.label}
             </span>
@@ -1130,8 +1130,7 @@ export default function Cart() {
                     >
                       <option value="all">All Lamination</option>
                       <option value="None">None</option>
-                      <option value="Glossy Lamination">Glossy</option>
-                      <option value="Matte Lamination">Matte</option>
+                      <option value="Matte Lamination">Matte Lamination</option>
                     </select>
                   </div>
 

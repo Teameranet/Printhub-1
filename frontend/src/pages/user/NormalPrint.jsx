@@ -101,7 +101,7 @@ const PRICING = {
   color: { A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12 },
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
-  lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
+  lamination: { None: 0, 'Matte Lamination': 20 },
   binding: { None: 0, Spiral: 50, Stapled: 10 },
   doubleSideMulti: 0.8,
 };
@@ -393,7 +393,7 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
         <div className="np-field">
           <label htmlFor={`lam-${file.id}`}>Lamination</label>
           <select id={`lam-${file.id}`} className="np-select" value={spec.lamination} onChange={e => set('lamination', e.target.value)}>
-            {['None', 'Glossy Lamination', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
+            {['None', 'Matte Lamination'].map(l => <option key={l}>{l}</option>)}
           </select>
         </div>
       </div>

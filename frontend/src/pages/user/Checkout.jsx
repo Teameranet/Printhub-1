@@ -172,7 +172,7 @@ const PRICING = {
   color: { A4: 8, A3: 16, A5: 6, Letter: 9, Legal: 12 },
   paperType: { Bond: 0, Glossy: 3, Matte: 2, Cardstock: 5 },
   pagesPerSheet: { 1: 1, 2: 0.6, 4: 0.35 },
-  lamination: { None: 0, 'Glossy Lamination': 25, 'Matte Lamination': 20 },
+  lamination: { None: 0, 'Matte Lamination': 20 },
   binding: { None: 0, Spiral: 50, Stapled: 10 },
   doubleSideMulti: 0.8,
 };
@@ -263,7 +263,7 @@ const MOCK_CART = [
     size: 4.5 * 1024 * 1024,
     spec: {
       paperSize: 'A4', paperType: 'Glossy', pageRange: 'all', orientation: 'Landscape',
-      pagesPerSheet: 2, copies: 3, lamination: 'Glossy Lamination', binding: 'None', sides: 'single', color: 'color',
+      pagesPerSheet: 2, copies: 3, lamination: 'Matte Lamination', binding: 'None', sides: 'single', color: 'color',
     },
   },
   {
@@ -273,7 +273,7 @@ const MOCK_CART = [
     size: 0.8 * 1024 * 1024,
     spec: {
       paperSize: 'A4', paperType: 'Bond', pageRange: 'all', orientation: 'Portrait',
-      pagesPerSheet: 1, copies: 1, lamination: 'None', binding: 'Stapled', sides: 'single', color: 'bw',
+      pagesPerSheet: 1, copies: 1, lamination: 'Matte Lamination', binding: 'Stapled', sides: 'single', color: 'bw',
     },
   },
 ];
