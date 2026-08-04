@@ -117,6 +117,12 @@ const Icons = {
       <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" />
     </svg>
   ),
+  Sheet: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+      <polyline points="14 2 14 8 20 8" />
+    </svg>
+  ),
   Package: () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M16.5 9.4 7.55 4.24" /><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
@@ -221,6 +227,21 @@ function getFileIcon(name) {
   if (['ppt', 'pptx'].includes(ext))
     return { Icon: Icons.FilePpt, color: '#16A34A', bg: 'rgba(22,163,74,0.10)', label: ext.toUpperCase() };
   return { Icon: Icons.FileGeneric, color: '#7E57C2', bg: 'rgba(126,87,194,0.10)', label: (ext || 'FILE').toUpperCase() };
+}
+
+function formatFileNameWithExtension(name, maxChars = 22) {
+  if (!name || name.length <= maxChars) return name;
+  const lastDotIndex = name.lastIndexOf('.');
+  if (lastDotIndex <= 0) {
+    return name.slice(0, maxChars - 1) + '…';
+  }
+  const ext = name.slice(lastDotIndex);
+  const baseName = name.slice(0, lastDotIndex);
+  const maxBaseLen = maxChars - ext.length - 1;
+  if (maxBaseLen <= 3) {
+    return baseName.slice(0, 3) + '…' + ext;
+  }
+  return baseName.slice(0, maxBaseLen) + '…' + ext;
 }
 
 /* ─── Mock Cart Data ──────────────────────────────────────────── */
@@ -609,7 +630,7 @@ function OrderSidebar({ items, method, pickupData, deliveryData }) {
                 <span className="co-sidebar-item-ext" style={{ background: color }}>{label}</span>
               </div>
               <div className="co-sidebar-item-info">
-                <div className="co-sidebar-item-name" title={item.name}>{item.name}</div>
+                <div className="co-sidebar-item-name" title={item.name}>{formatFileNameWithExtension(item.name)}</div>
                 <div className="co-sidebar-item-meta">
                   {item.spec.copies} copy · {item.spec.paperSize} · {item.spec.color === 'color' ? 'Color' : 'B&W'}
                 </div>
@@ -620,7 +641,7 @@ function OrderSidebar({ items, method, pickupData, deliveryData }) {
         })}
         <div className="co-price-line co-price-line--sheets" style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--divider)' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Icons.Printer /> Total Sheets
+            <Icons.Sheet /> Total Sheets
           </span>
           <span>{totalSheets}</span>
         </div>

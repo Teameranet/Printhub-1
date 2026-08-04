@@ -438,10 +438,13 @@
   color: var(--text-muted);
 }
 
-.cart-cost-ci--dim .cart-cost-label,
-.cart-cost-ci--dim .cart-cost-val {
+.cart-cost-ci--dim .cart-cost-label {
   color: var(--text-dim);
-  font-weight: 400;
+}
+
+.cart-cost-ci--dim .cart-cost-val {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .cart-item-total {
@@ -581,7 +584,7 @@
 }
 
 .cart-summary-line span:last-child {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-weight: 600;
   color: var(--text);
 }
@@ -610,10 +613,10 @@
 }
 
 .cart-summary-total-amt {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 800;
-  color: var(--primary-ink);
+  font-weight: 700;
+  color: var(--primary);
 }
 
 .cart-checkout-group {

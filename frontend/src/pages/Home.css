@@ -421,7 +421,6 @@
 .dropzone-text {
   font-size: 14px;
   color: var(--text-muted);
-  text-align: left;
 }
 
 .dropzone-text strong {

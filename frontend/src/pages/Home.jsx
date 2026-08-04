@@ -217,7 +217,7 @@ const NormalPrinting = () => {
             <div className="dropzone-icon"><Icon.Upload /></div>
             <div className="dropzone-text">
               <strong>Drag files here</strong>
-              <span> or <em>browse</em> from your device</span>
+              <span> or <em> click to browse</em> from your device</span>
             </div>
             <div className="dropzone-meta">PDF, DOCX, JPG, PNG & PPT files are only allowed.</div>
             <input

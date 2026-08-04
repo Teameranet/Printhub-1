@@ -735,7 +735,7 @@
 }
 
 .co-confirm-item-price {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 13px;
   font-weight: 600;
   color: var(--primary-ink);
@@ -783,7 +783,7 @@
 }
 
 .co-confirm-row--total span:last-child {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 17px;
   color: var(--primary);
 }
@@ -841,19 +841,29 @@
 }
 
 .co-btn--place {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, var(--primary), #9b6de0);
   color: #fff;
-  border: 1.5px solid var(--primary);
-  padding: 14px 30px;
+  font-family: var(--font-display);
   font-size: 15px;
-  box-shadow: 0 6px 24px var(--primary-glow);
-  border-radius: var(--r-xl);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--primary-glow);
+  transition: background 0.22s, transform 0.2s, box-shadow 0.22s;
+  letter-spacing: 0.01em;
   animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 .co-btn--place:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover), #8857d0);
   transform: translateY(-2px);
-  box-shadow: 0 10px 32px var(--primary-glow);
+  box-shadow: 0 8px 28px var(--primary-glow);
+}
+
+.co-btn--place:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 2px 10px var(--primary-glow);
 }
 
 .co-btn--loading {
@@ -2081,21 +2091,29 @@
 }
 
 .co-btn--place {
-  background: linear-gradient(135deg, var(--primary-active), var(--primary), #9B6FD6);
-  color: var(--text-on-primary);
-  border: none;
-  padding: 14px 30px;
+  background: linear-gradient(135deg, var(--primary), #9b6de0);
+  color: #fff;
+  font-family: var(--font-display);
   font-size: 15px;
-  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--primary-glow);
+  transition: background 0.22s, transform 0.2s, box-shadow 0.22s;
+  letter-spacing: 0.01em;
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 .co-btn--place:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover), #8857d0);
   transform: translateY(-2px);
   box-shadow: 0 8px 28px var(--primary-glow);
 }
 
 .co-btn--place:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(0.98);
+  box-shadow: 0 2px 10px var(--primary-glow);
 }
 
 .co-btn--loading {
@@ -2213,7 +2231,7 @@
   color: #ffffff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   line-height: 1;
 }
 
@@ -2232,13 +2250,13 @@
 }
 
 .co-sidebar-item-meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 10.5px;
   color: var(--text-dim);
 }
 
 .co-sidebar-item-price {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
   color: var(--text);
@@ -2346,7 +2364,7 @@
 }
 
 .co-price-line span:last-child {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-weight: 600;
   color: var(--text);
 }
@@ -2363,7 +2381,8 @@
 }
 
 .co-price-line--discount span:last-child {
-  font-family: var(--font-body); /* use body font instead of mono for words */
+  font-family: var(--font-display);
+  /* use display font */
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.05em;
@@ -2406,10 +2425,10 @@
 }
 
 .co-price-total-amt {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 800;
-  color: var(--primary-ink);
+  font-weight: 700;
+  color: var(--primary);
 }
 
 .co-sidebar-secure {
@@ -3012,6 +3031,7 @@
   justify-content: center;
   width: 100%;
 }
+
 @media (max-width: 540px) {
   .co-pickup-grid {
     grid-template-columns: 1fr;
