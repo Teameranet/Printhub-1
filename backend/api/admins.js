@@ -27,6 +27,18 @@ let adminUsers = [
     role: 'admin', status: 'active',
     createdAt: '2024-03-15T11:20:00Z', lastLogin: null, sessionToken: null,
   },
+  {
+    id: 'admin_3', name: 'Arjun Nair', email: 'arjun@printhub.in',
+    passwordHash: hashPassword('admin123'),
+    role: 'admin', status: 'inactive',
+    createdAt: '2024-05-02T08:00:00Z', lastLogin: null, sessionToken: null,
+  },
+  {
+    id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in',
+    passwordHash: hashPassword('admin123'),
+    role: 'admin', status: 'suspended',
+    createdAt: '2024-07-20T14:45:00Z', lastLogin: null, sessionToken: null,
+  },
 ];
 
 let auditTrail = [];

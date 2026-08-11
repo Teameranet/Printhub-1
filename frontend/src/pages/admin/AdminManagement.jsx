@@ -50,14 +50,6 @@ const SEED_ADMINS = [
   { id: 'admin_2', name: 'Riya Sharma', email: 'riya@printhub.in', role: 'admin', status: 'active', createdAt: '2024-03-15T11:20:00Z', lastLogin: '2026-07-24T14:10:00Z', sessionActive: true },
   { id: 'admin_3', name: 'Arjun Nair', email: 'arjun@printhub.in', role: 'admin', status: 'inactive', createdAt: '2024-05-02T08:00:00Z', lastLogin: '2026-06-30T10:05:00Z', sessionActive: false },
   { id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in', role: 'admin', status: 'suspended', createdAt: '2024-07-20T14:45:00Z', lastLogin: '2026-07-01T09:00:00Z', sessionActive: false },
-  { id: 'admin_5', name: 'Dev Kumar', email: 'dev@printhub.in', role: 'admin', status: 'active', createdAt: '2025-01-08T10:30:00Z', lastLogin: '2026-07-23T16:45:00Z', sessionActive: true },
-  { id: 'admin_6', name: 'Sneha Iyer', email: 'sneha@printhub.in', role: 'admin', status: 'active', createdAt: '2025-03-19T13:00:00Z', lastLogin: '2026-07-22T11:30:00Z', sessionActive: false },
-  { id: 'admin_7', name: 'Rahul Bose', email: 'rahul.b@printhub.in', role: 'admin', status: 'inactive', createdAt: '2025-06-01T09:15:00Z', lastLogin: '2026-07-10T08:00:00Z', sessionActive: false },
-  { id: 'admin_8', name: 'Kavya Rao', email: 'kavya@printhub.in', role: 'admin', status: 'active', createdAt: '2025-08-14T10:00:00Z', lastLogin: '2026-07-25T07:20:00Z', sessionActive: true },
-  { id: 'admin_9', name: 'Mohit Joshi', email: 'mohit@printhub.in', role: 'admin', status: 'active', createdAt: '2026-01-03T12:00:00Z', lastLogin: '2026-07-24T09:00:00Z', sessionActive: false },
-  { id: 'admin_10', name: 'Anita Desai', email: 'anita@printhub.in', role: 'admin', status: 'suspended', createdAt: '2026-03-22T15:30:00Z', lastLogin: '2026-07-05T13:00:00Z', sessionActive: false },
-  { id: 'admin_11', name: 'Vikram Singh', email: 'vikram@printhub.in', role: 'admin', status: 'active', createdAt: '2026-05-10T11:00:00Z', lastLogin: '2026-07-25T06:45:00Z', sessionActive: true },
-  { id: 'admin_12', name: 'Pooja Nanda', email: 'pooja@printhub.in', role: 'admin', status: 'active', createdAt: '2026-06-18T14:00:00Z', lastLogin: '2026-07-24T17:30:00Z', sessionActive: false },
 ];
 
 const SEED_AUDIT = [

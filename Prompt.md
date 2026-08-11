@@ -417,7 +417,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
      - Add privilege inheritance logic to streamline role assignment, while allowing custom overrides for individual admin accounts 
 
   4. **User Privilege Management**:
-   - Custom Role Model (Su[er Admin User]): 
+   - Custom Role Model (Super Admin User): 
    - Role List: View all existing roles.
    - Create Role: A form to define a new role.
    - Name: Generates the internal role ID (e.g., "Marketing").
