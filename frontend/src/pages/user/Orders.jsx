@@ -39,6 +39,13 @@ const BindingIcon = () => (
     <path d="M12 7v10" /><path d="M8 7h8" /><path d="M8 12h8" /><path d="M8 17h8" />
   </svg>
 );
+const LaminationIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <path d="M11.5 13 L12.5 15.5 L15 16.5 L12.5 17.5 L11.5 20 L10.5 17.5 L8 16.5 L10.5 15.5 Z" />
+  </svg>
+);
 const ColorIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor" />
@@ -201,8 +208,8 @@ const MOCK_ORDERS = [
     type: 'Normal Print',
     // Each file has its own settings
     fileDetails: [
-      { name: 'thesis_chapter1.pdf', pages: 28, copies: 1, color: false, binding: 'Spiral', size: '2.4 MB' },
-      { name: 'thesis_chapter2.pdf', pages: 14, copies: 1, color: false, binding: 'Spiral', size: '1.8 MB' },
+      { name: 'thesis_chapter1.pdf', pages: 28, copies: 1, color: false, binding: 'Spiral', lamination: 'None', size: '2.4 MB' },
+      { name: 'thesis_chapter2.pdf', pages: 14, copies: 1, color: false, binding: 'Spiral', lamination: 'None', size: '1.8 MB' },
     ],
     amount: 126,
     eta: null,
@@ -213,7 +220,7 @@ const MOCK_ORDERS = [
     status: 'processing',
     type: 'Normal Print',
     fileDetails: [
-      { name: 'presentation_deck.pdf', pages: 18, copies: 3, color: true, binding: 'None', size: '5.1 MB' },
+      { name: 'presentation_deck.pdf', pages: 18, copies: 3, color: true, binding: 'None', lamination: 'None', size: '5.1 MB' },
     ],
     amount: 162,
     eta: '~45 min',
@@ -224,9 +231,9 @@ const MOCK_ORDERS = [
     status: 'ready',
     type: 'Normal Print',
     fileDetails: [
-      { name: 'assignment_cs101.pdf', pages: 7, copies: 1, color: false, binding: 'None', size: '340 KB' },
+      { name: 'assignment_cs101.pdf', pages: 7, copies: 1, color: false, binding: 'None', lamination: 'Matte Lamination', size: '340 KB' },
     ],
-    amount: 21,
+    amount: 41,
     eta: 'Ready now',
   },
   {
@@ -235,9 +242,9 @@ const MOCK_ORDERS = [
     status: 'cancelled',
     type: 'Normal Print',
     fileDetails: [
-      { name: 'report_draft.docx', pages: 12, copies: 2, color: false, binding: 'Staple', size: '890 KB' },
-      { name: 'appendix_data.ppt', pages: 4, copies: 2, color: false, binding: 'Staple', size: '210 KB' },
-      { name: 'cover_letter.docx', pages: 1, copies: 2, color: false, binding: 'None', size: '58 KB' },
+      { name: 'report_draft.docx', pages: 12, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '890 KB' },
+      { name: 'appendix_data.ppt', pages: 4, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '210 KB' },
+      { name: 'cover_letter.docx', pages: 1, copies: 2, color: false, binding: 'None', lamination: 'None', size: '58 KB' },
     ],
     amount: 48,
     eta: null,
@@ -248,7 +255,7 @@ const MOCK_ORDERS = [
     status: 'delivered',
     type: 'Normal Print',
     fileDetails: [
-      { name: 'notes_sem4.pdf', pages: 88, copies: 1, color: false, binding: 'Glue', size: '12.3 MB' },
+      { name: 'notes_sem4.pdf', pages: 88, copies: 1, color: false, binding: 'Glue', lamination: 'None', size: '12.3 MB' },
     ],
     amount: 264,
     eta: null,
@@ -263,6 +270,7 @@ MOCK_ORDERS.forEach(o => {
   o.copies = Math.max(...o.fileDetails.map(f => f.copies));
   o.color = o.fileDetails.some(f => f.color);
   o.binding = o.fileDetails[0]?.binding || 'None';
+  o.lamination = o.fileDetails[0]?.lamination || 'None';
 });
 
 const STATUS_CONFIG = {
@@ -628,12 +636,7 @@ const Orders = () => {
                           <span>{orderDate} · {orderTime}</span>
                         </div>
                       </div>
-                      {order.eta && (
-                        <span className="order-eta order-eta--mobile">
-                          <ClockIcon />
-                          {order.eta}
-                        </span>
-                      )}
+
                     </div>
 
                     {/* Center: files preview */}
@@ -650,14 +653,9 @@ const Orders = () => {
 
                     {/* Right: amount + status */}
                     <div className="order-card-right">
-                      {order.eta && (
-                        <span className="order-eta order-eta--desktop">
-                          <ClockIcon />
-                          {order.eta}
-                        </span>
-                      )}
-                      <div className="order-amount">₹{order.amount}</div>
                       <span className={`order-status ${statusConf.cls}`}>{statusConf.label}</span>
+                      <div className="order-amount">₹{order.amount}</div>
+
                       <span className={`order-chevron${isExpanded ? ' order-chevron--open' : ''}`}>
                         <ChevronRightIcon />
                       </span>
@@ -736,44 +734,70 @@ const Orders = () => {
 
                                 {/* File print settings */}
                                 <div className="ocb-file-settings">
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><PagesIcon /></span>
-                                    <span className="ocb-setting-label">Pages</span>
-                                    <span className="ocb-setting-value">{file.pages}</span>
+                                  <div className="ocb-settings-grid">
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><PagesIcon /></span>
+                                        <span className="ocb-setting-label">Pages</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.pages}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><RangeIcon /></span>
+                                        <span className="ocb-setting-label">Range</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.pageRange || 'All'}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><CopyIcon /></span>
+                                        <span className="ocb-setting-label">Copies</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.copies}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><ColorIcon /></span>
+                                        <span className="ocb-setting-label">Color</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.color ? 'Color' : 'B&W'}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><SidesIcon /></span>
+                                        <span className="ocb-setting-label">Sides</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.sides || 'Double'}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><BindingIcon /></span>
+                                        <span className="ocb-setting-label">Binding</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.binding || 'None'}</span>
+                                    </div>
+                                    {file.lamination && file.lamination !== 'None' ? (
+                                      <div className="ocb-setting">
+                                        <div className="ocb-setting-left">
+                                          <span className="ocb-setting-icon"><LaminationIcon /></span>
+                                          <span className="ocb-setting-label">Lamination</span>
+                                        </div>
+                                        <span className="ocb-setting-value">Yes</span>
+                                      </div>
+                                    ) : (
+                                      <div className="ocb-setting">
+                                        <div className="ocb-setting-left">
+                                          <span className="ocb-setting-icon"><LaminationIcon /></span>
+                                          <span className="ocb-setting-label">Lamination</span>
+                                        </div>
+                                        <span className="ocb-setting-value">None</span>
+                                      </div>
+                                    )}
                                   </div>
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><RangeIcon /></span>
-                                    <span className="ocb-setting-label">Range</span>
-                                    <span className="ocb-setting-value">{file.pageRange || 'All'}</span>
-                                  </div>
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><CopyIcon /></span>
-                                    <span className="ocb-setting-label">Copies</span>
-                                    <span className="ocb-setting-value">{file.copies}</span>
-                                  </div>
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><ColorIcon /></span>
-                                    <span className="ocb-setting-label">Color</span>
-                                    <span className="ocb-setting-value">
-                                      {file.color
-                                        ? <span className="ocb-badge ocb-badge--color">Color</span>
-                                        : <span className="ocb-badge ocb-badge--bw">B&amp;W</span>
-                                      }
-                                    </span>
-                                  </div>
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><SidesIcon /></span>
-                                    <span className="ocb-setting-label">Sides</span>
-                                    <span className="ocb-setting-value">{file.sides || 'Double'}</span>
-                                  </div>
-                                  <div className="ocb-setting">
-                                    <span className="ocb-setting-icon"><BindingIcon /></span>
-                                    <span className="ocb-setting-label">Binding</span>
-                                    <span className="ocb-setting-value">{file.binding}</span>
-                                  </div>
-                                  <div className="ocb-setting ocb-setting--subtotal">
-                                    <span className="ocb-setting-label">Subtotal</span>
-                                    <span className="ocb-setting-value ocb-setting-value--price">
+                                  <div className="cart-item-total">
+                                    <span className="cart-item-total-label">Subtotal</span>
+                                    <span className="cart-item-total-amt">
                                       ₹{Math.round((order.amount / (order.pages || 1)) * file.pages * file.copies)}
                                     </span>
                                   </div>

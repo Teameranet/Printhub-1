@@ -142,6 +142,11 @@ const Icons = {
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </svg>
   ),
+  Layers: () => (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 12l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 7l10 5 10-5" />
+    </svg>
+  ),
   Book: () => (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
@@ -394,21 +399,21 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
   const cost = calcCost(item.spec, item.pages);
   const spec = item.spec;
 
-  const pageRangeLabel = spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All pages' : `Pages: ${spec.pageRange}`;
-
   const specTags = [
     // 1. Page Size
-    { label: spec.paperSize, Icon: Icons.File },
+    { title: 'Size', value: spec.paperSize, Icon: Icons.File },
     // 2. Page Range
-    { label: pageRangeLabel, Icon: Icons.Range, isPageRange: true },
-    // 3. Single or Double side
-    { label: spec.sides === 'double' ? 'Double-Sided' : 'Single-Sided', Icon: Icons.Copy },
-    // 4. Colour
-    { label: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
-    // 5. Binding & Lamination
-    spec.binding !== 'None' ? { label: spec.binding, Icon: Icons.Book } : null,
-    spec.lamination !== 'None' ? { label: spec.lamination, Icon: Icons.Sparkles } : null,
-  ].filter(Boolean);
+    { title: 'Range', value: spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All' : spec.pageRange, Icon: Icons.Range },
+    // 3. Copies
+    { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
+    // 4. Single or Double side
+    { title: 'Sides', value: spec.sides === 'double' ? 'Double' : 'Single', Icon: Icons.Layers },
+    // 5. Colour
+    { title: 'Color', value: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
+    // 6. Binding & Lamination
+    { title: 'Binding', value: spec.binding || 'None', Icon: Icons.Book },
+    { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' ? 'Yes' : 'None', Icon: Icons.Sparkles },
+  ];
 
   const set = (k, v) => onUpdateSpec(item.id, { ...spec, [k]: v });
 
@@ -456,18 +461,21 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
       </div>
 
       {/* ── Spec Tags ── */}
-      <div className="cart-item-tags">
-        {specTags.map((tag) => {
-          const TagIcon = tag.Icon || Icons.Tag;
-          return (
-            <span
-              key={tag.label}
-              className="cart-tag" /* className={`cart-tag ${tag.isPageRange ? 'cart-tag--pages' : ''}`} */
-            >
-              <TagIcon /> {tag.label}
-            </span>
-          );
-        })}
+      <div className="ocb-file-settings">
+        <div className="ocb-settings-grid">
+          {specTags.map((tag) => {
+            const TagIcon = tag.Icon || Icons.Tag;
+            return (
+              <div key={tag.title} className="ocb-setting">
+                <div className="ocb-setting-left">
+                  <span className="ocb-setting-icon"><TagIcon /></span>
+                  <span className="ocb-setting-label">{tag.title}</span>
+                </div>
+                <span className="ocb-setting-value">{tag.value}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── Inline Edit Dropdown Panel ── */}
