@@ -36,11 +36,11 @@
   margin-bottom: 24px;
 }
 
-/* ── Stats Row ───────────────────────────────────────── */
+/* ── Stats Row (am-stats-row design system) ─────────────────── */
 .orders-stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: var(--surface);
+  background: var(--bg-elev-1);
   border: 1px solid var(--border);
   border-radius: var(--r-xl);
   overflow: hidden;
@@ -56,6 +56,7 @@
   border-right: 1px solid var(--divider);
   text-align: center;
   transition: background 0.2s;
+  gap: 4px;
 }
 
 .orders-stat:last-child {
@@ -66,12 +67,22 @@
   background: var(--primary-softer);
 }
 
+.orders-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  margin-bottom: 6px;
+}
+
 .orders-stat-value {
   font-family: var(--font-display);
   font-size: 26px;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 4px;
+  color: var(--text);
 }
 
 .orders-stat-label {
@@ -408,31 +419,331 @@
   transform: rotate(90deg);
 }
 
-/* ── Expanded body ───────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   Order Card Body — redesigned per-file detail layout
+   ══════════════════════════════════════════════════════ */
+
 .order-card-body {
   padding: 0 24px 24px;
   border-top: 1px solid var(--divider);
-  animation: fadeUp 0.2s ease-out both;
+  animation: fadeUp 0.22s ease-out both;
 }
 
-.order-detail-grid {
+/* ── Order Meta Summary Row ─────────────────────────── */
+.ocb-meta-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
   margin-top: 20px;
+  margin-bottom: 20px;
+  background: var(--divider, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--divider, rgba(0, 0, 0, 0.08));
+  border-radius: var(--r-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.ocb-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 14px 18px;
+  background: var(--bg-elev-1, #f8fafc);
+}
+
+.ocb-meta-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim, #64748b);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ocb-meta-label svg {
+  color: var(--text-dim, #64748b);
+  opacity: 0.85;
+}
+
+.ocb-meta-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text, #0f172a);
+  font-family: var(--font-display, sans-serif);
+}
+
+.ocb-meta-value--price {
+  color: var(--primary, #6366f1);
+  font-size: 16px;
+}
+
+/* ── Files Section ──────────────────────────────────── */
+.ocb-files-section {
   margin-bottom: 20px;
 }
 
-.order-detail-item {
+.ocb-section-header {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 14px;
-  background: var(--bg-elev-2);
-  border-radius: var(--r-md);
-  border: 1px solid var(--border);
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
 }
 
+.ocb-section-header svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.ocb-file-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ── Files List ─────────────────────────────────────── */
+.ocb-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Individual File Card ───────────────────────────── */
+.ocb-file-card {
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.ocb-file-card:hover {
+  border-color: var(--primary-border);
+  box-shadow: 0 2px 12px rgba(126, 87, 194, 0.08);
+}
+
+/* File card header row */
+.ocb-file-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.ocb-file-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Extension type icon container */
+.ocb-file-ext {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md, 10px);
+  flex-shrink: 0;
+}
+
+.ocb-file-ext-label {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  padding: 1.5px 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  border-radius: 4px;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.ocb-file-name-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ocb-file-index {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary-ink);
+  opacity: 0.75;
+}
+
+.ocb-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 340px;
+  font-family: var(--font-mono);
+}
+
+.ocb-file-size {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* View button */
+.ocb-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 6px 13px;
+  border-radius: var(--r-full);
+  border: 1.5px solid var(--primary-border);
+  background: transparent;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  white-space: nowrap;
+}
+
+.ocb-view-btn:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* ── File Settings Bar (Sr. UI/UX Refined) ──────────────── */
+.ocb-file-settings {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  column-gap: 0;
+  padding: 10px 16px;
+  background: var(--bg-elev-1, #f8fafc);
+  border-top: 1px solid var(--divider, #e2e8f0);
+}
+
+.ocb-setting {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 14px;
+  border-right: 1px solid var(--divider, #e2e8f0);
+  min-height: 22px;
+}
+
+.ocb-setting:first-child {
+  padding-left: 0;
+}
+
+.ocb-setting:last-child,
+.ocb-setting--subtotal {
+  border-right: none;
+}
+
+.ocb-setting--subtotal {
+  margin-left: auto;
+  padding-right: 0;
+}
+
+.ocb-setting-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim, #64748b);
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+.ocb-setting-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim, #64748b);
+  white-space: nowrap;
+}
+
+.ocb-setting-value {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text, #0f172a);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ocb-setting-value--price {
+  color: var(--primary, #6366f1);
+  font-size: 14px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+/* ── Color / BW Badges ──────────────────────────────── */
+.ocb-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.5px 7px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.ocb-badge--color {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.ocb-badge--bw {
+  background: rgba(100, 116, 139, 0.1);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+/* ── Actions Row ────────────────────────────────────── */
+.order-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Legacy compat (kept for other uses) ──────────────── */
 .order-detail-label {
   font-size: 11px;
   font-weight: 600;
@@ -441,54 +752,92 @@
   color: var(--text-dim);
 }
 
-.order-detail-value {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ocb-meta-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .ocb-meta-item {
+    background: var(--bg-elev-1);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 16px 14px;
+    box-shadow: 0 4px 14px rgba(60, 40, 110, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .ocb-meta-label {
+    justify-content: center;
+  }
 }
 
-.order-detail-value--price {
-  font-family: var(--font-display);
-  font-size: 16px;
-  color: var(--accent);
+@media (max-width: 768px) {
+  .ocb-file-name {
+    max-width: 180px;
+  }
+
+  .ocb-file-settings {
+    padding: 10px 10px;
+  }
+
+  .ocb-setting {
+    padding: 0 10px;
+  }
 }
 
-.order-files-full {
-  margin-bottom: 20px;
-}
+@media (max-width: 480px) {
+  .ocb-meta-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 
-.order-file-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: var(--r-md);
-  transition: background 0.18s;
-}
+  .ocb-meta-item {
+    padding: 14px 10px;
+  }
 
-.order-file-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
+  .ocb-file-card-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-.order-file-row:hover {
-  background: var(--primary-softer);
-}
+  .ocb-view-btn {
+    width: 100%;
+    justify-content: center;
+  }
 
-.order-file-row svg {
-  color: var(--primary);
-  flex-shrink: 0;
-}
+  .ocb-file-settings {
+    flex-wrap: wrap;
+  }
 
-.order-card-actions {
-  display: flex;
-  gap: 10px;
+  .ocb-setting {
+    padding: 2px 8px 2px 0;
+    border-right: none;
+    min-width: calc(50% - 8px);
+    flex: 1 1 calc(50% - 8px);
+  }
+
+  .order-card-actions {
+    flex-direction: column;
+  }
+
+  .order-card-actions .ph-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ── Shared button from profile ─── */
