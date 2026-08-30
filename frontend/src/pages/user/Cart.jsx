@@ -962,10 +962,6 @@ export default function Cart() {
             <Icons.Cart />
             <span>Your Cart</span>
           </div>
-          <h1 className="cart-title">Print Cart</h1>
-          <p className="cart-subtitle">
-            Review your documents, adjust specifications, and proceed to checkout.
-          </p>
         </header>
 
         {items.length === 0 ? (
