@@ -817,7 +817,7 @@ const Orders = () => {
 
                       {/* ── Actions ── */}
                       <div className="order-card-actions">
-                        <button className="ph-btn ph-btn--primary ph-btn--sm">
+                        <button className="ph-btn ph-btn--primary">
                           <DownloadIcon /> Invoice
                         </button>
                       </div>
