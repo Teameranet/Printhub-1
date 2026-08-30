@@ -454,13 +454,14 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
           <div className="cart-item-fmeta">
             <span>{(item.size / (1024 * 1024)).toFixed(2)} MB</span>
             <span className="cart-dot">·</span>
-            <span>Added {new Date(item.addedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span>
+            <span> {new Date(item.addedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span>
+            {/* <span>Added {new Date(item.addedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span> */}
           </div>
         </div>
         <div className="cart-item-actions">
           {isPreviewable(item.name) && (
-            <button className="cart-act-btn cart-act-btn--view" onClick={() => onPreview(item)} title="View File" aria-label={`View ${item.name}`}>
-              <Icons.Eye /> View
+            <button className="cart-act-btn cart-act-btn--view" onClick={() => onPreview(item)} title="Preview File" aria-label={`Preview ${item.name}`}>
+              <Icons.Eye /> Preview
             </button>
           )}
           <button

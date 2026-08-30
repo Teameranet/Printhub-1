@@ -1952,13 +1952,23 @@
   }
 
   .sdet-fcard-hd {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
   }
 
   .sdet-fcard-acts {
-    width: 100%;
+    width: auto;
     justify-content: flex-end;
-    margin-top: 8px;
+    margin-top: 0;
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  .sdet-act-btn {
+    padding: 5px 10px;
+    font-size: 11.5px;
   }
 
   .sdet-drop {

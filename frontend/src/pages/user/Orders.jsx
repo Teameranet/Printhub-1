@@ -634,7 +634,12 @@ const Orders = () => {
                           <span>{orderDate} · {orderTime}</span>
                         </div>
                       </div>
-                      <span className={`order-status ${statusConf.cls} order-eta--mobile`}>{statusConf.label}</span>
+                      <div className="order-eta--mobile" style={{ alignItems: 'center', gap: '6px' }}>
+                        <span className={`order-status ${statusConf.cls}`}>{statusConf.label}</span>
+                        <span className={`order-chevron${isExpanded ? ' order-chevron--open' : ''}`}>
+                          <ChevronRightIcon />
+                        </span>
+                      </div>
                     </div>
 
                     {/* Center: files preview */}
@@ -652,9 +657,9 @@ const Orders = () => {
                     {/* Right: amount + status */}
                     <div className="order-card-right">
                       <span className={`order-status ${statusConf.cls} order-eta--desktop`}>{statusConf.label}</span>
-                      <div className="order-amount">₹{order.amount}</div>
+                      {!isExpanded && <div className="order-amount">₹{order.amount}</div>}
 
-                      <span className={`order-chevron${isExpanded ? ' order-chevron--open' : ''}`}>
+                      <span className={`order-chevron order-eta--desktop${isExpanded ? ' order-chevron--open' : ''}`}>
                         <ChevronRightIcon />
                       </span>
                     </div>
@@ -689,9 +694,6 @@ const Orders = () => {
                         <div className="ocb-section-header">
                           <FileIcon />
                           <span>Uploaded Files</span>
-                          {order.fileDetails.length > 1 && (
-                            <span className="ocb-file-count-badge">{order.fileDetails.length} files</span>
-                          )}
                         </div>
 
                         <div className="ocb-files-list">
@@ -720,13 +722,13 @@ const Orders = () => {
                                   </div>
                                   <button
                                     className="ocb-view-btn"
-                                    title="View File"
+                                    title="Preview File"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       window.open(`/uploads/${file.name}`, '_blank');
                                     }}
                                   >
-                                    <EyeIcon /> View
+                                    <EyeIcon /> Preview
                                   </button>
                                 </div>
 
@@ -815,14 +817,9 @@ const Orders = () => {
 
                       {/* ── Actions ── */}
                       <div className="order-card-actions">
-                        <button className="ph-btn ph-btn--ghost ph-btn--sm">
+                        <button className="ph-btn ph-btn--primary ph-btn--sm">
                           <DownloadIcon /> Invoice
                         </button>
-                        {order.status === 'delivered' && (
-                          <button className="ph-btn ph-btn--primary ph-btn--sm">
-                            <RepeatIcon /> Reorder
-                          </button>
-                        )}
                       </div>
 
                     </div>

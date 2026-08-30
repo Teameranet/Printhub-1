@@ -1540,17 +1540,26 @@
   }
 
   .cart-item-hd {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
     padding: 14px 16px;
   }
 
   .cart-item-actions {
-    width: 100%;
-    justify-content: flex-start;
-    padding-top: 6px;
-    border-top: 1px dashed var(--divider);
-    margin-top: 6px;
+    width: auto;
+    justify-content: flex-end;
+    padding-top: 0;
+    border-top: none;
+    margin-top: 0;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .cart-act-btn {
+    padding: 5px 10px;
+    font-size: 11.5px;
   }
 
   .cart-item-tags {
