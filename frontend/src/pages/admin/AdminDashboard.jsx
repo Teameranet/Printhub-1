@@ -223,7 +223,7 @@ const OverviewSection = ({ admin }) => {
 
       <div className="ad-welcome-badge">
         <ShieldIcon />
-        <span>{admin?.role === 'super_admin' ? 'Super Administrator' : 'Administrator'}</span>
+        <span>{admin?.role === 'super_admin' ? 'Super Admin' : 'Admin'}</span>
       </div>
     </div>
 
@@ -357,7 +357,7 @@ const AdminDashboard = () => {
           <div className="ad-sidebar-avatar" aria-hidden="true">{admin.avatar}</div>
           <div className="ad-sidebar-info">
             <div className="ad-sidebar-name">{admin.name}</div>
-            <div className="ad-sidebar-role">{admin?.role === 'super_admin' ? 'Super Administrator' : 'Administrator'}</div>
+            <div className="ad-sidebar-role">{admin?.role === 'super_admin' ? 'Super Admin' : 'Admin'}</div>
           </div>
         </div>
 

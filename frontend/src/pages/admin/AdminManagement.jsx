@@ -36,20 +36,73 @@ const SortAscIcon = () => <Ic d={["M3 6h18", "M7 12h10", "M11 18h2"]} />;
 const ClipboardIcon = () => <Ic d={["M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2", "M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"]} />;
 const KeyIcon = () => <Ic d={["M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"]} />;
 const InfoIcon = () => <Ic d={["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z", "M12 8v4", "M12 16h.01"]} />;
+const BarChartIcon = () => <Ic d={["M18 20V10", "M12 20V4", "M6 20v-6"]} />;
+const SettingsIcon = () => <Ic d={["M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z", "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"]} />;
+
+const MODULE_ICONS = {
+  orders: <ClipboardIcon />,
+  products: <SlidersIcon />,
+  users: <UsersIcon />,
+  analytics: <BarChartIcon />,
+  settings: <SettingsIcon />,
+  admins: <ShieldIcon />,
+};
 
 /* ================================================================
    CONSTANTS & HELPERS
    ================================================================ */
 
-const ROLES = ['super_admin', 'admin'];
 const STATUSES = ['active', 'inactive', 'suspended'];
+
+const PERMISSION_MODULES = [
+  { id: 'orders', label: 'Orders & Refunds', desc: 'Process customer print orders, cancellations, and refunds' },
+  { id: 'products', label: 'Catalog & Pricing', desc: 'Manage product catalog, paper types, pricing, and stock' },
+  { id: 'users', label: 'Customer Users', desc: 'View customer accounts, profile details, and account status' },
+  { id: 'analytics', label: 'Reports & Analytics', desc: 'Access revenue metrics, store usage stats, and data exports' },
+  { id: 'settings', label: 'System & Store Settings', desc: 'Configure store defaults, branding, and notification templates' },
+  { id: 'admins', label: 'Admin Governance', desc: 'Manage admin accounts, custom roles, privileges & audit logs' },
+];
+
+const ACTIONS = ['view', 'edit', 'delete'];
+
+const INITIAL_ROLES = [
+  {
+    id: 'super_admin',
+    name: 'Super Admin',
+    builtin: true,
+    desc: 'Full unrestricted system governance, admin account management, and financial control.',
+    permissions: {
+      orders: ['view', 'edit', 'delete'],
+      products: ['view', 'edit', 'delete'],
+      users: ['view', 'edit', 'delete'],
+      analytics: ['view', 'edit', 'delete'],
+      settings: ['view', 'edit', 'delete'],
+      admins: ['view', 'edit', 'delete'],
+    },
+  },
+  {
+    id: 'admin',
+    name: 'Admin',
+    builtin: false,
+    desc: 'Standard operational privileges for day-to-day store and customer management.',
+    permissions: {
+      orders: ['view', 'edit'],
+      products: ['view', 'edit'],
+      users: ['view', 'edit'],
+      analytics: ['view'],
+      settings: ['view'],
+      admins: [],
+    },
+  },
+
+];
 
 /* Initial seed data — in production this comes from the API */
 const SEED_ADMINS = [
-  { id: 'admin_1', name: 'PrintHub', email: 'printhub@gmail.com', role: 'super_admin', status: 'active', createdAt: '2024-01-10T09:00:00Z', lastLogin: '2026-07-25T08:32:00Z', sessionActive: true },
-  { id: 'admin_2', name: 'Riya Sharma', email: 'riya@printhub.in', role: 'admin', status: 'active', createdAt: '2024-03-15T11:20:00Z', lastLogin: '2026-07-24T14:10:00Z', sessionActive: true },
-  { id: 'admin_3', name: 'Arjun Nair', email: 'arjun@printhub.in', role: 'admin', status: 'inactive', createdAt: '2024-05-02T08:00:00Z', lastLogin: '2026-06-30T10:05:00Z', sessionActive: false },
-  { id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in', role: 'admin', status: 'suspended', createdAt: '2024-07-20T14:45:00Z', lastLogin: '2026-07-01T09:00:00Z', sessionActive: false },
+  { id: 'admin_1', name: 'PrintHub', email: 'printhub@gmail.com', password: 'Admin@Password123', role: 'super_admin', status: 'active', createdAt: '2024-01-10T09:00:00Z', lastLogin: '2026-07-25T08:32:00Z', sessionActive: true },
+  { id: 'admin_2', name: 'Riya Sharma', email: 'riya@printhub.in', password: 'Riya@Password123', role: 'admin', status: 'active', createdAt: '2024-03-15T11:20:00Z', lastLogin: '2026-07-24T14:10:00Z', sessionActive: true },
+  { id: 'admin_3', name: 'Arjun Nair', email: 'arjun@printhub.in', password: 'Arjun@Password123', role: 'admin', status: 'inactive', createdAt: '2024-05-02T08:00:00Z', lastLogin: '2026-06-30T10:05:00Z', sessionActive: false },
+  { id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in', password: 'Priya@Password123', role: 'admin', status: 'suspended', createdAt: '2024-07-20T14:45:00Z', lastLogin: '2026-07-01T09:00:00Z', sessionActive: false },
 ];
 
 const SEED_AUDIT = [
@@ -138,12 +191,28 @@ const StatsRow = ({ admins }) => {
 };
 
 /* ── Role Badge ─────────────────────────────────────────────── */
-const RoleBadge = ({ role }) => (
-  <span className={`am-badge ${role === 'super_admin' ? 'am-badge--super' : 'am-badge--admin'}`}>
-    {role === 'super_admin' ? <ShieldIcon /> : <UserIcon />}
-    {role === 'super_admin' ? 'Super Admin' : 'Admin'}
-  </span>
-);
+const RoleBadge = ({ role, roles = [] }) => {
+  if (role === 'super_admin') {
+    return (
+      <span className="am-badge am-badge--super">
+        <ShieldIcon /> Super Admin
+      </span>
+    );
+  }
+  if (role === 'admin') {
+    return (
+      <span className="am-badge am-badge--admin">
+        <UserIcon /> Admin
+      </span>
+    );
+  }
+  const matched = roles.find(r => r.id === role);
+  return (
+    <span className="am-badge am-badge--custom">
+      <ShieldIcon /> {matched ? matched.name : (role.startsWith('role_') ? role.replace('role_', '').replace(/_/g, ' ') : role)}
+    </span>
+  );
+};
 
 /* ── Status Badge ───────────────────────────────────────────── */
 const StatusBadge = ({ status }) => {
@@ -159,42 +228,32 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-/* ── Password Strength Meter ────────────────────────────────── */
-const PwStrengthMeter = ({ password }) => {
-  const { score, label, cls } = pwStrength(password);
-  if (!password) return null;
-  return (
-    <div className="am-pw-strength" aria-live="polite">
-      <div className="am-pw-bars">
-        {[1, 2, 3, 4].map(i => (
-          <div key={i} className={`am-pw-bar${i <= score ? ` am-pw-bar--filled-${cls}` : ''}`} />
-        ))}
-      </div>
-      {label && <span className={`am-pw-label am-pw-label--${cls}`}>{label} password</span>}
-    </div>
-  );
-};
-
 /* ── Inline spinner ─────────────────────────────────────────── */
 const BtnSpinner = () => <span className="am-btn-spinner" aria-hidden="true" />;
 
 /* ================================================================
    ADD / EDIT MODAL
    ================================================================ */
-const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
+const AdminFormModal = ({ mode, target, onClose, onSave, isSaving, roles = [] }) => {
   const isEdit = mode === 'edit';
+  const initialPassword = isEdit ? (target?.password || 'Admin@Password123') : '';
   const [form, setForm] = useState({
     name: isEdit ? target.name : '',
     email: isEdit ? target.email : '',
-    role: isEdit ? target.role : 'admin',
+    role: isEdit ? target.role : (roles[1]?.id || 'admin'),
     status: isEdit ? target.status : 'active',
-    password: '',
+    password: initialPassword,
     confirmPw: '',
   });
+  const [privilegeOverrides, setPrivilegeOverrides] = useState(() => (
+    isEdit && target?.privilegeOverrides ? { ...target.privilegeOverrides } : {}
+  ));
   const [errors, setErrors] = useState({});
   const [showPw, setShowPw] = useState(false);
   const [showCpw, setShowCpw] = useState(false);
   const firstRef = useRef(null);
+
+  const isPasswordChanged = form.password !== initialPassword;
 
   useEffect(() => { firstRef.current?.focus(); }, []);
 
@@ -210,16 +269,54 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
     setErrors(p => ({ ...p, [k]: '' }));
   };
 
+  /* Toggle individual account override permission */
+  const toggleOverridePerm = (modId, action) => {
+    const baseRole = roles.find(r => r.id === form.role) || roles[1];
+    const inheritedActions = baseRole?.permissions?.[modId] || [];
+
+    setPrivilegeOverrides(prev => {
+      const currentOverridden = prev[modId] !== undefined ? prev[modId] : [...inheritedActions];
+      const updated = currentOverridden.includes(action)
+        ? currentOverridden.filter(a => a !== action)
+        : [...currentOverridden, action];
+      return { ...prev, [modId]: updated };
+    });
+  };
+
+  const setAllAccountPerms = (enable) => {
+    const newOverrides = {};
+    PERMISSION_MODULES.forEach(m => {
+      newOverrides[m.id] = enable ? ['view', 'edit', 'delete'] : [];
+    });
+    setPrivilegeOverrides(newOverrides);
+  };
+
+  const handleResetAccountPerms = () => {
+    setPrivilegeOverrides(target?.privilegeOverrides ? { ...target.privilegeOverrides } : {});
+  };
+
+  const setAllModuleAccountPerms = (modId, enable) => {
+    setPrivilegeOverrides(prev => ({
+      ...prev,
+      [modId]: enable ? ['view', 'edit', 'delete'] : [],
+    }));
+  };
+
   const validate = () => {
     const e = {};
     const name = sanitize(form.name);
     if (!name || name.length < 2) e.name = 'Name must be at least 2 characters.';
     if (!isValidEmail(sanitize(form.email))) e.email = 'Enter a valid email address.';
-    if (!isEdit && !form.password) e.password = 'Password is required.';
-    if (form.password) {
-      const { score } = pwStrength(form.password);
-      if (score < 2) e.password = 'Password is too weak. Use at least 8 characters with a number.';
-      if (form.password !== form.confirmPw) e.confirmPw = 'Passwords do not match.';
+    if (!form.password) e.password = 'Password is required.';
+    if (form.password && form.password.length < 8) {
+      e.password = 'Password must be at least 8 characters.';
+    }
+    if (isPasswordChanged) {
+      if (!form.confirmPw) {
+        e.confirmPw = 'Please confirm the new password.';
+      } else if (form.password !== form.confirmPw) {
+        e.confirmPw = 'Passwords do not match.';
+      }
     }
     return e;
   };
@@ -233,23 +330,29 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
       email: sanitize(form.email).toLowerCase(),
       role: form.role,
       status: form.status,
-      ...(form.password ? { password: form.password } : {}),
+      password: form.password,
+      ...(Object.keys(privilegeOverrides).length > 0 ? { privilegeOverrides } : {}),
     });
   };
 
+  const currentRoleName = useMemo(() => {
+    const r = roles.find(x => x.id === (form.role || target?.role));
+    return r ? r.name : (form.role || target?.role || 'Admin');
+  }, [roles, form.role, target?.role]);
+
   return (
     <div className="am-modal-overlay" role="dialog" aria-modal="true"
-      aria-label={isEdit ? 'Edit admin account' : 'Add admin account'}
+      aria-label={isEdit ? `Edit ${target?.name || 'User'} account` : 'Add admin account'}
       onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="am-modal">
+      <div className={`am-modal${form.role ? ' am-modal--admin-edit' : ''}`}>
         <div className="am-modal-header">
           <div className={`am-modal-icon am-modal-icon--primary`}>
             {isEdit ? <EditIcon /> : <PlusIcon />}
           </div>
           <div>
-            <p className="am-modal-title">{isEdit ? 'Edit Admin Account' : 'Add New Admin'}</p>
+            <p className="am-modal-title">{isEdit ? `Edit ${target?.name || 'User'} Account` : 'Add New Admin'}</p>
             <p className="am-modal-subtitle">
-              {isEdit ? `Modifying ${target.name}` : 'Create a new administrator account'}
+              {isEdit ? `Modifying ${currentRoleName}` : 'Create a new admin account'}
             </p>
           </div>
           <button className="am-modal-close" onClick={onClose} aria-label="Close modal">
@@ -292,10 +395,12 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
                 <label className="am-label" htmlFor="amf-role">Role <span>*</span></label>
                 <select id="amf-role" className="am-select"
                   value={form.role} onChange={e => set('role', e.target.value)}>
-                  <option value="admin">Admin</option>
-                  <option value="super_admin">Super Admin</option>
+                  {roles.map(r => (
+                    <option key={r.id} value={r.id}>
+                      {r.id === 'super_admin' ? `${r.name} (System Role)` : r.name}
+                    </option>
+                  ))}
                 </select>
-                <span className="am-field-hint">Super Admins can manage other admins.</span>
               </div>
 
               <div className="am-field">
@@ -312,13 +417,13 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
             {/* Password */}
             <div className="am-field">
               <label className="am-label" htmlFor="amf-pw">
-                {isEdit ? 'New Password' : 'Password'} {!isEdit && <span>*</span>}
+                Password <span>*</span>
               </label>
               <div className="am-input-wrap">
                 <LockIcon />
                 <input id="amf-pw" className={`am-input${errors.password ? ' am-input--error' : ''}`}
                   type={showPw ? 'text' : 'password'}
-                  placeholder={isEdit ? 'Leave blank to keep current password' : 'Min 8 chars, include a number'}
+                  placeholder="Min 8 chars, include a number"
                   value={form.password} onChange={e => set('password', e.target.value)}
                   maxLength={100} autoComplete="new-password" />
                 <button type="button" className="am-pw-toggle" onClick={() => setShowPw(p => !p)}
@@ -327,17 +432,16 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
                 </button>
               </div>
               {errors.password && <span className="am-field-error"><AlertTriIcon />{errors.password}</span>}
-              <PwStrengthMeter password={form.password} />
             </div>
 
-            {/* Confirm password */}
-            {form.password && (
+            {/* Confirm password — shown when user changes password */}
+            {isPasswordChanged && (
               <div className="am-field">
                 <label className="am-label" htmlFor="amf-cpw">Confirm Password <span>*</span></label>
                 <div className="am-input-wrap">
                   <LockIcon />
                   <input id="amf-cpw" className={`am-input${errors.confirmPw ? ' am-input--error' : ''}`}
-                    type={showCpw ? 'text' : 'password'} placeholder="Re-enter password"
+                    type={showCpw ? 'text' : 'password'} placeholder="Re-enter new password to confirm"
                     value={form.confirmPw} onChange={e => set('confirmPw', e.target.value)}
                     maxLength={100} autoComplete="new-password" />
                   <button type="button" className="am-pw-toggle" onClick={() => setShowCpw(p => !p)}
@@ -346,6 +450,97 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
                   </button>
                 </div>
                 {errors.confirmPw && <span className="am-field-error"><AlertTriIcon />{errors.confirmPw}</span>}
+              </div>
+            )}
+
+            {/* Custom Role Privilege Matrix after selecting role */}
+            {form.role && (
+              <div className="am-field" style={{ marginTop: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
+                  <label className="am-label" style={{ margin: 0 }}>Custom Role Privilege Matrix <span>*</span></label>
+                  <div className="am-quick-perm-actions">
+                    <button type="button" className="am-btn-text" onClick={() => setAllAccountPerms(true)}>
+                      Grant All
+                    </button>
+                    <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                    <button type="button" className="am-btn-text" onClick={() => setAllAccountPerms(false)}>
+                      Clear All
+                    </button>
+                    <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                    <button type="button" className="am-btn-text" onClick={handleResetAccountPerms}>
+                      Reset to Saved
+                    </button>
+                  </div>
+                </div>
+
+                <div className="am-privilege-table-wrap">
+                  <table className="am-privilege-table">
+                    <thead>
+                      <tr>
+                        <th>Permission Module</th>
+                        <th style={{ textTransform: 'uppercase' }}>View</th>
+                        <th style={{ textTransform: 'uppercase' }}>Edit</th>
+                        <th style={{ textTransform: 'uppercase' }}>Delete</th>
+                        {/* <th>Privilege Status</th> */}
+                        <th>Quick Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {PERMISSION_MODULES.map(m => {
+                        const baseRole = roles.find(r => r.id === form.role) || roles[1];
+                        const inherited = baseRole?.permissions?.[m.id] || [];
+                        const hasOverride = privilegeOverrides[m.id] !== undefined;
+                        const activePerms = hasOverride ? privilegeOverrides[m.id] : inherited;
+                        const allChecked = ACTIONS.every(a => activePerms.includes(a));
+                        const IconComp = MODULE_ICONS[m.id] || <ShieldIcon />;
+
+                        return (
+                          <tr key={m.id}>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                <span className="am-perm-module-icon">{IconComp}</span>
+                                <div>
+                                  <strong className="am-priv-mod-label">{m.label}</strong>
+                                  <span className="am-priv-mod-desc">{m.desc}</span>
+                                </div>
+                              </div>
+                            </td>
+                            {ACTIONS.map(act => (
+                              <td key={act} className="am-priv-cb-cell">
+                                <label className="am-cb-label">
+                                  <input
+                                    type="checkbox"
+                                    checked={activePerms.includes(act)}
+                                    onChange={() => toggleOverridePerm(m.id, act)}
+                                  />
+                                </label>
+                              </td>
+                            ))}
+                            {/* <td>
+                              {hasOverride ? (
+                                <span className="am-override-badge am-override-badge--custom">
+                                  Custom Override
+                                </span>
+                              ) : (
+                                <span className="am-override-badge am-override-badge--inherited">
+                                  Inherited from Role
+                                </span>
+                              )}
+                            </td> */}
+                            <td>
+                              <button
+                                type="button"
+                                className="am-btn-text"
+                                onClick={() => setAllModuleAccountPerms(m.id, !allChecked)}>
+                                {allChecked ? 'Clear' : 'Select All'}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
@@ -367,12 +562,28 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
 };
 
 /* ================================================================
-   MANAGE ROLES MODAL (Super Admin Only)
+   MANAGE ROLES & USER PRIVILEGES MODAL (Super Admin Only)
    ================================================================ */
-const ManageRolesModal = ({ admins, onClose, onRoleChange, isBusy }) => {
-  const [selectedAdminId, setSelectedAdminId] = useState('');
-  const [newRole, setNewRole] = useState('admin');
-  const [activeTab, setActiveTab] = useState('matrix'); // 'matrix' | 'assign'
+const ManageRolesModal = ({ admins, roles, onClose, onCreateRole, onUpdateRole, onDeleteRole, isBusy }) => {
+  const [activeTab, setActiveTab] = useState('matrix'); // 'matrix' | 'create' | 'custom_role'
+
+  /* Create role form state */
+  const [newRoleName, setNewRoleName] = useState('');
+  const [newRoleDesc, setNewRoleDesc] = useState('');
+  const [newRolePerms, setNewRolePerms] = useState({});
+  const [createError, setCreateError] = useState('');
+
+  /* Edit custom role state in Manage Role Privileges */
+  const customRoles = useMemo(() => roles.filter(r => !r.builtin), [roles]);
+  const [selectedEditRoleId, setSelectedEditRoleId] = useState(() => {
+    const firstCustom = roles.find(r => !r.builtin);
+    return firstCustom ? firstCustom.id : '';
+  });
+  const [editRoleName, setEditRoleName] = useState('');
+  const [editRoleDesc, setEditRoleDesc] = useState('');
+  const [editRolePerms, setEditRolePerms] = useState({});
+  const [editRoleError, setEditRoleError] = useState('');
+
   const firstRef = useRef(null);
 
   useEffect(() => { firstRef.current?.focus(); }, []);
@@ -382,49 +593,169 @@ const ManageRolesModal = ({ admins, onClose, onRoleChange, isBusy }) => {
     return () => document.removeEventListener('keydown', h);
   }, [onClose]);
 
-  const roles = [
-    {
-      id: 'super_admin',
-      title: 'Super Administrator',
-      count: admins.filter(a => a.role === 'super_admin').length,
-      desc: 'Complete full-system authority. Can manage admins, roles, security settings, and audit logs.',
-      permissions: [
-        { label: 'Admin & Role Management', granted: true },
-        { label: 'Full System Audit Trail', granted: true },
-        { label: 'User Account Management', granted: true },
-        { label: 'Order & Refund Processing', granted: true },
-        { label: 'Service & Price Management', granted: true },
-        { label: 'Print & Asset Settings', granted: true },
-      ],
-    },
-    {
-      id: 'admin',
-      title: 'Administrator',
-      count: admins.filter(a => a.role === 'admin').length,
-      desc: 'Standard operational privileges for day-to-day store and customer management.',
-      permissions: [
-        { label: 'Admin & Role Management', granted: false },
-        { label: 'Full System Audit Trail', granted: false },
-        { label: 'User Account Management', granted: true },
-        { label: 'Order & Refund Processing', granted: true },
-        { label: 'Service & Price Management', granted: true },
-        { label: 'Print & Asset Settings', granted: true },
-      ],
-    },
-  ];
+  /* Sync edit role fields when selected role or roles change */
+  const loadRoleForEditing = useCallback((roleId) => {
+    const targetRole = roles.find(r => r.id === roleId) || roles.find(r => !r.builtin);
+    if (targetRole) {
+      setSelectedEditRoleId(targetRole.id);
+      setEditRoleName(targetRole.name);
+      setEditRoleDesc(targetRole.desc || '');
+      setEditRolePerms(targetRole.permissions ? JSON.parse(JSON.stringify(targetRole.permissions)) : {});
+      setEditRoleError('');
+    } else {
+      setSelectedEditRoleId('');
+      setEditRoleName('');
+      setEditRoleDesc('');
+      setEditRolePerms({});
+    }
+  }, [roles]);
 
-  const handleAssignRole = (e) => {
-    e.preventDefault();
-    if (!selectedAdminId) return;
-    const target = admins.find(a => a.id === selectedAdminId);
-    if (!target) return;
-    if (target.role === newRole) return;
-    onRoleChange(target, newRole);
+  useEffect(() => {
+    if (selectedEditRoleId) {
+      const exists = roles.find(r => r.id === selectedEditRoleId);
+      if (exists) {
+        setEditRoleName(exists.name);
+        setEditRoleDesc(exists.desc || '');
+        setEditRolePerms(exists.permissions ? JSON.parse(JSON.stringify(exists.permissions)) : {});
+      } else {
+        loadRoleForEditing(customRoles[0]?.id || '');
+      }
+    } else if (customRoles.length > 0) {
+      loadRoleForEditing(customRoles[0].id);
+    }
+  }, [roles, selectedEditRoleId, customRoles, loadRoleForEditing]);
+
+  /* Toggle action in Create Role form */
+  const toggleCreatePerm = (modId, action) => {
+    setNewRolePerms(prev => {
+      const current = prev[modId] || [];
+      const updated = current.includes(action)
+        ? current.filter(a => a !== action)
+        : [...current, action];
+      return { ...prev, [modId]: updated };
+    });
   };
+
+  const setAllModulePerms = (modId, enable) => {
+    setNewRolePerms(prev => ({
+      ...prev,
+      [modId]: enable ? ['view', 'edit', 'delete'] : [],
+    }));
+  };
+
+  const setAllCreatePerms = (enable) => {
+    const newPerms = {};
+    PERMISSION_MODULES.forEach(m => {
+      newPerms[m.id] = enable ? ['view', 'edit', 'delete'] : [];
+    });
+    setNewRolePerms(newPerms);
+  };
+
+  const handleResetCreateRole = () => {
+    setNewRolePerms({});
+  };
+
+  /* Toggle action in Edit Role form */
+  const toggleEditRolePerm = (modId, action) => {
+    setEditRolePerms(prev => {
+      const current = prev[modId] || [];
+      const updated = current.includes(action)
+        ? current.filter(a => a !== action)
+        : [...current, action];
+      return { ...prev, [modId]: updated };
+    });
+  };
+
+  const setAllEditModulePerms = (modId, enable) => {
+    setEditRolePerms(prev => ({
+      ...prev,
+      [modId]: enable ? ['view', 'edit', 'delete'] : [],
+    }));
+  };
+
+  const setAllEditPerms = (enable) => {
+    const newPerms = {};
+    PERMISSION_MODULES.forEach(m => {
+      newPerms[m.id] = enable ? ['view', 'edit', 'delete'] : [];
+    });
+    setEditRolePerms(newPerms);
+  };
+
+  const handleResetEditRole = () => {
+    const targetRole = roles.find(r => r.id === selectedEditRoleId);
+    if (targetRole) {
+      setEditRoleName(targetRole.name);
+      setEditRoleDesc(targetRole.desc || '');
+      setEditRolePerms(targetRole.permissions ? JSON.parse(JSON.stringify(targetRole.permissions)) : {});
+      setEditRoleError('');
+    }
+  };
+
+  /* Handle Create Role submit */
+  const handleCreateSubmit = (e) => {
+    e.preventDefault();
+    const cleanName = sanitize(newRoleName);
+    if (!cleanName || cleanName.length < 2) {
+      setCreateError('Role name must be at least 2 characters.');
+      return;
+    }
+    const roleId = `role_${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}`;
+    if (roles.some(r => r.id === roleId)) {
+      setCreateError('A role with this name or ID already exists.');
+      return;
+    }
+    setCreateError('');
+    onCreateRole({
+      id: roleId,
+      name: cleanName,
+      builtin: false,
+      desc: sanitize(newRoleDesc) || 'Custom administrative privilege role.',
+      permissions: newRolePerms,
+    });
+    setNewRoleName('');
+    setNewRoleDesc('');
+    setNewRolePerms({});
+    setActiveTab('matrix');
+  };
+
+  /* Handle Save Custom Role Changes */
+  const handleSaveCustomRole = (e) => {
+    e.preventDefault();
+    if (!selectedEditRoleId) return;
+    const cleanName = sanitize(editRoleName);
+    if (!cleanName || cleanName.length < 2) {
+      setEditRoleError('Role name must be at least 2 characters.');
+      return;
+    }
+    const duplicate = roles.some(r => r.id !== selectedEditRoleId && r.name.toLowerCase() === cleanName.toLowerCase());
+    if (duplicate) {
+      setEditRoleError('Another role with this name already exists.');
+      return;
+    }
+    setEditRoleError('');
+    if (onUpdateRole) {
+      onUpdateRole({
+        id: selectedEditRoleId,
+        name: cleanName,
+        desc: sanitize(editRoleDesc) || 'Custom administrative privilege role.',
+        permissions: editRolePerms,
+      });
+    }
+    setActiveTab('matrix');
+  };
+
+  /* Switch directly to edit a role from Matrix */
+  const handleStartEditRole = (roleId) => {
+    loadRoleForEditing(roleId);
+    setActiveTab('custom_role');
+  };
+
+  const selectedRoleObj = roles.find(r => r.id === selectedEditRoleId);
+  const isEditingBuiltin = selectedRoleObj?.builtin;
 
   return (
     <div className="am-modal-overlay" role="dialog" aria-modal="true"
-      aria-label="Manage Roles & Permissions"
+      aria-label="User Privilege & Role Management"
       onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="am-modal am-modal--roles">
         <div className="am-modal-header">
@@ -432,8 +763,8 @@ const ManageRolesModal = ({ admins, onClose, onRoleChange, isBusy }) => {
             <ShieldIcon />
           </div>
           <div>
-            <p className="am-modal-title">Role Management & Permissions</p>
-            <p className="am-modal-subtitle">Configure system roles, access privileges, and assignments</p>
+            <p className="am-modal-title">Role & Privilege Governance</p>
+            <p className="am-modal-subtitle">Configure custom role definitions, granular permission matrix grids, and access levels</p>
           </div>
           <button ref={firstRef} className="am-modal-close" onClick={onClose} aria-label="Close modal">
             <CloseIcon />
@@ -444,83 +775,385 @@ const ManageRolesModal = ({ admins, onClose, onRoleChange, isBusy }) => {
           <div className="am-role-tabs">
             <button type="button" className={`am-role-tab${activeTab === 'matrix' ? ' am-role-tab--active' : ''}`}
               onClick={() => setActiveTab('matrix')}>
-              <ShieldIcon /> Role Matrix
+              <ShieldIcon /> Role Matrix ({roles.length})
             </button>
-            <button type="button" className={`am-role-tab${activeTab === 'assign' ? ' am-role-tab--active' : ''}`}
-              onClick={() => setActiveTab('assign')}>
-              <UsersIcon /> Assign Roles ({admins.length})
+            <button type="button" className={`am-role-tab${activeTab === 'custom_role' ? ' am-role-tab--active' : ''}`}
+              onClick={() => setActiveTab('custom_role')}>
+              <ShieldIcon /> Manage Role Privileges ({customRoles.length})
+            </button>
+            <button type="button" className={`am-role-tab am-role-tab--create${activeTab === 'create' ? ' am-role-tab--create-active' : ''}`}
+              onClick={() => setActiveTab('create')}>
+              <PlusIcon /> Create Custom Role
             </button>
           </div>
 
-          {activeTab === 'matrix' ? (
+          {/* TAB 1: ROLE MATRIX */}
+          {activeTab === 'matrix' && (
             <div className="am-roles-grid">
-              {roles.map(r => (
-                <div key={r.id} className="am-role-card">
-                  <div className="am-role-card-header">
-                    <div className="am-role-title-wrap">
-                      <RoleBadge role={r.id} />
-                      <span className="am-role-count">{r.count} {r.count === 1 ? 'Account' : 'Accounts'}</span>
+              {roles.map(r => {
+                const memberCount = admins.filter(a => a.role === r.id).length;
+                const roleTypeClass = r.id.startsWith('super') ? 'super' : r.builtin ? 'system' : 'custom';
+
+                return (
+                  <div key={r.id} className={`am-role-card am-role-card--${roleTypeClass}`}>
+                    <div className="am-role-card-header">
+                      <div className="am-role-title-wrap">
+                        <div className={`am-role-avatar-emblem am-role-avatar-emblem--${roleTypeClass}`}>
+                          <ShieldIcon />
+                        </div>
+                        <div className="am-role-meta-block">
+                          <h3 className="am-role-title">{r.name}</h3>
+                          <div className="am-role-badge-row">
+                            {r.builtin ? (
+                              <span className="am-role-builtin-badge">System Role</span>
+                            ) : (
+                              <span className="am-role-custom-badge">Custom Role</span>
+                            )}
+                            <span className="am-role-count">{memberCount} member{memberCount !== 1 ? 's' : ''}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {!r.builtin && (
+                        <div className="am-role-custom-actions">
+                          <button
+                            type="button"
+                            className="am-icon-btn"
+                            onClick={() => handleStartEditRole(r.id)}
+                            disabled={isBusy}
+                            title={`Edit ${r.name} custom role privileges & info`}
+                            aria-label={`Edit ${r.name} custom role`}>
+                            <EditIcon />
+                          </button>
+                          <button
+                            type="button"
+                            className="am-icon-btn am-icon-btn--danger"
+                            onClick={() => onDeleteRole && onDeleteRole(r)}
+                            disabled={isBusy}
+                            title={`Delete ${r.name} custom role`}
+                            aria-label={`Delete ${r.name} custom role`}>
+                            <TrashIcon />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="am-role-desc">{r.desc}</p>
+
+                    {/* Mini Privilege Matrix Table */}
+                    <div className="am-privilege-table-wrap">
+                      <table className="am-privilege-table">
+                        <thead>
+                          <tr>
+                            <th>Permission Module</th>
+                            <th style={{ textTransform: 'uppercase', textAlign: 'center' }}>View</th>
+                            <th style={{ textTransform: 'uppercase', textAlign: 'center' }}>Edit</th>
+                            <th style={{ textTransform: 'uppercase', textAlign: 'center' }}>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {PERMISSION_MODULES.map(m => {
+                            const grantedActions = r.permissions?.[m.id] || [];
+                            const IconComp = MODULE_ICONS[m.id] || <ShieldIcon />;
+                            return (
+                              <tr key={m.id}>
+                                <td>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <span className="am-perm-module-icon">{IconComp}</span>
+                                    <span className="am-perm-module-name">{m.label}</span>
+                                  </div>
+                                </td>
+                                {ACTIONS.map(act => (
+                                  <td key={act} className="am-priv-cb-cell">
+                                    <label className="am-cb-label" title={`${act.toUpperCase()} privilege for ${m.label}: ${grantedActions.includes(act) ? 'Granted' : 'Denied'}`}>
+                                      <input
+                                        type="checkbox"
+                                        checked={grantedActions.includes(act)}
+                                        disabled
+                                        style={{ pointerEvents: 'none' }}
+                                      />
+                                    </label>
+                                  </td>
+                                ))}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <p className="am-role-desc">{r.desc}</p>
-
-                  <div className="am-perm-header">Privileges & Permissions</div>
-                  <ul className="am-perm-list">
-                    {r.permissions.map((p, i) => (
-                      <li key={i} className={`am-perm-item${p.granted ? ' am-perm-item--granted' : ' am-perm-item--denied'}`}>
-                        {p.granted ? <CheckCircleIcon /> : <CloseIcon />}
-                        <span>{p.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                );
+              })}
             </div>
-          ) : (
-            <form onSubmit={handleAssignRole} className="am-role-assign-form">
+          )}
+
+          {/* TAB 2: CREATE ROLE */}
+          {activeTab === 'create' && (
+            <form onSubmit={handleCreateSubmit} className="am-role-create-form">
               <p className="am-role-assign-intro">
-                Select an administrator to modify their role privileges. Super Admins hold governance over all admin management functions.
+                Define a new custom role model with granular module privileges. Once created, this role can be assigned when adding or editing admin team members.
               </p>
 
-              <div className="am-field" style={{ marginBottom: 16 }}>
-                <label className="am-label" htmlFor="amf-assign-admin">Select Admin Account <span>*</span></label>
-                <select id="amf-assign-admin" className="am-select" value={selectedAdminId}
-                  onChange={e => {
-                    const id = e.target.value;
-                    setSelectedAdminId(id);
-                    const found = admins.find(a => a.id === id);
-                    if (found) setNewRole(found.role);
-                  }}>
-                  <option value="">-- Choose Admin Account --</option>
-                  {admins.map(a => (
-                    <option key={a.id} value={a.id}>
-                      {a.name} ({a.email}) — Currently: {a.role === 'super_admin' ? 'Super Admin' : 'Admin'}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {selectedAdminId && (
-                <div className="am-field" style={{ marginBottom: 20 }}>
-                  <label className="am-label" htmlFor="amf-assign-role">Assign New Role <span>*</span></label>
-                  <select id="amf-assign-role" className="am-select" value={newRole} onChange={e => setNewRole(e.target.value)}>
-                    <option value="admin">Admin</option>
-                    <option value="super_admin">Super Admin</option>
-                  </select>
+              {createError && (
+                <div className="am-field-error" style={{ marginBottom: 14 }}>
+                  <AlertTriIcon /> {createError}
                 </div>
               )}
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
-                <button type="button" className="am-btn am-btn--ghost" onClick={onClose} disabled={isBusy}>
-                  Close
-                </button>
-                {selectedAdminId && (
-                  <button type="submit" className="am-btn am-btn--primary" disabled={isBusy}>
-                    {isBusy && <BtnSpinner />}
-                    {isBusy ? 'Updating…' : 'Update Role'}
-                  </button>
-                )}
+              <div className="am-field-row" style={{ marginBottom: 16 }}>
+                <div className="am-field">
+                  <label className="am-label" htmlFor="amf-role-name">Role Name <span>*</span></label>
+                  <input id="amf-role-name" className="am-input am-input--no-icon"
+                    type="text" placeholder="e.g. Marketing Lead"
+                    value={newRoleName} onChange={e => setNewRoleName(e.target.value)} maxLength={50} />
+                </div>
+
+                <div className="am-field">
+                  <label className="am-label" htmlFor="amf-role-desc">Role Description</label>
+                  <input id="amf-role-desc" className="am-input am-input--no-icon"
+                    type="text" placeholder="Brief summary of duties & access level"
+                    value={newRoleDesc} onChange={e => setNewRoleDesc(e.target.value)} maxLength={150} />
+                </div>
               </div>
+
+              <div className="am-field" style={{ marginBottom: 20 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
+                  <label className="am-label" style={{ margin: 0 }}>Custom Role Privilege Matrix <span>*</span></label>
+                  <div className="am-quick-perm-actions">
+                    <button type="button" className="am-btn-text" onClick={() => setAllCreatePerms(true)}>
+                      Grant All
+                    </button>
+                    <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                    <button type="button" className="am-btn-text" onClick={() => setAllCreatePerms(false)}>
+                      Clear All
+                    </button>
+                    <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                    <button type="button" className="am-btn-text" onClick={handleResetCreateRole}>
+                      Reset to Saved
+                    </button>
+                  </div>
+                </div>
+                <div className="am-privilege-table-wrap">
+                  <table className="am-privilege-table">
+                    <thead>
+                      <tr>
+                        <th>Permission Module</th>
+                        <th style={{ textTransform: 'uppercase' }}>View</th>
+                        <th style={{ textTransform: 'uppercase' }}>Edit</th>
+                        <th style={{ textTransform: 'uppercase' }}>Delete</th>
+                        <th>Quick Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {PERMISSION_MODULES.map(m => {
+                        const cur = newRolePerms[m.id] || [];
+                        const allChecked = ACTIONS.every(a => cur.includes(a));
+                        const IconComp = MODULE_ICONS[m.id] || <ShieldIcon />;
+                        return (
+                          <tr key={m.id}>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                <span className="am-perm-module-icon">{IconComp}</span>
+                                <div>
+                                  <strong className="am-priv-mod-label">{m.label}</strong>
+                                  <span className="am-priv-mod-desc">{m.desc}</span>
+                                </div>
+                              </div>
+                            </td>
+                            {ACTIONS.map(act => (
+                              <td key={act} className="am-priv-cb-cell">
+                                <label className="am-cb-label">
+                                  <input type="checkbox"
+                                    checked={cur.includes(act)}
+                                    onChange={() => toggleCreatePerm(m.id, act)} />
+                                </label>
+                              </td>
+                            ))}
+                            <td>
+                              <button type="button" className="am-btn-text"
+                                onClick={() => setAllModulePerms(m.id, !allChecked)}>
+                                {allChecked ? 'Clear' : 'Select All'}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
+                <button type="button" className="am-btn am-btn--ghost" onClick={() => setActiveTab('matrix')} disabled={isBusy}>
+                  Cancel
+                </button>
+                <button type="submit" className="am-btn am-btn--primary" disabled={isBusy}>
+                  {isBusy && <BtnSpinner />}
+                  {isBusy ? 'Saving Role…' : 'Create Role Model'}
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* TAB 3: MANAGE CUSTOM ROLE PRIVILEGES & NAME/DESCRIPTION */}
+          {activeTab === 'custom_role' && (
+            <form onSubmit={handleSaveCustomRole} className="am-role-edit-form">
+              {/* <p className="am-role-assign-intro">
+                Select a custom role to update its name, description, and base privilege matrix. Changes will immediately apply to all admins currently assigned to this role.
+              </p> */}
+
+              {/* Role Selector */}
+              <div className="am-field-row" style={{ marginBottom: 16 }}>
+                <div className="am-field">
+                  <label className="am-label" htmlFor="amf-edit-role-select">Select Custom Role to Edit <span>*</span></label>
+                  {customRoles.length === 0 ? (
+                    <div className="am-role-empty-notice">
+                      <span>No custom roles found. Create one first.</span>
+                      <button type="button" className="am-btn am-btn--primary" style={{ marginLeft: 12 }} onClick={() => setActiveTab('create')}>
+                        <PlusIcon /> Create Custom Role
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <select
+                        id="amf-edit-role-select"
+                        className="am-select"
+                        value={selectedEditRoleId}
+                        onChange={e => loadRoleForEditing(e.target.value)}>
+                        {customRoles.map(r => (
+                          <option key={r.id} value={r.id}>
+                            {r.name}
+                          </option>
+                        ))}
+                      </select>
+                      {selectedEditRoleId && (
+                        <span className="am-field-hint">
+                          Assigned to {admins.filter(a => a.role === selectedEditRoleId).length} admin account(s)
+                        </span>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {selectedEditRoleId && selectedRoleObj && (
+                <>
+                  {editRoleError && (
+                    <div className="am-field-error" style={{ marginBottom: 14 }}>
+                      <AlertTriIcon /> {editRoleError}
+                    </div>
+                  )}
+
+                  {/* Name and Description Inputs */}
+                  <div className="am-field-row" style={{ marginBottom: 16 }}>
+                    <div className="am-field">
+                      <label className="am-label" htmlFor="amf-edit-name">Role Name <span>*</span></label>
+                      <input
+                        id="amf-edit-name"
+                        className="am-input am-input--no-icon"
+                        type="text"
+                        placeholder="e.g. Content Manager"
+                        value={editRoleName}
+                        onChange={e => { setEditRoleName(e.target.value); setEditRoleError(''); }}
+                        maxLength={50}
+                        disabled={isEditingBuiltin}
+                      />
+                    </div>
+
+                    <div className="am-field">
+                      <label className="am-label" htmlFor="amf-edit-desc">Role Description</label>
+                      <input
+                        id="amf-edit-desc"
+                        className="am-input am-input--no-icon"
+                        type="text"
+                        placeholder="Brief description of this role's permissions & duties"
+                        value={editRoleDesc}
+                        onChange={e => setEditRoleDesc(e.target.value)}
+                        maxLength={150}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Privilege Grid Checklist */}
+                  <div className="am-field" style={{ marginBottom: 20 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
+                      <label className="am-label" style={{ margin: 0 }}>Custom Role Privilege Matrix <span>*</span></label>
+                      <div className="am-quick-perm-actions">
+                        <button type="button" className="am-btn-text" onClick={() => setAllEditPerms(true)}>
+                          Grant All
+                        </button>
+                        <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                        <button type="button" className="am-btn-text" onClick={() => setAllEditPerms(false)}>
+                          Clear All
+                        </button>
+                        <span style={{ color: 'var(--border-strong)', padding: '0 4px' }}>|</span>
+                        <button type="button" className="am-btn-text" onClick={handleResetEditRole}>
+                          Reset to Saved
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="am-privilege-table-wrap">
+                      <table className="am-privilege-table">
+                        <thead>
+                          <tr>
+                            <th>Permission Module</th>
+                            <th style={{ textTransform: 'uppercase' }}>View</th>
+                            <th style={{ textTransform: 'uppercase' }}>Edit</th>
+                            <th style={{ textTransform: 'uppercase' }}>Delete</th>
+                            <th>Quick Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {PERMISSION_MODULES.map(m => {
+                            const cur = editRolePerms[m.id] || [];
+                            const allChecked = ACTIONS.every(a => cur.includes(a));
+                            const IconComp = MODULE_ICONS[m.id] || <ShieldIcon />;
+                            return (
+                              <tr key={m.id}>
+                                <td>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <span className="am-perm-module-icon">{IconComp}</span>
+                                    <div>
+                                      <strong className="am-priv-mod-label">{m.label}</strong>
+                                      <span className="am-priv-mod-desc">{m.desc}</span>
+                                    </div>
+                                  </div>
+                                </td>
+                                {ACTIONS.map(act => (
+                                  <td key={act} className="am-priv-cb-cell">
+                                    <label className="am-cb-label">
+                                      <input type="checkbox"
+                                        checked={cur.includes(act)}
+                                        onChange={() => toggleEditRolePerm(m.id, act)} />
+                                    </label>
+                                  </td>
+                                ))}
+                                <td>
+                                  <button type="button" className="am-btn-text"
+                                    onClick={() => setAllEditModulePerms(m.id, !allChecked)}>
+                                    {allChecked ? 'Clear' : 'Select All'}
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
+                    <button type="button" className="am-btn am-btn--ghost" onClick={handleResetEditRole} disabled={isBusy}>
+                      Reset Changes
+                    </button>
+                    <button type="submit" className="am-btn am-btn--primary" disabled={isBusy}>
+                      {isBusy && <BtnSpinner />}
+                      {isBusy ? 'Saving Role Changes…' : 'Save Role Changes'}
+                    </button>
+                  </div>
+                </>
+              )}
             </form>
           )}
         </div>
@@ -648,6 +1281,7 @@ const AdminManagementSection = () => {
 
   /* ── State ────────────────────────────────────────────── */
   const [admins, setAdmins] = useState(SEED_ADMINS);
+  const [roles, setRoles] = useState(INITIAL_ROLES);
   const [auditLog, setAuditLog] = useState(SEED_AUDIT);
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
@@ -801,6 +1435,54 @@ const AdminManagementSection = () => {
     }, 600);
   }, [addAudit, showToast]);
 
+  const handleCreateRole = useCallback((newRole) => {
+    setIsBusy(true);
+    setTimeout(() => {
+      setRoles(p => [...p, newRole]);
+      addAudit('create', `Created custom role model <strong>${newRole.name}</strong>`);
+      showToast('success', `Role "${newRole.name}" created successfully.`);
+      setIsBusy(false);
+    }, 500);
+  }, [addAudit, showToast]);
+
+  const handleUpdateRole = useCallback((updatedRole) => {
+    setIsBusy(true);
+    setTimeout(() => {
+      setRoles(prev => prev.map(r => r.id === updatedRole.id ? { ...r, ...updatedRole } : r));
+      addAudit('update', `Updated custom role model <strong>${updatedRole.name}</strong> privileges and info`);
+      showToast('success', `Custom role "${updatedRole.name}" updated successfully.`);
+      setIsBusy(false);
+    }, 500);
+  }, [addAudit, showToast]);
+
+  const handleDeleteRole = useCallback((roleToDelete) => {
+    if (roleToDelete.builtin) return;
+    setIsBusy(true);
+    setTimeout(() => {
+      setAdmins(prev => prev.map(a => a.role === roleToDelete.id ? { ...a, role: 'admin', sessionActive: false } : a));
+      setRoles(prev => prev.filter(r => r.id !== roleToDelete.id));
+      addAudit('delete', `Deleted custom role model <strong>${roleToDelete.name}</strong>`);
+      showToast('warn', `Role "${roleToDelete.name}" deleted. Assigned users reverted to Admin.`);
+      setIsBusy(false);
+    }, 500);
+  }, [addAudit, showToast]);
+
+  const handleUpdatePrivileges = useCallback((target, assignedRole, privilegeOverrides) => {
+    setIsBusy(true);
+    setTimeout(() => {
+      setAdmins(p => p.map(a =>
+        a.id === target.id
+          ? { ...a, role: assignedRole, privilegeOverrides, sessionActive: false }
+          : a
+      ));
+      const rName = roles.find(r => r.id === assignedRole)?.name || assignedRole;
+      addAudit('update', `Updated privileges & role for <strong>${target.name}</strong> → ${rName}`);
+      showToast('success', `Privileges updated for "${target.name}". Active session revoked.`);
+      setIsBusy(false);
+      setModal(null);
+    }, 600);
+  }, [roles, addAudit, showToast]);
+
   /* ── Can current admin act on target? ─────────────────── */
   const canAct = (target) => {
     /* Super admin can't delete or suspend themselves */
@@ -837,7 +1519,7 @@ const AdminManagementSection = () => {
         <div className="am-access-denied-icon"><ShieldIcon /></div>
         <h2 className="am-access-denied-title">Access Restricted</h2>
         <p className="am-access-denied-desc">
-          Admin Management is only accessible to Super Administrators.
+          Admin Management is only accessible to Super Admins.
           Contact your Super Admin to request elevated access.
         </p>
       </div>
@@ -1042,7 +1724,7 @@ const AdminManagementSection = () => {
                   </td>
 
                   {/* Role */}
-                  <td data-label="Role"><RoleBadge role={a.role} /></td>
+                  <td data-label="Role"><RoleBadge role={a.role} roles={roles} /></td>
 
                   {/* Last Login */}
                   <td data-label="Last Login" style={{ fontSize: 12.5, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
@@ -1163,6 +1845,7 @@ const AdminManagementSection = () => {
         <AdminFormModal
           mode={modal.type === 'edit' ? 'edit' : 'add'}
           target={modal.target}
+          roles={roles}
           onClose={() => setModal(null)}
           onSave={handleSave}
           isSaving={isBusy}
@@ -1187,8 +1870,12 @@ const AdminManagementSection = () => {
       {modal?.type === 'manage_roles' && (
         <ManageRolesModal
           admins={admins}
+          roles={roles}
           onClose={() => setModal(null)}
-          onRoleChange={handleRoleChange}
+          onCreateRole={handleCreateRole}
+          onUpdateRole={handleUpdateRole}
+          onDeleteRole={handleDeleteRole}
+          onUpdatePrivileges={handleUpdatePrivileges}
           isBusy={isBusy}
         />
       )}
