@@ -469,7 +469,7 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
     { title: 'Binding', value: spec.binding || 'None', Icon: Icons.Book },
     // Row 4: Copies & Lamination
     { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
-    { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' ? (spec.lamination === 'Yes' ? 'Yes' : spec.lamination) : 'None', Icon: Icons.Sparkles },
+    { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' && spec.lamination !== 'none' ? 'Yes' : 'None', Icon: Icons.Sparkles },
   ];
 
   const set = (k, v) => onUpdateSpec(item.id, { ...spec, [k]: v });

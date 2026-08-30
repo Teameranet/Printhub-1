@@ -800,7 +800,7 @@ const Orders = () => {
                                         <span className="ocb-setting-icon"><LaminationIcon /></span>
                                         <span className="ocb-setting-label">Lamination</span>
                                       </div>
-                                      <span className="ocb-setting-value">{file.lamination && file.lamination !== 'None' ? (file.lamination === 'Yes' ? 'Yes' : file.lamination) : 'None'}</span>
+                                      <span className="ocb-setting-value">{file.lamination && file.lamination !== 'None' && file.lamination !== 'none' ? 'Yes' : 'None'}</span>
                                     </div>
                                   </div>
                                   <div className="cart-item-total">
