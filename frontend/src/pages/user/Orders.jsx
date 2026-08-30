@@ -41,9 +41,7 @@ const BindingIcon = () => (
 );
 const LaminationIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <polyline points="14 2 14 8 20 8" />
-    <path d="M11.5 13 L12.5 15.5 L15 16.5 L12.5 17.5 L11.5 20 L10.5 17.5 L8 16.5 L10.5 15.5 Z" />
+    <path d="M12 3c.132 5.813 4.45 10.131 10.263 10.263-5.813.132-10.131 4.45-10.263 10.263C11.868 17.713 7.55 13.395 1.737 13.263 7.55 13.131 11.868 8.813 12 3z" />
   </svg>
 );
 const ColorIcon = () => (
@@ -735,6 +733,13 @@ const Orders = () => {
                                 {/* File print settings */}
                                 <div className="ocb-file-settings">
                                   <div className="ocb-settings-grid">
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><PaperIcon /></span>
+                                        <span className="ocb-setting-label">Size</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.paperSize || 'A4'}</span>
+                                    </div>
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">
                                         <span className="ocb-setting-icon"><PagesIcon /></span>

@@ -136,6 +136,22 @@ const Icons = {
       <polyline points="14 2 14 8 20 8" />
     </svg>
   ),
+  Pages: () => (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+      <path d="M14 2v6h6" />
+      <path d="M16 13H8" />
+      <path d="M16 17H8" />
+      <path d="M10 9H8" />
+    </svg>
+  ),
+  Paper: () => (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+      <line x1="8" x2="16" y1="6" y2="6" />
+      <line x1="8" x2="14" y1="10" y2="10" />
+    </svg>
+  ),
   Copy: () => (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
@@ -143,8 +159,10 @@ const Icons = {
     </svg>
   ),
   Layers: () => (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 12l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 7l10 5 10-5" />
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
     </svg>
   ),
   Book: () => (
@@ -401,16 +419,18 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
 
   const specTags = [
     // 1. Page Size
-    { title: 'Size', value: spec.paperSize, Icon: Icons.File },
-    // 2. Page Range
+    { title: 'Size', value: spec.paperSize, Icon: Icons.Paper },
+    // 2. Pages
+    { title: 'Pages', value: item.pages, Icon: Icons.Pages },
+    // 3. Page Range
     { title: 'Range', value: spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All' : spec.pageRange, Icon: Icons.Range },
-    // 3. Copies
+    // 4. Copies
     { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
-    // 4. Single or Double side
+    // 5. Single or Double side
     { title: 'Sides', value: spec.sides === 'double' ? 'Double' : 'Single', Icon: Icons.Layers },
-    // 5. Colour
+    // 6. Colour
     { title: 'Color', value: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
-    // 6. Binding & Lamination
+    // 7. Binding & Lamination
     { title: 'Binding', value: spec.binding || 'None', Icon: Icons.Book },
     { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' ? 'Yes' : 'None', Icon: Icons.Sparkles },
   ];
@@ -432,8 +452,6 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
         <div className="cart-item-info">
           <div className="cart-item-fname" title={item.name}>{item.name}</div>
           <div className="cart-item-fmeta">
-            <span>{item.pages} page{item.pages !== 1 ? 's' : ''}</span>
-            <span className="cart-dot">·</span>
             <span>{(item.size / (1024 * 1024)).toFixed(2)} MB</span>
             <span className="cart-dot">·</span>
             <span>Added {new Date(item.addedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span>
@@ -461,17 +479,17 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
       </div>
 
       {/* ── Spec Tags ── */}
-      <div className="ocb-file-settings">
-        <div className="ocb-settings-grid">
+      <div className="cart-file-settings">
+        <div className="cart-settings-grid">
           {specTags.map((tag) => {
             const TagIcon = tag.Icon || Icons.Tag;
             return (
-              <div key={tag.title} className="ocb-setting">
-                <div className="ocb-setting-left">
-                  <span className="ocb-setting-icon"><TagIcon /></span>
-                  <span className="ocb-setting-label">{tag.title}</span>
+              <div key={tag.title} className="cart-setting">
+                <div className="cart-setting-left">
+                  <span className="cart-setting-icon"><TagIcon /></span>
+                  <span className="cart-setting-label">{tag.title}</span>
                 </div>
-                <span className="ocb-setting-value">{tag.value}</span>
+                <span className="cart-setting-value">{tag.value}</span>
               </div>
             );
           })}
