@@ -1204,6 +1204,35 @@
   border-radius: var(--r-md);
 }
 
+.cart-input--error {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.04) !important;
+}
+
+.cart-input--error:focus,
+.cart-input--error:focus-visible {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.cart-field-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #ef4444;
+  line-height: 1.3;
+}
+
+.cart-field-error svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
 .cart-select {
   appearance: none;
   -webkit-appearance: none;

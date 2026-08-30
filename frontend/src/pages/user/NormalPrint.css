@@ -479,6 +479,34 @@
   box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
+.np-input--error {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.04) !important;
+}
+
+.np-input--error:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.np-field-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #ef4444;
+  line-height: 1.3;
+}
+
+.np-field-error svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
 .np-select {
   appearance: none;
   -webkit-appearance: none;

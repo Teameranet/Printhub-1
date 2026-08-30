@@ -218,6 +218,38 @@ const PRICING = {
   doubleSideMulti: 0.8,
 };
 
+function getPageRangeError(range, totalPages) {
+  if (!range || range.trim() === '' || range.trim().toLowerCase() === 'all') {
+    return null;
+  }
+  const parts = range.split(',');
+  for (let part of parts) {
+    const t = part.trim();
+    if (!t) continue;
+    if (t.includes('-')) {
+      const sides = t.split('-');
+      if (sides.length !== 2) return 'Invalid format. Use e.g. 1-5 or 1,3,5';
+      const [aStr, bStr] = sides;
+      const a = Number(aStr.trim());
+      const b = Number(bStr.trim());
+      if (isNaN(a) || isNaN(b)) return 'Invalid page numbers in range';
+      if (a < 1 || b < 1) return 'Page numbers must start from 1';
+      if (a > b) return `Invalid range: ${a} cannot exceed ${b}`;
+      if (a > totalPages || b > totalPages) {
+        return `Range exceeds document (${totalPages} page${totalPages !== 1 ? 's' : ''} available)`;
+      }
+    } else {
+      const n = Number(t);
+      if (isNaN(n)) return 'Invalid page number. Use numbers like 1, 2, 1-5';
+      if (n < 1) return 'Page numbers must start from 1';
+      if (n > totalPages) {
+        return `Page ${n} exceeds document (${totalPages} page${totalPages !== 1 ? 's' : ''} available)`;
+      }
+    }
+  }
+  return null;
+}
+
 function parsePageRange(range, totalPages) {
   if (!range || range.trim().toLowerCase() === 'all') return totalPages;
   let count = 0;
@@ -284,7 +316,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:10:00',
     spec: {
-      paperSize: 'A4', paperType: 'Bond', pageRange: 'All', orientation: 'Portrait',
+      paperSize: 'A4', paperType: 'Bond', pageRange: '1-42', orientation: 'Portrait',
       pagesPerSheet: 1, copies: 2, lamination: 'None', binding: 'Spiral', sides: 'double', color: 'bw',
     },
   },
@@ -296,7 +328,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:12:00',
     spec: {
-      paperSize: 'A4', paperType: 'Glossy', pageRange: 'All', orientation: 'Landscape',
+      paperSize: 'A4', paperType: 'Glossy', pageRange: '1-18', orientation: 'Landscape',
       pagesPerSheet: 2, copies: 3, lamination: 'Matte Lamination', binding: 'None', sides: 'single', color: 'color',
     },
   },
@@ -308,7 +340,7 @@ const MOCK_CART = [
     previewUrl: null,
     addedAt: '2026-07-03T09:15:00',
     spec: {
-      paperSize: 'A4', paperType: 'Bond', pageRange: 'All', orientation: 'Portrait',
+      paperSize: 'A4', paperType: 'Bond', pageRange: '1-7', orientation: 'Portrait',
       pagesPerSheet: 1, copies: 1, lamination: 'Matte Lamination', binding: 'Stapled', sides: 'single', color: 'bw',
     },
   },
@@ -416,6 +448,14 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
   const { Icon, color, bg, label } = getFileIcon(item.name);
   const cost = calcCost(item.spec, item.pages);
   const spec = item.spec;
+  const rangeError = getPageRangeError(spec.pageRange, item.pages);
+
+  const formatRange = (range, pages) => {
+    if (!range || range.toLowerCase() === 'all') {
+      return Number(pages) > 1 ? `1-${pages}` : '1';
+    }
+    return range;
+  };
 
   const specTags = [
     // 1. Page Size
@@ -423,7 +463,7 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
     // 2. Pages
     { title: 'Pages', value: item.pages, Icon: Icons.Pages },
     // 3. Page Range
-    { title: 'Range', value: spec.pageRange?.toLowerCase() === 'all' || !spec.pageRange ? 'All' : spec.pageRange, Icon: Icons.Range },
+    { title: 'Range', value: formatRange(spec.pageRange, item.pages), Icon: Icons.Range },
     // 4. Copies
     { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
     // 5. Single or Double side
@@ -553,19 +593,24 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
             <div className="cart-edit-field">
               <label htmlFor={`edit-range-${item.id}`}>
                 Page Range
-                <span className="cart-field-tip" title='e.g. "All", "1-5", "1,3,7-9"'><Icons.Info /></span>
+                <span className="cart-field-tip" title='e.g. "1-5", "1,3,7-9"'><Icons.Info /></span>
               </label>
               <input
                 id={`edit-range-${item.id}`}
                 type="text"
-                className="cart-input"
-                value={spec.pageRange === 'all' ? 'All' : spec.pageRange}
+                className={`cart-input${rangeError ? ' cart-input--error' : ''}`}
+                value={spec.pageRange ?? ''}
                 onChange={(e) => {
-                  const val = e.target.value;
-                  set('pageRange', val === 'all' ? 'All' : val);
+                  set('pageRange', e.target.value);
                 }}
-                placeholder="e.g. All, (1,2,3 & 1-10)"
+                placeholder={`e.g. ${item.pages > 1 ? `1-${item.pages}` : '1'}`}
               />
+              {rangeError && (
+                <div className="cart-field-error">
+                  <Icons.Warning />
+                  <span>{rangeError}</span>
+                </div>
+              )}
             </div>
 
             {/* 3rd: Paper Size */}

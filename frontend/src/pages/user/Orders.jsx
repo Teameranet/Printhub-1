@@ -754,7 +754,11 @@ const Orders = () => {
                                         <span className="ocb-setting-icon"><RangeIcon /></span>
                                         <span className="ocb-setting-label">Range</span>
                                       </div>
-                                      <span className="ocb-setting-value">{file.pageRange || 'All'}</span>
+                                      <span className="ocb-setting-value">
+                                        {(!file.pageRange || file.pageRange.toLowerCase() === 'all')
+                                          ? (Number(file.pages) > 1 ? `1-${file.pages}` : '1')
+                                          : file.pageRange}
+                                      </span>
                                     </div>
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">

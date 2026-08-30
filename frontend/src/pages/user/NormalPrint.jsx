@@ -106,6 +106,38 @@ const PRICING = {
   doubleSideMulti: 0.8,
 };
 
+function getPageRangeError(range, totalPages) {
+  if (!range || range.trim() === '' || range.trim().toLowerCase() === 'all') {
+    return null;
+  }
+  const parts = range.split(',');
+  for (let part of parts) {
+    const t = part.trim();
+    if (!t) continue;
+    if (t.includes('-')) {
+      const sides = t.split('-');
+      if (sides.length !== 2) return 'Invalid format. Use e.g. 1-5 or 1,3,5';
+      const [aStr, bStr] = sides;
+      const a = Number(aStr.trim());
+      const b = Number(bStr.trim());
+      if (isNaN(a) || isNaN(b)) return 'Invalid page numbers in range';
+      if (a < 1 || b < 1) return 'Page numbers must start from 1';
+      if (a > b) return `Invalid range: ${a} cannot exceed ${b}`;
+      if (a > totalPages || b > totalPages) {
+        return `Range exceeds document (${totalPages} page${totalPages !== 1 ? 's' : ''} available)`;
+      }
+    } else {
+      const n = Number(t);
+      if (isNaN(n)) return 'Invalid page number. Use numbers like 1, 2, 1-5';
+      if (n < 1) return 'Page numbers must start from 1';
+      if (n > totalPages) {
+        return `Page ${n} exceeds document (${totalPages} page${totalPages !== 1 ? 's' : ''} available)`;
+      }
+    }
+  }
+  return null;
+}
+
 function parsePageRange(range, totalPages) {
   if (!range || range.trim().toLowerCase() === 'all') return totalPages;
   let count = 0;
@@ -256,6 +288,7 @@ function PreviewModal({ file, onClose }) {
 function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
   const spec = file.spec;
   const cost = calcCost(spec, file.pages);
+  const rangeError = getPageRangeError(spec.pageRange, file.pages);
   const { Icon, color, bg, label } = getFileIcon(file.name);
   const set = (k, v) => onChange(file.id, { ...spec, [k]: v });
 
@@ -350,16 +383,22 @@ function FileSpecCard({ file, onChange, onRemove, onPreview, index }) {
         <div className="np-field">
           <label htmlFor={`range-${file.id}`}>
             Page Range
-            <span className="np-field-tip" title='e.g. "all", "1-5", "1,3,7-9"'><Icons.Info /></span>
+            <span className="np-field-tip" title='e.g. "1-5", "1,3,7-9"'><Icons.Info /></span>
           </label>
           <input
             id={`range-${file.id}`}
             type="text"
-            className="np-input"
-            value={spec.pageRange}
+            className={`np-input${rangeError ? ' np-input--error' : ''}`}
+            value={spec.pageRange ?? ''}
             onChange={e => set('pageRange', e.target.value)}
-            placeholder='e.g. All, (1,2,3 & 1-10)'
+            placeholder={`e.g. ${file.pages > 1 ? `1-${file.pages}` : '1'}`}
           />
+          {rangeError && (
+            <div className="np-field-error">
+              <Icons.Warning />
+              <span>{rangeError}</span>
+            </div>
+          )}
         </div>
 
         {/* 3rd: Paper Size */}
@@ -471,13 +510,17 @@ export default function NormalPrint() {
       if (!SUPPORTED_EXTS.includes(ext)) { errs.push(`"${f.name}" — unsupported file type.`); return; }
       if (running + sizeMB > MAX_TOTAL_MB) { errs.push(`"${f.name}" exceeds the 500 MB total limit.`); return; }
       running += sizeMB;
+      const estimated = estimatePages(f);
       valid.push({
         id: idCounter.current++,
         name: f.name,
-        pages: estimatePages(f),
+        pages: estimated,
         fileObj: f,
         previewUrl: isPreviewable(f.name) ? URL.createObjectURL(f) : null,
-        spec: { ...DEFAULT_SPEC },
+        spec: {
+          ...DEFAULT_SPEC,
+          pageRange: estimated > 1 ? `1-${estimated}` : '1',
+        },
       });
     });
 
