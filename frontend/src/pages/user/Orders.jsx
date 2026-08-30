@@ -634,7 +634,7 @@ const Orders = () => {
                           <span>{orderDate} · {orderTime}</span>
                         </div>
                       </div>
-
+                      <span className={`order-status ${statusConf.cls} order-eta--mobile`}>{statusConf.label}</span>
                     </div>
 
                     {/* Center: files preview */}
@@ -651,7 +651,7 @@ const Orders = () => {
 
                     {/* Right: amount + status */}
                     <div className="order-card-right">
-                      <span className={`order-status ${statusConf.cls}`}>{statusConf.label}</span>
+                      <span className={`order-status ${statusConf.cls} order-eta--desktop`}>{statusConf.label}</span>
                       <div className="order-amount">₹{order.amount}</div>
 
                       <span className={`order-chevron${isExpanded ? ' order-chevron--open' : ''}`}>
