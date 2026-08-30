@@ -17,8 +17,6 @@ import ServiceDetail from './pages/user/ServiceDetail';
 /* Admin pages */
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminProducts from './pages/admin/AdminProducts';
-import AdminUsers from './pages/admin/AdminUsers';
 
 import './App.css';
 import { Suspense } from 'react';
@@ -53,10 +51,6 @@ const AppLayout = () => {
             <Route path="/adminuser/login"     element={<AdminLogin />} />
             <Route path="/adminuser/dashboard" element={<AdminDashboard />} />
             <Route path="/adminuser/dashboard/:section" element={<AdminDashboard />} />
-
-            {/* Legacy admin routes kept for backwards compatibility */}
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route path="/admin/users"    element={<AdminUsers />} />
           </Routes>
         </Suspense>
       </main>
