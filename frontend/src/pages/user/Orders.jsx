@@ -735,6 +735,7 @@ const Orders = () => {
                                 {/* File print settings */}
                                 <div className="ocb-file-settings">
                                   <div className="ocb-settings-grid">
+                                    {/* Row 1: Size & Color */}
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">
                                         <span className="ocb-setting-icon"><PaperIcon /></span>
@@ -744,11 +745,29 @@ const Orders = () => {
                                     </div>
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><ColorIcon /></span>
+                                        <span className="ocb-setting-label">Color</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.color === 'color' || file.color === 'Color' || file.color === true ? 'Color' : 'Black & White'}</span>
+                                    </div>
+
+                                    {/* Row 2: Pages & Sides */}
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
                                         <span className="ocb-setting-icon"><PagesIcon /></span>
                                         <span className="ocb-setting-label">Pages</span>
                                       </div>
                                       <span className="ocb-setting-value">{file.pages}</span>
                                     </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><SidesIcon /></span>
+                                        <span className="ocb-setting-label">Sides</span>
+                                      </div>
+                                      <span className="ocb-setting-value">{file.sides?.toLowerCase().includes('double') ? 'Double-Sided' : (file.sides?.toLowerCase().includes('single') ? 'Single-Sided' : (file.sides || 'Double-Sided'))}</span>
+                                    </div>
+
+                                    {/* Row 3: Range & Binding */}
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">
                                         <span className="ocb-setting-icon"><RangeIcon /></span>
@@ -762,49 +781,27 @@ const Orders = () => {
                                     </div>
                                     <div className="ocb-setting">
                                       <div className="ocb-setting-left">
-                                        <span className="ocb-setting-icon"><CopyIcon /></span>
-                                        <span className="ocb-setting-label">Copies</span>
-                                      </div>
-                                      <span className="ocb-setting-value">{file.copies}</span>
-                                    </div>
-                                    <div className="ocb-setting">
-                                      <div className="ocb-setting-left">
-                                        <span className="ocb-setting-icon"><ColorIcon /></span>
-                                        <span className="ocb-setting-label">Color</span>
-                                      </div>
-                                      <span className="ocb-setting-value">{file.color ? 'Color' : 'B&W'}</span>
-                                    </div>
-                                    <div className="ocb-setting">
-                                      <div className="ocb-setting-left">
-                                        <span className="ocb-setting-icon"><SidesIcon /></span>
-                                        <span className="ocb-setting-label">Sides</span>
-                                      </div>
-                                      <span className="ocb-setting-value">{file.sides || 'Double'}</span>
-                                    </div>
-                                    <div className="ocb-setting">
-                                      <div className="ocb-setting-left">
                                         <span className="ocb-setting-icon"><BindingIcon /></span>
                                         <span className="ocb-setting-label">Binding</span>
                                       </div>
                                       <span className="ocb-setting-value">{file.binding || 'None'}</span>
                                     </div>
-                                    {file.lamination && file.lamination !== 'None' ? (
-                                      <div className="ocb-setting">
-                                        <div className="ocb-setting-left">
-                                          <span className="ocb-setting-icon"><LaminationIcon /></span>
-                                          <span className="ocb-setting-label">Lamination</span>
-                                        </div>
-                                        <span className="ocb-setting-value">Yes</span>
+
+                                    {/* Row 4: Copies & Lamination */}
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><CopyIcon /></span>
+                                        <span className="ocb-setting-label">Copies</span>
                                       </div>
-                                    ) : (
-                                      <div className="ocb-setting">
-                                        <div className="ocb-setting-left">
-                                          <span className="ocb-setting-icon"><LaminationIcon /></span>
-                                          <span className="ocb-setting-label">Lamination</span>
-                                        </div>
-                                        <span className="ocb-setting-value">None</span>
+                                      <span className="ocb-setting-value">{file.copies || 1}</span>
+                                    </div>
+                                    <div className="ocb-setting">
+                                      <div className="ocb-setting-left">
+                                        <span className="ocb-setting-icon"><LaminationIcon /></span>
+                                        <span className="ocb-setting-label">Lamination</span>
                                       </div>
-                                    )}
+                                      <span className="ocb-setting-value">{file.lamination && file.lamination !== 'None' ? (file.lamination === 'Yes' ? 'Yes' : file.lamination) : 'None'}</span>
+                                    </div>
                                   </div>
                                   <div className="cart-item-total">
                                     <span className="cart-item-total-label">Subtotal</span>

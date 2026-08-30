@@ -461,7 +461,8 @@
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   color: var(--text);
-  font-size: 13.5px;
+  font-size: 14px;
+  font-weight: 500;
   font-family: var(--font-body);
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
@@ -565,9 +566,9 @@
   border: none;
   text-align: center;
   color: var(--text);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   outline: none;
   appearance: textfield;
   -moz-appearance: textfield;

@@ -528,7 +528,7 @@
 
 /* ── Individual File Card ───────────────────────────── */
 .ocb-file-card {
-  background: var(--bg-elev-2);
+  background: var(--bg-elev-1);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -546,7 +546,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 14px 10px;
+  padding: 14px 16px;
+  background: var(--bg-elev-1);
   border-bottom: 1px solid var(--divider);
 }
 
@@ -744,7 +745,8 @@
   margin-bottom: -14px;
   margin-top: 10px;
   width: calc(100% + 32px);
-  padding: 12px 16px;
+  padding: 14px 20px;
+  background: linear-gradient(90deg, var(--bg-elev-2), var(--bg-elev-1));
   border-top: 1px solid var(--divider, rgba(20, 14, 36, 0.08));
   box-sizing: border-box;
 }

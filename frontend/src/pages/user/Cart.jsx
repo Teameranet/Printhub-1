@@ -458,21 +458,18 @@ function CartItemCard({ item, index, onUpdateCopies, onUpdateSpec, onRemove, onP
   };
 
   const specTags = [
-    // 1. Page Size
+    // Row 1: Size & Color
     { title: 'Size', value: spec.paperSize, Icon: Icons.Paper },
-    // 2. Pages
+    { title: 'Color', value: spec.color === 'color' ? 'Color' : 'Black & White', Icon: Icons.Palette },
+    // Row 2: Pages & Sides
     { title: 'Pages', value: item.pages, Icon: Icons.Pages },
-    // 3. Page Range
+    { title: 'Sides', value: spec.sides === 'double' ? 'Double-Sided' : 'Single-Sided', Icon: Icons.Layers },
+    // Row 3: Range & Binding
     { title: 'Range', value: formatRange(spec.pageRange, item.pages), Icon: Icons.Range },
-    // 4. Copies
-    { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
-    // 5. Single or Double side
-    { title: 'Sides', value: spec.sides === 'double' ? 'Double' : 'Single', Icon: Icons.Layers },
-    // 6. Colour
-    { title: 'Color', value: spec.color === 'color' ? 'Color' : 'B&W', Icon: Icons.Palette },
-    // 7. Binding & Lamination
     { title: 'Binding', value: spec.binding || 'None', Icon: Icons.Book },
-    { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' ? 'Yes' : 'None', Icon: Icons.Sparkles },
+    // Row 4: Copies & Lamination
+    { title: 'Copies', value: spec.copies || 1, Icon: Icons.Copy },
+    { title: 'Lamination', value: spec.lamination && spec.lamination !== 'None' ? (spec.lamination === 'Yes' ? 'Yes' : spec.lamination) : 'None', Icon: Icons.Sparkles },
   ];
 
   const set = (k, v) => onUpdateSpec(item.id, { ...spec, [k]: v });
