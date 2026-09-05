@@ -449,6 +449,7 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Display a list of all orders, including order details, user information, and payment status.
 - Allow admin to view order details, including multiple document details with specifications, and total price (INR).
 - Enable admin to manage orders, including updating order status, processing payments, and canceling orders.
+  - Allow to download uploaded documents.
   - Order cancellation reason field.
   - Allow admin to cancel the order refund the payment.
 - Display a success message after the order status is updated or the payment is processed.
