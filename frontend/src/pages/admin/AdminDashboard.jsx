@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import AdminManagementSection from './AdminManagement';
+import UserManagementSection from './UserManagement';
 import './AdminDashboard.css';
 
 /* ─── Icons ──────────────────────────────────────────────────── */
@@ -258,7 +259,7 @@ const OverviewSection = ({ admin }) => {
 const SECTION_MAP = {
   'overview':     (admin) => <OverviewSection admin={admin} />,
   'admins':       () => <AdminManagementSection />,
-  'users':        () => <PlaceholderSection title="User Management"          description="View, edit and manage all registered users." />,
+  'users':        () => <UserManagementSection />,
   'orders':       () => <PlaceholderSection title="Order Management"         description="Track and process customer print orders." />,
   'normal-print': () => <PlaceholderSection title="Normal Print Management"  description="Configure and manage normal print jobs." />,
   'services':     () => <PlaceholderSection title="Service Management"       description="Add, edit and remove printing services." />,
