@@ -437,13 +437,13 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 
 ## Admin User Management
 - Display a list of all registered users.
-- Allow admin to view user details, including registration information, login history, and order history.
-- Enable admin to manage user accounts, including deleting inactive users.
-- Super Admin User Management: Allow to add admin users, delete, and update manage by super admin users.
-  - Display a list of all super admin users.
-  - Allow admin to view super admin details, including registration information, login history, and order history.
-  - Enable admin to manage super admin accounts, including deleting inactive super admin users.
-  - Add any additional fields as per super admin user details page set by admin user & set user Privileges as per admin user.
+- Allow admin to view user details USER , ORDERS ,SPENT , CREATED ,STATUS,ACTIONS BUTTON like View,Edit & Delete .
+  - View user details, including registration information, user type , account type, and order history Include all order details.
+  - Edit user details, including registration information, user type.
+  - Delete user account.
+  - Enable admin to manage user accounts, including deleting inactive users.
+
+ 
 
 ## Admin Order Management
 - Display a list of all orders, including order details, user information, and payment status.
@@ -456,8 +456,6 @@ Design a responsive homepage using the provided **Printhub\_logo.png**.
 - Search feature to find specific orders.
 - Sorting feature to sort orders by order ID, user ID, or payment status.
 - Pagination for large lists.
-- Display a summary of total orders, total users, and total revenue (INR).
-- Update the summary in real-time as orders are processed.
 - Display a summary of total orders, total users, and total revenue (INR).
 - Update the summary in real-time as orders are processed.
 - Invoice Generation Allow Admin to download invoices of the order details in PDF format.
