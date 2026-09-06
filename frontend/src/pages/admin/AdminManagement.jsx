@@ -23,7 +23,21 @@ const UnlockIcon = () => <Ic d={["M8 11V7a4 4 0 0 1 8 0", "M5 11h14v11H5z", "M12
 const CloseIcon = () => <Ic d={["M18 6 6 18", "M6 6l12 12"]} />;
 const UserIcon = ({ size = 14 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="7" r="4" />
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
+const AdminIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <circle cx="19" cy="11" r="2"/>
+    <path d="M19 8v1"/>
+    <path d="M19 13v1"/>
+    <path d="m21.6 9.5-.87.5"/>
+    <path d="m17.27 12-.87.5"/>
+    <path d="m21.6 12.5-.87-.5"/>
+    <path d="m17.27 10-.87-.5"/>
   </svg>
 );
 const MailIcon = () => <Ic d={["M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z", "M22 6l-10 7L2 6"]} />;
@@ -166,13 +180,13 @@ const StatsRow = ({ admins }) => {
   const total = admins.length;
   const active = admins.filter(a => a.status === 'active').length;
   const superAdms = admins.filter(a => a.role === 'super_admin').length;
-  const sessions = admins.filter(a => a.sessionActive).length;
+  const inactive = admins.filter(a => a.status === 'inactive').length;
 
   const stats = [
-    { label: 'Total Admins', value: total, color: '#6366f1', bg: 'rgba(99, 102, 241, 0.1)', border: 'rgba(99, 102, 241, 0.25)', icon: <UsersIcon /> },
-    { label: 'Active Accounts', value: active, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.1)', border: 'rgba(22, 163, 74, 0.25)', icon: <CheckCircleIcon /> },
-    { label: 'Super Admins', value: superAdms, color: '#c97a0b', bg: 'rgba(201, 122, 11, 0.1)', border: 'rgba(201, 122, 11, 0.25)', icon: <ShieldIcon /> },
-    { label: 'Live Sessions', value: sessions, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.1)', border: 'rgba(37, 99, 235, 0.25)', icon: <KeyIcon /> },
+    { label: 'Total Admins', value: total, color: 'var(--primary)', bg: 'var(--primary-soft)', border: 'var(--primary-border)', icon: <AdminIcon /> },
+    { label: 'Super Admins', value: superAdms, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.10)', border: 'rgba(37, 99, 235, 0.25)', icon: <ShieldIcon /> },
+    { label: 'Active Accounts', value: active, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.10)', border: 'rgba(22, 163, 74, 0.25)', icon: <CheckCircleIcon /> },
+    { label: 'Inactive Accounts', value: inactive, color: '#dc2626', bg: 'rgba(220, 38, 38, 0.09)', border: 'rgba(220, 38, 38, 0.22)', icon: <BanIcon /> },
   ];
 
   return (
