@@ -16,11 +16,11 @@ const Ic = ({ d, size = 18, ...rest }) => (
 const SearchIcon = () => <Ic d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />;
 const SlidersIcon = () => <Ic d={["M4 21v-7", "M4 10V3", "M12 21v-9", "M12 8V3", "M20 21v-5", "M20 12V3", "M1 14h6", "M9 8h6", "M17 16h6"]} />;
 const PlusIcon = () => <Ic d="M12 5v14M5 12h14" />;
-const EditIcon = () => <Ic d={["M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"]} />;
-const TrashIcon = () => <Ic d={["M3 6h18", "M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6", "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"]} />;
-const BanIcon = () => <Ic d={["M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z", "M12 9v4", "M12 17h.01"]} />;
-const UnlockIcon = () => <Ic d={["M8 11V7a4 4 0 0 1 8 0", "M5 11h14v11H5z", "M12 16v2"]} />;
-const CloseIcon = () => <Ic d={["M18 6 6 18", "M6 6l12 12"]} />;
+const EditIcon = ({ size = 16 }) => <Ic d={["M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"]} size={size} />;
+const TrashIcon = ({ size = 16 }) => <Ic d={["M3 6h18", "M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6", "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"]} size={size} />;
+const BanIcon = ({ size = 16 }) => <Ic d={["M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z", "M12 9v4", "M12 17h.01"]} size={size} />;
+const UnlockIcon = ({ size = 16 }) => <Ic d={["M8 11V7a4 4 0 0 1 8 0", "M5 11h14v11H5z", "M12 16v2"]} size={size} />;
+const CloseIcon = ({ size = 18 }) => <Ic d={["M18 6 6 18", "M6 6l12 12"]} size={size} />;
 const UserIcon = ({ size = 14 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -29,15 +29,15 @@ const UserIcon = ({ size = 14 }) => (
 );
 const AdminIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-    <circle cx="9" cy="7" r="4"/>
-    <circle cx="19" cy="11" r="2"/>
-    <path d="M19 8v1"/>
-    <path d="M19 13v1"/>
-    <path d="m21.6 9.5-.87.5"/>
-    <path d="m17.27 12-.87.5"/>
-    <path d="m21.6 12.5-.87-.5"/>
-    <path d="m17.27 10-.87-.5"/>
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <circle cx="19" cy="11" r="2" />
+    <path d="M19 8v1" />
+    <path d="M19 13v1" />
+    <path d="m21.6 9.5-.87.5" />
+    <path d="m17.27 12-.87.5" />
+    <path d="m21.6 12.5-.87-.5" />
+    <path d="m17.27 10-.87-.5" />
   </svg>
 );
 const MailIcon = () => <Ic d={["M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z", "M22 6l-10 7L2 6"]} />;
@@ -70,7 +70,7 @@ const MODULE_ICONS = {
    CONSTANTS & HELPERS
    ================================================================ */
 
-const STATUSES = ['active', 'inactive', 'suspended'];
+const STATUSES = ['active', 'inactive'];
 
 const PERMISSION_MODULES = [
   { id: 'orders', label: 'Orders & Refunds', desc: 'Process customer print orders, cancellations, and refunds' },
@@ -120,7 +120,7 @@ const SEED_ADMINS = [
   { id: 'admin_1', name: 'PrintHub', email: 'printhub@gmail.com', password: 'Admin@Password123', role: 'super_admin', status: 'active', createdAt: '2024-01-10T09:00:00Z', lastLogin: '2026-07-25T08:32:00Z', sessionActive: true },
   { id: 'admin_2', name: 'Riya Sharma', email: 'riya@printhub.in', password: 'Riya@Password123', role: 'admin', status: 'active', createdAt: '2024-03-15T11:20:00Z', lastLogin: '2026-07-24T14:10:00Z', sessionActive: true },
   { id: 'admin_3', name: 'Arjun Nair', email: 'arjun@printhub.in', password: 'Arjun@Password123', role: 'admin', status: 'inactive', createdAt: '2024-05-02T08:00:00Z', lastLogin: '2026-06-30T10:05:00Z', sessionActive: false },
-  { id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in', password: 'Priya@Password123', role: 'admin', status: 'suspended', createdAt: '2024-07-20T14:45:00Z', lastLogin: '2026-07-01T09:00:00Z', sessionActive: false },
+  { id: 'admin_4', name: 'Priya Menon', email: 'priya@printhub.in', password: 'Priya@Password123', role: 'admin', status: 'inactive', createdAt: '2024-07-20T14:45:00Z', lastLogin: '2026-07-01T09:00:00Z', sessionActive: false },
 ];
 
 const SEED_AUDIT = [
@@ -237,11 +237,12 @@ const StatusBadge = ({ status }) => {
   const map = {
     active: 'am-badge--active',
     inactive: 'am-badge--inactive',
-    suspended: 'am-badge--suspended',
+    suspended: 'am-badge--inactive',
   };
+  const label = (status === 'inactive' || status === 'suspended') ? 'Inactive' : (status.charAt(0).toUpperCase() + status.slice(1));
   return (
-    <span className={`am-badge ${map[status] || ''}`}>
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+    <span className={`am-badge ${map[status] || 'am-badge--inactive'}`}>
+      {label}
     </span>
   );
 };
@@ -424,10 +425,9 @@ const AdminFormModal = ({ mode, target, onClose, onSave, isSaving, roles = [] })
               <div className="am-field">
                 <label className="am-label" htmlFor="amf-status">Status <span>*</span></label>
                 <select id="amf-status" className="am-select"
-                  value={form.status} onChange={e => set('status', e.target.value)}>
+                  value={form.status === 'suspended' ? 'inactive' : form.status} onChange={e => set('status', e.target.value)}>
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
-                  <option value="suspended">Suspended</option>
                 </select>
               </div>
             </div>
@@ -591,7 +591,7 @@ const ManageRolesModal = ({ admins, roles, onClose, onCreateRole, onUpdateRole, 
   const [newRolePerms, setNewRolePerms] = useState({});
   const [createError, setCreateError] = useState('');
 
-  /* Edit custom role state in Manage Role Privileges */
+  /* Edit custom role state */
   const customRoles = useMemo(() => roles.filter(r => !r.builtin), [roles]);
   const [selectedEditRoleId, setSelectedEditRoleId] = useState(() => {
     const firstCustom = roles.find(r => !r.builtin);
@@ -794,10 +794,6 @@ const ManageRolesModal = ({ admins, roles, onClose, onCreateRole, onUpdateRole, 
             <button type="button" className={`am-role-tab${activeTab === 'matrix' ? ' am-role-tab--active' : ''}`}
               onClick={() => setActiveTab('matrix')}>
               <ShieldIcon /> Role Matrix ({roles.length})
-            </button>
-            <button type="button" className={`am-role-tab${activeTab === 'custom_role' ? ' am-role-tab--active' : ''}`}
-              onClick={() => setActiveTab('custom_role')}>
-              <ShieldIcon /> Manage Role Privileges ({customRoles.length})
             </button>
             <button type="button" className={`am-role-tab am-role-tab--create${activeTab === 'create' ? ' am-role-tab--create-active' : ''}`}
               onClick={() => setActiveTab('create')}>
@@ -1162,6 +1158,9 @@ const ManageRolesModal = ({ admins, roles, onClose, onCreateRole, onUpdateRole, 
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
+                    <button type="button" className="am-btn am-btn--ghost" onClick={() => setActiveTab('matrix')} disabled={isBusy}>
+                      Cancel
+                    </button>
                     <button type="button" className="am-btn am-btn--ghost" onClick={handleResetEditRole} disabled={isBusy}>
                       Reset Changes
                     </button>
@@ -1203,21 +1202,21 @@ const ConfirmModal = ({ type, target, onClose, onConfirm, isBusy }) => {
 
   const cfg = {
     delete: {
-      icon: <TrashIcon />, iconCls: 'am-modal-icon--danger',
+      icon: <TrashIcon size={20} />, iconCls: 'am-modal-icon--danger',
       title: 'Delete Admin Account',
       subtitle: 'This action cannot be undone.',
       btnCls: 'am-btn--danger', btnLabel: 'Delete Account',
-      warning: '⚠ All active sessions will be revoked immediately. The admin will lose all access.',
+      warning: 'All active sessions will be revoked immediately. The admin will lose all access.',
     },
     suspend: {
-      icon: <BanIcon />, iconCls: 'am-modal-icon--warn',
-      title: 'Suspend Admin Account',
-      subtitle: 'The admin will be locked out.',
-      btnCls: 'am-btn--warn', btnLabel: 'Suspend Account',
-      warning: '⚠ Any active sessions for this account will be terminated upon suspension.',
+      icon: <BanIcon size={20} />, iconCls: 'am-modal-icon--warn',
+      title: 'Deactivate Admin Account',
+      subtitle: 'The admin will be set to inactive.',
+      btnCls: 'am-btn--warn', btnLabel: 'Deactivate Account',
+      warning: 'Any active sessions for this account will be terminated upon deactivation.',
     },
     restore: {
-      icon: <UnlockIcon />, iconCls: 'am-modal-icon--primary',
+      icon: <UnlockIcon size={20} />, iconCls: 'am-modal-icon--primary',
       title: 'Restore Admin Account',
       subtitle: 'The admin will regain access.',
       btnCls: 'am-btn--primary', btnLabel: 'Restore Account',
@@ -1320,10 +1319,10 @@ const AdminManagementSection = () => {
   const isSuperAdmin = currentAdmin?.role === 'super_admin';
 
   /* ── Toast helper ─────────────────────────────────────── */
-  const showToast = useCallback((type, msg) => {
+  const showToast = useCallback((type, msg, title) => {
     clearTimeout(toastTimer.current);
-    setToast({ type, msg });
-    toastTimer.current = setTimeout(() => setToast(null), 4000);
+    setToast({ type, msg, title });
+    toastTimer.current = setTimeout(() => setToast(null), 5000);
   }, []);
 
   /* ── Audit helper ─────────────────────────────────────── */
@@ -1388,11 +1387,11 @@ const AdminManagementSection = () => {
         };
         setAdmins(p => [newAdmin, ...p]);
         addAudit('create', `Created admin account <strong>${data.name}</strong>`);
-        showToast('success', `Admin "${data.name}" created successfully.`);
+        showToast('success', `Admin "${data.name}" created successfully.`, 'Account Created Successfully');
       } else {
         setAdmins(p => p.map(a => a.id === modal.target.id ? { ...a, ...data } : a));
         addAudit('update', `Updated account <strong>${data.name}</strong> — role: ${data.role}, status: ${data.status}`);
-        showToast('success', `Admin "${data.name}" updated successfully.`);
+        showToast('success', `Admin "${data.name}" updated successfully.`, 'Account Updated Successfully');
       }
       setIsBusy(false);
       setModal(null);
@@ -1407,7 +1406,7 @@ const AdminManagementSection = () => {
       setAdmins(p => p.filter(a => a.id !== t.id));
       addAudit('delete',
         `Deleted admin account <strong>${t.name}</strong>${t.sessionActive ? ' — active session revoked' : ''}`);
-      showToast('success', `Admin "${t.name}" deleted. ${t.sessionActive ? 'Session revoked.' : ''}`);
+      showToast('success', `Admin "${t.name}" permanently deleted.${t.sessionActive ? ' Active session revoked.' : ''}`, 'Account Deleted Successfully');
       setIsBusy(false);
       setModal(null);
     }, 700);
@@ -1418,11 +1417,11 @@ const AdminManagementSection = () => {
     setTimeout(() => {
       const t = modal.target;
       setAdmins(p => p.map(a =>
-        a.id === t.id ? { ...a, status: 'suspended', sessionActive: false } : a
+        a.id === t.id ? { ...a, status: 'inactive', sessionActive: false } : a
       ));
       addAudit('suspend',
-        `Suspended account <strong>${t.name}</strong>${t.sessionActive ? ' — active session terminated' : ''}`);
-      showToast('warn', `Admin "${t.name}" suspended. ${t.sessionActive ? 'Session terminated.' : ''}`);
+        `Deactivated account <strong>${t.name}</strong>${t.sessionActive ? ' — active session terminated' : ''}`);
+      showToast('warn', `Admin "${t.name}" set to inactive.${t.sessionActive ? ' Session terminated.' : ''}`, 'Account Deactivated');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -1436,7 +1435,7 @@ const AdminManagementSection = () => {
         a.id === t.id ? { ...a, status: 'active' } : a
       ));
       addAudit('restore', `Restored account <strong>${t.name}</strong> → active`);
-      showToast('success', `Admin "${t.name}" restored to active.`);
+      showToast('success', `Admin "${t.name}" restored to active.`, 'Account Restored Successfully');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -1447,7 +1446,7 @@ const AdminManagementSection = () => {
     setTimeout(() => {
       setAdmins(p => p.map(a => a.id === target.id ? { ...a, role: newRole } : a));
       addAudit('update', `Updated role for <strong>${target.name}</strong> → ${newRole === 'super_admin' ? 'Super Admin' : 'Admin'}`);
-      showToast('success', `Role for "${target.name}" updated to ${newRole === 'super_admin' ? 'Super Admin' : 'Admin'}.`);
+      showToast('success', `Role for "${target.name}" updated to ${newRole === 'super_admin' ? 'Super Admin' : 'Admin'}.`, 'Role Updated Successfully');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -1458,7 +1457,7 @@ const AdminManagementSection = () => {
     setTimeout(() => {
       setRoles(p => [...p, newRole]);
       addAudit('create', `Created custom role model <strong>${newRole.name}</strong>`);
-      showToast('success', `Role "${newRole.name}" created successfully.`);
+      showToast('success', `Role "${newRole.name}" created successfully.`, 'Role Created Successfully');
       setIsBusy(false);
     }, 500);
   }, [addAudit, showToast]);
@@ -1468,7 +1467,7 @@ const AdminManagementSection = () => {
     setTimeout(() => {
       setRoles(prev => prev.map(r => r.id === updatedRole.id ? { ...r, ...updatedRole } : r));
       addAudit('update', `Updated custom role model <strong>${updatedRole.name}</strong> privileges and info`);
-      showToast('success', `Custom role "${updatedRole.name}" updated successfully.`);
+      showToast('success', `Custom role "${updatedRole.name}" updated successfully.`, 'Role Updated Successfully');
       setIsBusy(false);
     }, 500);
   }, [addAudit, showToast]);
@@ -1480,7 +1479,7 @@ const AdminManagementSection = () => {
       setAdmins(prev => prev.map(a => a.role === roleToDelete.id ? { ...a, role: 'admin', sessionActive: false } : a));
       setRoles(prev => prev.filter(r => r.id !== roleToDelete.id));
       addAudit('delete', `Deleted custom role model <strong>${roleToDelete.name}</strong>`);
-      showToast('warn', `Role "${roleToDelete.name}" deleted. Assigned users reverted to Admin.`);
+      showToast('warn', `Role "${roleToDelete.name}" deleted. Assigned users reverted to Admin.`, 'Role Deleted');
       setIsBusy(false);
     }, 500);
   }, [addAudit, showToast]);
@@ -1495,7 +1494,7 @@ const AdminManagementSection = () => {
       ));
       const rName = roles.find(r => r.id === assignedRole)?.name || assignedRole;
       addAudit('update', `Updated privileges & role for <strong>${target.name}</strong> → ${rName}`);
-      showToast('success', `Privileges updated for "${target.name}". Active session revoked.`);
+      showToast('success', `Privileges updated for "${target.name}". Active session revoked.`, 'Privileges Updated');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -1555,13 +1554,21 @@ const AdminManagementSection = () => {
         </span>
       </div>
 
-      {/* Toast */}
+      {/* Toast Notification (NP Page Success Toast Style) */}
       {toast && (
-        <div className={`am-toast am-toast--${toast.type}`} role="status" aria-live="polite">
-          {toast.type === 'success' && <CheckCircleIcon />}
-          {toast.type === 'error' && <AlertTriIcon />}
-          {toast.type === 'warn' && <AlertTriIcon />}
-          <span>{toast.msg}</span>
+        <div className={`am-toast am-toast--${toast.type}`} role="alert" aria-live="polite">
+          <div className="am-toast-icon">
+            {toast.type === 'success' && <CheckCircleIcon />}
+            {toast.type === 'error' && <AlertTriIcon />}
+            {toast.type === 'warn' && <AlertTriIcon />}
+          </div>
+          <div className="am-toast-body">
+            <strong>{toast.title || (toast.type === 'success' ? 'Success' : toast.type === 'warn' ? 'Notice' : 'Error')}</strong>
+            <span>{toast.msg}</span>
+          </div>
+          <button className="am-toast-x" onClick={() => setToast(null)} aria-label="Dismiss">
+            <CloseIcon />
+          </button>
         </div>
       )}
 
@@ -1659,8 +1666,7 @@ const AdminManagementSection = () => {
               {[
                 { val: 'all', label: 'All Status' },
                 { val: 'active', label: 'Active' },
-                { val: 'inactive', label: 'Inactive' },
-                { val: 'suspended', label: 'Suspended' }
+                { val: 'inactive', label: 'Inactive' }
               ].map(s => (
                 <button
                   key={s.val}
@@ -1769,17 +1775,17 @@ const AdminManagementSection = () => {
                       </button>
 
                       {/* Suspend / Restore */}
-                      {canAct(a) && a.status !== 'suspended' && (
+                      {canAct(a) && a.status === 'active' && (
                         <button className="am-icon-btn am-icon-btn--warn"
                           onClick={() => setModal({ type: 'suspend', target: a })}
-                          title="Suspend account" aria-label={`Suspend ${a.name}`}>
+                          title="Deactivate account" aria-label={`Deactivate ${a.name}`}>
                           <BanIcon />
                         </button>
                       )}
-                      {canAct(a) && a.status === 'suspended' && (
+                      {canAct(a) && a.status !== 'active' && (
                         <button className="am-icon-btn"
                           onClick={() => setModal({ type: 'restore', target: a })}
-                          title="Restore account" aria-label={`Restore ${a.name}`}>
+                          title="Activate account" aria-label={`Activate ${a.name}`}>
                           <UnlockIcon />
                         </button>
                       )}
