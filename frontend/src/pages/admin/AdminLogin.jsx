@@ -55,7 +55,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('Printhub@gmail.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
@@ -144,7 +144,7 @@ const AdminLogin = () => {
                 className="al-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@example.com"
+                placeholder="Printhub@gmail.com"
                 autoComplete="email"
                 autoFocus
                 disabled={loading || !!successMsg}
