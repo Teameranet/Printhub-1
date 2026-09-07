@@ -163,13 +163,6 @@ const Settings = () => {
             <ToggleRow id="notif-order"    label="Order Updates"       sub="Status changes for your orders"           checked={notifs.orderUpdates}  onChange={(v) => setNotifs(n => ({ ...n, orderUpdates: v }))} />
             <ToggleRow id="notif-pickup"   label="Ready for Pickup"    sub="Alert when your order is ready"           checked={notifs.readyForPickup} onChange={(v) => setNotifs(n => ({ ...n, readyForPickup: v }))} />
             <ToggleRow id="notif-sms"      label="SMS Notifications"   sub="Receive messages on your mobile"          checked={notifs.sms}           onChange={(v) => setNotifs(n => ({ ...n, sms: v }))} />
-            <ToggleRow id="notif-promos"   label="Promotions & Offers" sub="Deals and special discounts"              checked={notifs.promos}        onChange={(v) => setNotifs(n => ({ ...n, promos: v }))} />
-            <ToggleRow id="notif-news"     label="Newsletter"          sub="Monthly tips and product updates"         checked={notifs.newsletters}   onChange={(v) => setNotifs(n => ({ ...n, newsletters: v }))} />
-            <div className="settings-section-footer">
-              <button className="ph-btn ph-btn--primary ph-btn--sm" onClick={handleSaveNotifs}>
-                <SaveIcon /> Save Preferences
-              </button>
-            </div>
           </SettingsSection>
 
           {/* ── Security ── */}
@@ -233,15 +226,6 @@ const Settings = () => {
               </div>
             </div>
             <div className="settings-section-body">
-              <div className="settings-danger-row">
-                <div>
-                  <div className="settings-field-label">Sign Out of All Devices</div>
-                  <div className="settings-field-sub">This will end all active sessions immediately.</div>
-                </div>
-                <button className="ph-btn ph-btn--danger-outline ph-btn--sm" onClick={logout}>
-                  Sign Out Everywhere
-                </button>
-              </div>
               <div className="settings-danger-row">
                 <div>
                   <div className="settings-field-label">Delete Account</div>

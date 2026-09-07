@@ -196,6 +196,24 @@ const CloseIcon = () => (
     <path d="M18 6 6 18" /><path d="m6 6 12 12" />
   </svg>
 );
+const AlertCircleIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+);
+
+const TruckIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><path d="M15 18H9" /><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><path d="M8 18a2 2 0 1 0-4 0 2 2 0 0 0 4 0z" /><path d="M20 18a2 2 0 1 0-4 0 2 2 0 0 0 4 0z" />
+  </svg>
+);
+const XCircleIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" /><path d="M15 9l-6 6" /><path d="M9 9l6 6" />
+  </svg>
+);
 
 /* ─── Mock Order Data ───────────────────────────────────────── */
 const MOCK_ORDERS = [
@@ -240,12 +258,14 @@ const MOCK_ORDERS = [
     status: 'cancelled',
     type: 'Normal Print',
     fileDetails: [
-      { name: 'report_draft.docx', pages: 12, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '890 KB' },
-      { name: 'appendix_data.ppt', pages: 4, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '210 KB' },
+      { name: 'Assignment_CS101.docx', pages: 12, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '890 KB' },
+      { name: 'Appendix_data.ppt', pages: 4, copies: 2, color: false, binding: 'Staple', lamination: 'None', size: '210 KB' },
       { name: 'cover_letter.docx', pages: 1, copies: 2, color: false, binding: 'None', lamination: 'None', size: '58 KB' },
     ],
     amount: 48,
     eta: null,
+    cancelledAt: '2026-06-20T12:30:00Z',
+    cancellationReason: 'Uploaded wrong files',
   },
   {
     id: 'ORD-2026-005',
@@ -272,11 +292,11 @@ MOCK_ORDERS.forEach(o => {
 });
 
 const STATUS_CONFIG = {
-  delivered: { label: 'Delivered', cls: 'status--success' },
-  processing: { label: 'Processing', cls: 'status--info' },
-  ready: { label: 'Ready for Pickup', cls: 'status--accent' },
-  cancelled: { label: 'Cancelled', cls: 'status--danger' },
-  pending: { label: 'Pending', cls: 'status--muted' },
+  delivered: { label: 'Delivered', cls: 'status--success', icon: <TruckIcon /> },
+  processing: { label: 'Processing', cls: 'status--info', icon: <RefreshIcon /> },
+  ready: { label: 'Ready for Pickup', cls: 'status--accent', icon: <PackageIcon /> },
+  cancelled: { label: 'Cancelled', cls: 'status--danger', icon: <XCircleIcon /> },
+  pending: { label: 'Pending', cls: 'status--muted', icon: <ClockIcon /> },
 };
 /* FILTERS removed */
 /* ─── Orders Page ────────────────────────────────────────────── */
@@ -635,7 +655,7 @@ const Orders = () => {
                         </div>
                       </div>
                       <div className="order-eta--mobile" style={{ alignItems: 'center', gap: '6px' }}>
-                        <span className={`order-status ${statusConf.cls}`}>{statusConf.label}</span>
+                        <span className={`order-status ${statusConf.cls}`}>{statusConf.icon} {statusConf.label}</span>
                         <span className={`order-chevron${isExpanded ? ' order-chevron--open' : ''}`}>
                           <ChevronRightIcon />
                         </span>
@@ -656,7 +676,7 @@ const Orders = () => {
 
                     {/* Right: amount + status */}
                     <div className="order-card-right">
-                      <span className={`order-status ${statusConf.cls} order-eta--desktop`}>{statusConf.label}</span>
+                      <span className={`order-status ${statusConf.cls} order-eta--desktop`}>{statusConf.icon} {statusConf.label}</span>
                       {!isExpanded && <div className="order-amount">₹{order.amount}</div>}
 
                       <span className={`order-chevron order-eta--desktop${isExpanded ? ' order-chevron--open' : ''}`}>
@@ -668,6 +688,36 @@ const Orders = () => {
                   {/* Expanded details */}
                   {isExpanded && (
                     <div className="order-card-body">
+
+                      {/* ── Cancellation Reason Banner (if cancelled) ── */}
+                      {order.status === 'cancelled' && (
+                        <div className="ocb-cancellation-banner fade-up">
+                          <div className="ocb-cancellation-header">
+                            <AlertCircleIcon />
+                            <span className="ocb-cancellation-title">Order Cancelled</span>
+                            {order.cancelledAt && (
+                              <span className="ocb-cancellation-date">
+                                • {new Date(order.cancelledAt).toLocaleDateString('en-IN', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric',
+                                })} at {new Date(order.cancelledAt).toLocaleTimeString('en-IN', {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                })}
+                              </span>
+                            )}
+                          </div>
+                          <div className="ocb-cancellation-body">
+                            <div className="ocb-cancellation-row">
+                              <span className="ocb-cancellation-label">Reason:</span>
+                              <span className="ocb-cancellation-reason">
+                                {order.cancellationReason || order.cancelReason || 'Customer requested cancellation - uploaded wrong files'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
 
                       {/* ── Order Meta Row ── */}
                       <div className="ocb-meta-row fade-up">
@@ -684,7 +734,7 @@ const Orders = () => {
                           <span className="ocb-meta-value">{order.pages}</span>
                         </div>
                         <div className="ocb-meta-item">
-                          <span className="ocb-meta-label">Order Total</span>
+                          <span className="ocb-meta-label"><WalletIcon /> Order Total</span>
                           <span className="ocb-meta-value ocb-meta-value--price">₹{order.amount}</span>
                         </div>
                       </div>

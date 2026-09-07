@@ -430,12 +430,14 @@ function RemoveConfirm({ item, onConfirm, onClose }) {
           <Icons.Trash />
         </div>
         <div className="cart-confirm-title">Remove document?</div>
-        <div className="cart-confirm-desc">
+        <div className="cart-confirm-sub">
           Are you sure you want to remove <strong>{item.name}</strong> from your cart?
         </div>
         <div className="cart-confirm-actions">
           <button className="cart-modal-cancel" onClick={onClose}>Keep File</button>
-          <button className="cart-modal-del" onClick={() => onConfirm(item.id)}>Remove</button>
+          <button className="cart-confirm-remove" onClick={() => onConfirm(item.id)}>
+            <Icons.Trash /> Remove
+          </button>
         </div>
       </div>
     </div>

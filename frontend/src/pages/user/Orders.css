@@ -320,8 +320,9 @@
   background: var(--bg-elev-2);
   border: 1px solid var(--border);
   border-radius: var(--r-full);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -378,10 +379,16 @@
   white-space: nowrap;
 }
 
+.order-status svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 .status--success {
-  background: rgba(22, 163, 74, 0.1);
-  color: var(--success);
-  border: 1px solid rgba(22, 163, 74, 0.22);
+  background: rgba(37, 99, 235, 0.10);
+  color: #2563EB;
+  border: 1px solid rgba(37, 99, 235, 0.28);
 }
 
 .status--info {
@@ -429,6 +436,75 @@
   animation: fadeUp 0.22s ease-out both;
 }
 
+/* ── Cancellation Banner (in order-card-body) ──────────── */
+.ocb-cancellation-banner {
+  margin-top: 20px;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: var(--r-lg, 12px);
+  background: rgba(220, 38, 38, 0.035);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.05);
+}
+
+.ocb-cancellation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: rgba(220, 38, 38, 0.08);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.16);
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--danger);
+  flex-wrap: wrap;
+}
+
+.ocb-cancellation-header svg {
+  width: 17px;
+  height: 17px;
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.ocb-cancellation-title {
+  font-weight: 700;
+}
+
+.ocb-cancellation-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.ocb-cancellation-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ocb-cancellation-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ocb-cancellation-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.ocb-cancellation-reason {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 500;
+  word-break: break-word;
+}
+
 /* ── Order Meta Summary Row ─────────────────────────── */
 .ocb-meta-row {
   display: grid;
@@ -466,8 +542,11 @@
 }
 
 .ocb-meta-label svg {
+  width: 14px;
+  height: 14px;
   color: var(--text-dim, #64748b);
   opacity: 0.85;
+  flex-shrink: 0;
 }
 
 .ocb-meta-value {
@@ -604,14 +683,15 @@
 }
 
 .ocb-file-name {
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 340px;
-  font-family: var(--font-mono);
+  line-height: 1.35;
 }
 
 .ocb-file-size {
@@ -834,6 +914,34 @@
 }
 
 @media (max-width: 480px) {
+  .ocb-cancellation-banner {
+    margin-top: 16px;
+  }
+
+  .ocb-cancellation-header {
+    padding: 10px 14px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .ocb-cancellation-body {
+    padding: 12px 14px;
+  }
+
+  .ocb-cancellation-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .ocb-cancellation-label {
+    min-width: unset;
+  }
+
+  .ocb-cancellation-reason {
+    font-size: 13px;
+  }
+
   .ocb-meta-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
@@ -1533,5 +1641,25 @@
 
   .orders-sort-select {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ocb-cancellation-header {
+    padding: 10px 14px;
+  }
+
+  .ocb-cancellation-body {
+    padding: 12px 14px;
+  }
+
+  .ocb-cancellation-row {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ocb-cancellation-label {
+    min-width: auto;
   }
 }

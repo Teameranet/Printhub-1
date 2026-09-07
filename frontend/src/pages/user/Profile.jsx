@@ -56,15 +56,43 @@ const StarIcon = () => (
   </svg>
 );
 
-const USER_TYPE_LABELS = {
-  regular: 'Regular User',
-  student: 'Student',
-  institute: 'Institute',
+const CheckCircleIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11" />
+  </svg>
+);
+
+const StudentIcon = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+  </svg>
+);
+
+const BuildingIcon = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="2" width="16" height="20" rx="2" />
+    <line x1="9" y1="22" x2="9" y2="18" />
+    <line x1="15" y1="22" x2="15" y2="18" />
+    <line x1="8" y1="6" x2="10" y2="6" />
+    <line x1="14" y1="6" x2="16" y2="6" />
+    <line x1="8" y1="10" x2="10" y2="10" />
+    <line x1="14" y1="10" x2="16" y2="10" />
+  </svg>
+);
+
+const USER_TYPE_META = {
+  regular: { label: 'Regular', Icon: UserIcon },
+  student: { label: 'Student', Icon: StudentIcon },
+  institute: { label: 'Institute', Icon: BuildingIcon },
 };
-const USER_TYPE_COLORS = {
-  regular: 'badge--primary',
-  student: 'badge--accent',
-  institute: 'badge--info',
+
+const getUserTypeMeta = (type) => {
+  const t = (type || 'regular').toLowerCase();
+  if (t.includes('student')) return USER_TYPE_META.student;
+  if (t.includes('institute')) return USER_TYPE_META.institute;
+  return USER_TYPE_META.regular;
 };
 
 /* ─── Profile Page ──────────────────────────────────────────── */
@@ -96,6 +124,14 @@ const Profile = () => {
     ? new Date(user.createdAt).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })
     : 'N/A';
 
+  const createdDate = user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      })
+    : (joinDate !== 'N/A' ? joinDate : 'Recently');
+
   const handleSave = () => {
     // Mock save
     setSaved(true);
@@ -118,26 +154,34 @@ const Profile = () => {
           <div className="profile-hero-bg" aria-hidden="true" />
 
           <div className="profile-hero-content">
-            {/* Avatar */}
-            <div className="profile-hero-avatar">
-              <span>{initials}</span>
-              <div className="profile-hero-avatar-ring" aria-hidden="true" />
-            </div>
-
-            {/* Info */}
-            <div className="profile-hero-info">
-              <div className="profile-hero-name">{displayName}</div>
-              <div className="profile-hero-meta">
-                <span className={`ph-badge ${USER_TYPE_COLORS[user.userType] || 'badge--primary'}`}>
-                  <BadgeIcon />
-                  {USER_TYPE_LABELS[user.userType] || 'Member'}
-                </span>
-                <span className="ph-badge badge--muted">
-                  <CalendarIcon />
-                  Joined {joinDate}
-                </span>
+            <div className="profile-hero-main">
+              {/* Avatar */}
+              <div className="profile-hero-avatar">
+                <span>{initials}</span>
+                <div className="profile-hero-avatar-ring" aria-hidden="true" />
               </div>
 
+              {/* Info */}
+              <div className="profile-hero-info">
+                <div className="profile-hero-name">{displayName}</div>
+                <div className="profile-hero-meta">
+                  <span className="ph-badge badge--primary">
+                    {(() => {
+                      const { label, Icon } = getUserTypeMeta(user.userType);
+                      return (
+                        <>
+                          <Icon size={14} />
+                          {label}
+                        </>
+                      );
+                    })()}
+                  </span>
+                  <span className="profile-hero-joined">
+                    <CalendarIcon />
+                    Joined {joinDate}
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Edit toggle */}
@@ -160,11 +204,19 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* ── Save toast ── */}
+        {/* ── Save toast (Admin page notification style) ── */}
         {saved && (
-          <div className="ph-toast ph-toast--success" role="status">
-            <BadgeIcon />
-            Profile saved successfully!
+          <div className="um-toast um-toast--success" role="alert" aria-live="polite">
+            <div className="um-toast-icon">
+              <CheckCircleIcon />
+            </div>
+            <div className="um-toast-body">
+              <strong>Account Updated Successfully</strong>
+              <span>Profile details updated.</span>
+            </div>
+            <button className="um-toast-x" onClick={() => setSaved(false)} aria-label="Dismiss">
+              <XIcon />
+            </button>
           </div>
         )}
 
@@ -175,7 +227,7 @@ const Profile = () => {
           <div className="ph-card fade-up">
             <div className="ph-card-head">
               <div className="ph-card-icon ph-card-icon--primary"><UserIcon /></div>
-              <div>
+              <div className="ph-card-head-text">
                 <div className="ph-card-title">Personal Information</div>
                 <div className="ph-card-sub">Your account details</div>
               </div>
@@ -197,30 +249,13 @@ const Profile = () => {
               </div>
 
               <div className="ph-field-group">
-                <label className="ph-label" htmlFor="profile-mobile">Mobile Number</label>
-                {editing ? (
-                  <div className="ph-input-wrap">
-                    <PhoneIcon />
-                    <input
-                      id="profile-mobile"
-                      className="ph-input ph-input--icon"
-                      value={form.mobile}
-                      onChange={(e) => setForm(f => ({ ...f, mobile: e.target.value }))}
-                      placeholder="+91 XXXXX XXXXX"
-                    />
-                  </div>
-                ) : (
-                  <div className="ph-field-value">
-                    <PhoneIcon />
-                    {form.mobile || <span className="ph-field-empty">Not set</span>}
-                  </div>
-                )}
+                <label className="ph-label">Mobile Number</label>
+                <div className="ph-field-value">
+                  {form.mobile || <span className="ph-field-empty">Not set</span>}
+                </div>
               </div>
 
-              <div className="ph-field-group">
-                <label className="ph-label">Account ID</label>
-                <div className="ph-field-value ph-field-value--mono">{user.id || 'N/A'}</div>
-              </div>
+
             </div>
           </div>
 
@@ -228,7 +263,7 @@ const Profile = () => {
           <div className="ph-card fade-up">
             <div className="ph-card-head">
               <div className="ph-card-icon ph-card-icon--accent"><ShieldIcon /></div>
-              <div>
+              <div className="ph-card-head-text">
                 <div className="ph-card-title">Account Details</div>
                 <div className="ph-card-sub">Membership & security</div>
               </div>
@@ -237,8 +272,8 @@ const Profile = () => {
               <div className="ph-field-group">
                 <label className="ph-label">Account Type</label>
                 <div className="ph-field-value">
-                  <span className={`ph-badge ${USER_TYPE_COLORS[user.userType] || 'badge--primary'}`}>
-                    {USER_TYPE_LABELS[user.userType] || 'Member'}
+                  <span className="ph-badge badge--primary">
+                    {getUserTypeMeta(user.userType).label}
                   </span>
                 </div>
               </div>
@@ -246,21 +281,17 @@ const Profile = () => {
               <div className="ph-field-group">
                 <label className="ph-label">Auth Provider</label>
                 <div className="ph-field-value">
-                  {user.provider === 'google' ? (
-                    <span className="ph-badge badge--muted">Google</span>
-                  ) : (
-                    <span className="ph-badge badge--muted">Email / Mobile</span>
-                  )}
+                  {user.provider === 'google' ? 'Google' : 'Mobile'}
                 </div>
               </div>
 
               <div className="ph-field-group">
-                <label className="ph-label">Member Since</label>
+                <label className="ph-label">Account Created</label>
                 <div className="ph-field-value">
-                  <CalendarIcon />
-                  {joinDate}
+                  {createdDate}
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -268,7 +299,7 @@ const Profile = () => {
           <div className="ph-card ph-card--wide fade-up">
             <div className="ph-card-head">
               <div className="ph-card-icon ph-card-icon--success"><PrinterIcon /></div>
-              <div>
+              <div className="ph-card-head-text">
                 <div className="ph-card-title">Print Activity</div>
                 <div className="ph-card-sub">Your printing summary this month</div>
               </div>
@@ -276,9 +307,9 @@ const Profile = () => {
             <div className="ph-card-body ph-activity-grid">
               {[
                 { label: 'Total Orders', value: '12', unit: 'orders', color: 'var(--primary)' },
-                { label: 'Pages Printed', value: '347', unit: 'pages', color: 'var(--success)' },
-                { label: 'Money Saved', value: '₹480', unit: 'vs retail', color: 'var(--accent)' },
-                { label: 'Avg. Turn-around', value: '~2h', unit: 'per order', color: 'var(--info)' },
+                { label: 'Active Orders', value: '2', unit: 'in queue', color: 'var(--success)' },
+                { label: 'Pages Printed', value: '347', unit: 'pages', color: 'var(--accent)' },
+                { label: 'Total Spent', value: '₹1,200', unit: 'lifetime', color: 'var(--info)' },
               ].map((item) => (
                 <div className="ph-activity-item" key={item.label}>
                   <div className="ph-activity-value" style={{ color: item.color }}>{item.value}</div>

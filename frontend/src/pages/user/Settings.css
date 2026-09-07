@@ -487,19 +487,6 @@
   transform: translateY(-1px);
 }
 
-.ph-btn--danger-outline {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1.5px solid var(--border);
-}
-
-.ph-btn--danger-outline:hover {
-  background: rgba(220, 38, 38, 0.06);
-  color: var(--danger);
-  border-color: rgba(220, 38, 38, 0.22);
-  transform: translateY(-1px);
-}
-
 /* ── Toast ───────────────────────────────────────────── */
 .ph-toast {
   display: flex;
@@ -580,9 +567,10 @@
   }
   
   .ph-card-head {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 12px;
+    padding: 16px 18px;
   }
   
   .settings-danger-row {
