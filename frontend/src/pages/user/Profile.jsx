@@ -297,15 +297,14 @@ const Profile = () => {
             </div>
             <div className="ph-card-body ph-activity-grid">
               {[
-                { label: 'Total Orders', value: '12', unit: 'orders', color: 'var(--primary)' },
-                { label: 'Active Orders', value: '2', unit: 'in queue', color: 'var(--success)' },
-                { label: 'Pages Printed', value: '347', unit: 'pages', color: 'var(--accent)' },
-                { label: 'Total Spent', value: '₹1,200', unit: 'lifetime', color: 'var(--info)' },
+                { label: 'Total Orders', value: '12', color: 'var(--primary)' },
+                { label: 'Active Orders', value: '2', color: 'var(--success)' },
+                { label: 'Pages Printed', value: '347', color: 'var(--accent)' },
+                { label: 'Total Spent', value: '₹1,200', color: 'var(--info)' },
               ].map((item) => (
                 <div className="ph-activity-item" key={item.label}>
                   <div className="ph-activity-value" style={{ color: item.color }}>{item.value}</div>
                   <div className="ph-activity-label">{item.label}</div>
-                  <div className="ph-activity-unit">{item.unit}</div>
                 </div>
               ))}
             </div>
