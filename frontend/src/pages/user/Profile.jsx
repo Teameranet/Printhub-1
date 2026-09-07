@@ -265,19 +265,10 @@ const Profile = () => {
               <div className="ph-card-icon ph-card-icon--accent"><ShieldIcon /></div>
               <div className="ph-card-head-text">
                 <div className="ph-card-title">Account Details</div>
-                <div className="ph-card-sub">Membership & security</div>
+                <div className="ph-card-sub">Authentication & Security</div>
               </div>
             </div>
             <div className="ph-card-body">
-              <div className="ph-field-group">
-                <label className="ph-label">Account Type</label>
-                <div className="ph-field-value">
-                  <span className="ph-badge badge--primary">
-                    {getUserTypeMeta(user.userType).label}
-                  </span>
-                </div>
-              </div>
-
               <div className="ph-field-group">
                 <label className="ph-label">Auth Provider</label>
                 <div className="ph-field-value">
