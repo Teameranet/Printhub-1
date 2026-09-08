@@ -14,32 +14,30 @@ const Ic = ({ d, size = 18, ...rest }) => (
 
 const SearchIcon = () => <Ic d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />;
 const SlidersIcon = () => <Ic d={["M4 21v-7", "M4 10V3", "M12 21v-9", "M12 8V3", "M20 21v-5", "M20 12V3", "M1 14h6", "M9 8h6", "M17 16h6"]} />;
-const EditIcon = ({ size = 14 }) => <Ic d={["M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"]} size={size} />;
-const TrashIcon = ({ size = 14 }) => <Ic d={["M3 6h18", "M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6", "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"]} size={size} />;
-const BanIcon = ({ size = 18 }) => <Ic d={["M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z", "M12 9v4", "M12 17h.01"]} size={size} />;
-const UnlockIcon = ({ size = 14 }) => <Ic d={["M8 11V7a4 4 0 0 1 8 0", "M5 11h14v11H5z", "M12 16v2"]} size={size} />;
-const CloseIcon = () => <Ic d={["M18 6 6 18", "M6 6l12 12"]} />;
+const EditIcon = ({ size = 16 }) => <Ic d={["M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"]} size={size} />;
+const TrashIcon = ({ size = 16 }) => <Ic d={["M3 6h18", "M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6", "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"]} size={size} />;
+const BanIcon = ({ size = 16 }) => <Ic d={["M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z", "M12 9v4", "M12 17h.01"]} size={size} />;
+const UnlockIcon = ({ size = 16 }) => <Ic d={["M8 11V7a4 4 0 0 1 8 0", "M5 11h14v11H5z", "M12 16v2"]} size={size} />;
+const CloseIcon = ({ size = 18 }) => <Ic d={["M18 6 6 18", "M6 6l12 12"]} size={size} />;
 const UserIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
   </svg>
 );
-const MailIcon = () => <Ic d={["M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z", "M22 6l-10 7L2 6"]} />;
 const LockIcon = () => <Ic d={["M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z", "M7 11V7a5 5 0 0 1 10 0v4"]} />;
 const PhoneIcon = () => <Ic d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />;
 const UsersIcon = ({ size = 18 }) => <Ic d={["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"]} size={size} />;
-const CheckCircleIcon = () => <Ic d={["M22 11.08V12a10 10 0 1 1-5.93-9.14", "M22 4 12 14.01l-3-3"]} />;
+const CheckCircleIcon = ({ size = 18 }) => <Ic size={size} d={["M22 11.08V12a10 10 0 1 1-5.93-9.14", "M22 4 12 14.01l-3-3"]} />;
 const AlertTriIcon = () => <Ic d={["M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z", "M12 9v4", "M12 17h.01"]} />;
 const ChevronLeftIcon = () => <Ic d="M15 18l-6-6 6-6" />;
 const ChevronRightIc = () => <Ic d="M9 18l6-6-6-6" />;
 const SortAscIcon = () => <Ic d={["M3 6h18", "M7 12h10", "M11 18h2"]} />;
 const InfoIcon = () => <Ic d={["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z", "M12 8v4", "M12 16h.01"]} />;
-const ShoppingBagIcon = () => <Ic d={["M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z", "M3 6h18", "M16 10a4 4 0 0 1-8 0"]} />;
-const CalendarIcon = () => <Ic d={["M3 4h18v18H3z", "M16 2v4", "M8 2v4", "M3 10h18"]} />;
-const EyeIcon = () => <Ic d={["M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z", "M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"]} />;
+const EyeIcon = ({ size = 16 }) => <Ic d={["M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z", "M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"]} size={size} />;
 const EyeOffIcon = () => <Ic d={["M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94", "M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19", "M1 1l22 22", "M14.12 14.12a3 3 0 1 1-4.24-4.24"]} />;
 const TagIcon = () => <Ic d={["M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z", "M7 7h.01"]} />;
+const ShieldIcon = ({ size = 16 }) => <Ic d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" size={size} />;
 const PlusIcon = () => <Ic d="M12 5v14M5 12h14" />;
 
 const StudentIcon = () => (
@@ -66,15 +64,13 @@ const BuildingIcon = () => (
    ================================================================ */
 
 const SEED_USERS = [
-  { id: 'u_001', username: 'arjun_k', identifier: '9876543210', mobile: '9876543210', email: 'arjun.k@gmail.com', userType: 'regular', status: 'active', createdAt: '2024-02-10T09:00:00Z', lastLogin: '2026-08-30T08:32:00Z', totalOrders: 14, totalSpent: 3240 },
-  { id: 'u_002', username: 'priya_m', identifier: '9123456780', mobile: '9123456780', email: 'priya.m@students.edu', userType: 'student', status: 'active', createdAt: '2024-04-15T11:20:00Z', lastLogin: '2026-08-28T14:10:00Z', totalOrders: 8, totalSpent: 1620 },
-  { id: 'u_003', username: 'techcorp', identifier: '9988776655', mobile: '9988776655', email: 'prints@techcorp.in', userType: 'institute', status: 'active', createdAt: '2024-01-05T08:00:00Z', lastLogin: '2026-08-31T10:05:00Z', totalOrders: 56, totalSpent: 18450 },
+  { username: 'arjun_k', mobile: '9876543210', userType: 'regular', status: 'active', createdAt: '2024-02-10T09:00:00Z', lastLogin: '2026-08-30T08:32:00Z', totalOrders: 14, totalSpent: 3240 },
+  { username: 'priya_m', mobile: '9123456780', userType: 'student', status: 'active', createdAt: '2024-04-15T11:20:00Z', lastLogin: '2026-08-28T14:10:00Z', totalOrders: 8, totalSpent: 1620 },
+  { username: 'techcorp', mobile: '9988776655', userType: 'institute', status: 'active', createdAt: '2024-01-05T08:00:00Z', lastLogin: '2026-08-31T10:05:00Z', totalOrders: 56, totalSpent: 18450 },
 ];
 
 const sanitize = (v = '') =>
   String(v).trim().replace(/<[^>]*>/g, '').replace(/['"`;\\/]/g, '').slice(0, 200);
-
-const isValidEmail = (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
 
 const initials = (name = '') =>
   name.trim().split(/[\s_-]/).filter(Boolean).map(w => w[0]).join('').toUpperCase().slice(0, 2) || '??';
@@ -91,7 +87,6 @@ const fmtDate = (iso) => {
 const fmtINR = (n) =>
   n != null ? `₹${Number(n).toLocaleString('en-IN')}` : '—';
 
-const genId = () => `u_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
 const nowIso = () => new Date().toISOString();
 
 const TYPE_META = {
@@ -138,7 +133,7 @@ const TypeBadge = ({ userType }) => {
   const meta = TYPE_META[userType] || { label: userType, Icon: UserIcon };
   const IconComponent = meta.Icon || UserIcon;
   return (
-    <span className="um-badge um-badge--type">
+    <span className={`um-badge um-badge--type um-badge--${userType}`}>
       <IconComponent /> {meta.label}
     </span>
   );
@@ -146,10 +141,11 @@ const TypeBadge = ({ userType }) => {
 
 /* ── Status Badge ───────────────────────────────────────────── */
 const StatusBadge = ({ status }) => {
-  const map = { active: 'um-badge--active', suspended: 'um-badge--suspended' };
+  const map = { active: 'um-badge--active', inactive: 'um-badge--inactive', suspended: 'um-badge--inactive' };
+  const label = (status === 'inactive' || status === 'suspended') ? 'Inactive' : (status.charAt(0).toUpperCase() + status.slice(1));
   return (
-    <span className={`um-badge ${map[status] || ''}`}>
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+    <span className={`um-badge ${map[status] || 'um-badge--inactive'}`}>
+      {label}
     </span>
   );
 };
@@ -157,79 +153,7 @@ const StatusBadge = ({ status }) => {
 /* ── Inline spinner ─────────────────────────────────────────── */
 const BtnSpinner = () => <span className="um-btn-spinner" aria-hidden="true" />;
 
-/* ================================================================
-   VIEW PROFILE MODAL
-   ================================================================ */
-const ViewModal = ({ target, onClose, onEdit }) => {
-  const firstRef = useRef(null);
-  useEffect(() => { firstRef.current?.focus(); }, []);
-  useEffect(() => {
-    const h = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', h);
-    return () => document.removeEventListener('keydown', h);
-  }, [onClose]);
 
-  return (
-    <div className="um-modal-overlay" role="dialog" aria-modal="true"
-      aria-label={`Profile: ${target.username}`}
-      onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="um-modal um-modal--view">
-        <div className="um-modal-header">
-          <div className="um-modal-icon um-modal-icon--primary"><EyeIcon /></div>
-          <div>
-            <p className="um-modal-title">User Profile</p>
-            <p className="um-modal-subtitle">Detailed account information</p>
-          </div>
-          <button ref={firstRef} className="um-modal-close" onClick={onClose} aria-label="Close modal">
-            <CloseIcon />
-          </button>
-        </div>
-
-        <div className="um-modal-body">
-          {/* Avatar + Identity */}
-          <div className="um-view-identity">
-            <div className="um-view-avatar">
-              {initials(target.username)}
-            </div>
-            <div className="um-view-id-block">
-              <div className="um-view-name">{target.username}</div>
-              <div className="um-view-id">ID: {target.id}</div>
-              <div className="um-view-badges">
-                <TypeBadge userType={target.userType} />
-                <StatusBadge status={target.status} />
-              </div>
-            </div>
-          </div>
-
-          {/* Detail rows */}
-          <div className="um-view-details">
-            {[
-              { icon: <MailIcon />, label: 'Email', val: target.email || '—' },
-              { icon: <PhoneIcon />, label: 'Mobile', val: target.mobile || '—' },
-              { icon: <CalendarIcon />, label: 'Joined', val: fmtDate(target.createdAt) },
-              { icon: <CalendarIcon />, label: 'Last Login', val: fmtDate(target.lastLogin) },
-              { icon: <ShoppingBagIcon />, label: 'Total Orders', val: target.totalOrders ?? '—' },
-              { icon: <TagIcon />, label: 'Total Spent', val: fmtINR(target.totalSpent) },
-            ].map(({ icon, label, val }) => (
-              <div key={label} className="um-view-row">
-                <span className="um-view-row-icon">{icon}</span>
-                <span className="um-view-row-label">{label}</span>
-                <span className="um-view-row-val">{val}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="um-modal-footer">
-          <button className="um-btn um-btn--ghost" onClick={onClose}>Close</button>
-          <button className="um-btn um-btn--primary" onClick={() => { onClose(); onEdit(target); }}>
-            <EditIcon /> Edit Account
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 /* ================================================================
    ADD / EDIT MODAL
@@ -238,7 +162,6 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
   const isEdit = mode === 'edit';
   const [form, setForm] = useState({
     username: isEdit ? target.username : '',
-    email: isEdit ? (target.email || '') : '',
     mobile: isEdit ? (target.mobile || '') : '',
     userType: isEdit ? target.userType : 'regular',
     status: isEdit ? target.status : 'active',
@@ -266,7 +189,6 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
     const e = {};
     const un = sanitize(form.username);
     if (!un || un.length < 2) e.username = 'Username must be at least 2 characters.';
-    if (form.email && !isValidEmail(form.email)) e.email = 'Enter a valid email address.';
     const mob = sanitize(form.mobile);
     if (!isEdit && !mob) e.mobile = 'Mobile number is required.';
     if (mob && !/^\d{10}$/.test(mob)) e.mobile = 'Enter a valid 10-digit mobile number.';
@@ -285,7 +207,6 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
     if (Object.keys(e2).length) { setErrors(e2); return; }
     onSave({
       username: sanitize(form.username),
-      email: sanitize(form.email).toLowerCase(),
       mobile: sanitize(form.mobile),
       userType: form.userType,
       status: form.status,
@@ -340,19 +261,6 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
               </div>
             </div>
 
-            {/* Email */}
-            <div className="um-field">
-              <label className="um-label" htmlFor="umf-email">Email</label>
-              <div className="um-input-wrap">
-                <MailIcon />
-                <input id="umf-email"
-                  className={`um-input${errors.email ? ' um-input--error' : ''}`}
-                  type="email" placeholder="user@example.com" autoComplete="off"
-                  value={form.email} onChange={e => set('email', e.target.value)} maxLength={120} />
-              </div>
-              {errors.email && <span className="um-field-error"><AlertTriIcon />{errors.email}</span>}
-            </div>
-
             {/* User Type & Status */}
             <div className="um-field-row">
               <div className="um-field">
@@ -368,9 +276,9 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
               <div className="um-field">
                 <label className="um-label" htmlFor="umf-status">Status <span>*</span></label>
                 <select id="umf-status" className="um-select"
-                  value={form.status} onChange={e => set('status', e.target.value)}>
+                  value={form.status === 'suspended' ? 'inactive' : form.status} onChange={e => set('status', e.target.value)}>
                   <option value="active">Active</option>
-                  <option value="suspended">Suspended</option>
+                  <option value="inactive">Inactive</option>
                 </select>
               </div>
             </div>
@@ -434,6 +342,8 @@ const UserFormModal = ({ mode, target, onClose, onSave, isSaving }) => {
   );
 };
 
+
+
 /* ================================================================
    CONFIRM / DANGER MODALS
    ================================================================ */
@@ -448,20 +358,23 @@ const ConfirmModal = ({ type, target, onClose, onConfirm, isBusy }) => {
 
   const cfg = {
     delete: {
-      icon: <TrashIcon />, iconCls: 'um-modal-icon--danger',
-      title: 'Delete User Account', subtitle: 'This action cannot be undone.',
-      btnCls: 'um-btn--danger', btnLabel: 'Delete Account',
-      warning: '⚠ All account data, order history, and session tokens will be permanently removed.',
+      icon: <TrashIcon size={20} />, iconCls: 'um-modal-icon--danger',
+      title: 'Delete User Account',
+      subtitle: 'This action is irreversible and permanent.',
+      btnCls: 'um-btn--danger', btnLabel: 'Delete User',
+      warning: 'All active sessions will be revoked immediately. The user will lose all access.',
     },
     suspend: {
-      icon: <BanIcon />, iconCls: 'um-modal-icon--warn',
-      title: 'Suspend User Account', subtitle: 'The user will be locked out immediately.',
-      btnCls: 'um-btn--warn', btnLabel: 'Suspend Account',
-      warning: '⚠ The user will be unable to sign in or place new orders.',
+      icon: <BanIcon size={20} />, iconCls: 'um-modal-icon--warn',
+      title: 'Deactivate User Account',
+      subtitle: 'The user account will be set to inactive.',
+      btnCls: 'um-btn--warn', btnLabel: 'Deactivate Account',
+      warning: 'Any active sessions for this account will be terminated upon deactivation.',
     },
     restore: {
-      icon: <UnlockIcon />, iconCls: 'um-modal-icon--primary',
-      title: 'Restore User Account', subtitle: 'The user will regain access.',
+      icon: <UnlockIcon size={20} />, iconCls: 'um-modal-icon--primary',
+      title: 'Restore User Account',
+      subtitle: 'The user will regain access.',
       btnCls: 'um-btn--primary', btnLabel: 'Restore Account',
       warning: null,
     },
@@ -480,28 +393,43 @@ const ConfirmModal = ({ type, target, onClose, onConfirm, isBusy }) => {
             <p className="um-modal-title">{c.title}</p>
             <p className="um-modal-subtitle">{c.subtitle}</p>
           </div>
-          <button className="um-modal-close" onClick={onClose} aria-label="Close modal"><CloseIcon /></button>
+          <button className="um-modal-close" onClick={onClose} aria-label="Close modal">
+            <CloseIcon />
+          </button>
         </div>
 
         <div className="um-modal-body">
           <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 4 }}>
-            You are about to <strong style={{ color: 'var(--text)' }}>{type}</strong> the following user:
+            You are about to <strong style={{ color: 'var(--text)' }}>{type}</strong> the following user account:
           </p>
           <div className="um-confirm-details">
-            <div className="um-confirm-detail-row"><UserIcon /><strong>{target.username}</strong></div>
-            {target.mobile && <div className="um-confirm-detail-row"><PhoneIcon /><span>{target.mobile}</span></div>}
-            {target.email && <div className="um-confirm-detail-row"><MailIcon /><span>{target.email}</span></div>}
-            <div className="um-confirm-detail-row"><TagIcon /><TypeBadge userType={target.userType} /></div>
+            <div className="um-confirm-detail-row">
+              <UserIcon />
+              <strong>{target.username || target.name}</strong>
+            </div>
+            {target.mobile && (
+              <div className="um-confirm-detail-row">
+                <PhoneIcon />
+                <span>{target.mobile}</span>
+              </div>
+            )}
+            <div className="um-confirm-detail-row">
+              <ShieldIcon />
+              <TypeBadge userType={target.userType} />
+            </div>
           </div>
           {c.warning && (
             <div className="um-confirm-warning">
-              <AlertTriIcon /><span>{c.warning}</span>
+              <AlertTriIcon />
+              <span>{c.warning}</span>
             </div>
           )}
         </div>
 
         <div className="um-modal-footer">
-          <button ref={firstRef} className="um-btn um-btn--ghost" onClick={onClose} disabled={isBusy}>Cancel</button>
+          <button ref={firstRef} className="um-btn um-btn--ghost" onClick={onClose} disabled={isBusy}>
+            Cancel
+          </button>
           <button className={`um-btn ${c.btnCls}`} onClick={onConfirm} disabled={isBusy}>
             {isBusy && <BtnSpinner />}
             {isBusy ? 'Processing…' : c.btnLabel}
@@ -534,10 +462,10 @@ const UserManagementSection = () => {
 
   const activeAdvFiltersCount = (typeFilter !== 'all' ? 1 : 0) + (stFilter !== 'all' ? 1 : 0);
 
-  const showToast = useCallback((type, msg) => {
+  const showToast = useCallback((type, msg, title) => {
     clearTimeout(toastTimer.current);
-    setToast({ type, msg });
-    toastTimer.current = setTimeout(() => setToast(null), 4000);
+    setToast({ type, msg, title });
+    toastTimer.current = setTimeout(() => setToast(null), 5000);
   }, []);
 
   const filtered = useMemo(() => {
@@ -546,7 +474,6 @@ const UserManagementSection = () => {
       .filter(u => {
         const matchQ = !q ||
           u.username.toLowerCase().includes(q) ||
-          (u.email && u.email.toLowerCase().includes(q)) ||
           (u.mobile && u.mobile.includes(q));
         const matchT = typeFilter === 'all' || u.userType === typeFilter;
         const matchS = stFilter === 'all' || u.status === stFilter;
@@ -578,15 +505,20 @@ const UserManagementSection = () => {
     setTimeout(() => {
       if (modal.type === 'add') {
         const newUser = {
-          id: genId(), identifier: data.mobile,
-          ...data, createdAt: nowIso(),
-          lastLogin: null, totalOrders: 0, totalSpent: 0,
+          username: data.username,
+          mobile: data.mobile,
+          userType: data.userType,
+          status: data.status,
+          createdAt: nowIso(),
+          lastLogin: null,
+          totalOrders: 0,
+          totalSpent: 0,
         };
         setUsers(p => [newUser, ...p]);
-        showToast('success', `User "${data.username}" created successfully.`);
+        showToast('success', `User "${data.username}" created successfully.`, 'Account Created Successfully');
       } else {
-        setUsers(p => p.map(u => u.id === modal.target.id ? { ...u, ...data } : u));
-        showToast('success', `User "${data.username}" updated.`);
+        setUsers(p => p.map(u => u.mobile === modal.target.mobile ? { ...u, ...data } : u));
+        showToast('success', `User "${data.username}" updated.`, 'Account Updated Successfully');
       }
       setIsBusy(false);
       setModal(null);
@@ -597,8 +529,8 @@ const UserManagementSection = () => {
     setIsBusy(true);
     setTimeout(() => {
       const t = modal.target;
-      setUsers(p => p.filter(u => u.id !== t.id));
-      showToast('success', `User "${t.username}" permanently deleted.`);
+      setUsers(p => p.filter(u => u.mobile !== t.mobile));
+      showToast('success', `User "${t.username}" permanently deleted.`, 'Account Deleted Successfully');
       setIsBusy(false);
       setModal(null);
     }, 700);
@@ -608,8 +540,8 @@ const UserManagementSection = () => {
     setIsBusy(true);
     setTimeout(() => {
       const t = modal.target;
-      setUsers(p => p.map(u => u.id === t.id ? { ...u, status: 'suspended' } : u));
-      showToast('warn', `User "${t.username}" suspended.`);
+      setUsers(p => p.map(u => u.mobile === t.mobile ? { ...u, status: 'inactive' } : u));
+      showToast('warn', `User "${t.username}" set to inactive.`, 'Account Deactivated');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -619,8 +551,8 @@ const UserManagementSection = () => {
     setIsBusy(true);
     setTimeout(() => {
       const t = modal.target;
-      setUsers(p => p.map(u => u.id === t.id ? { ...u, status: 'active' } : u));
-      showToast('success', `User "${t.username}" restored to active.`);
+      setUsers(p => p.map(u => u.mobile === t.mobile ? { ...u, status: 'active' } : u));
+      showToast('success', `User "${t.username}" restored to active.`, 'Account Restored Successfully');
       setIsBusy(false);
       setModal(null);
     }, 600);
@@ -655,12 +587,20 @@ const UserManagementSection = () => {
         </span>
       </div>
 
-      {/* Toast */}
+      {/* Toast Notification (NP Page Success Toast Style) */}
       {toast && (
-        <div className={`um-toast um-toast--${toast.type}`} role="status" aria-live="polite">
-          {toast.type === 'success' && <CheckCircleIcon />}
-          {(toast.type === 'error' || toast.type === 'warn') && <AlertTriIcon />}
-          <span>{toast.msg}</span>
+        <div className={`um-toast um-toast--${toast.type}`} role="alert" aria-live="polite">
+          <div className="um-toast-icon">
+            {toast.type === 'success' && <CheckCircleIcon />}
+            {(toast.type === 'error' || toast.type === 'warn') && <AlertTriIcon />}
+          </div>
+          <div className="um-toast-body">
+            <strong>{toast.title || (toast.type === 'success' ? 'Success' : toast.type === 'warn' ? 'Notice' : 'Error')}</strong>
+            <span>{toast.msg}</span>
+          </div>
+          <button className="um-toast-x" onClick={() => setToast(null)} aria-label="Dismiss">
+            <CloseIcon />
+          </button>
         </div>
       )}
 
@@ -673,7 +613,7 @@ const UserManagementSection = () => {
           <div className="um-search-box">
             <span className="um-search-icon"><SearchIcon /></span>
             <input type="text" className="um-search"
-              placeholder="Search by username, email, or mobile…"
+              placeholder="Search by username or mobile number…"
               value={search} onChange={e => setSearch(e.target.value)}
               aria-label="Search users" />
             {search && (
@@ -728,7 +668,7 @@ const UserManagementSection = () => {
               {[
                 { val: 'all', label: 'All Status' },
                 { val: 'active', label: 'Active' },
-                { val: 'suspended', label: 'Suspended' },
+                { val: 'inactive', label: 'Inactive' },
               ].map(s => (
                 <button key={s.val} type="button"
                   className={`um-adv-chip${stFilter === s.val ? ' um-adv-chip--active' : ''}`}
@@ -759,7 +699,6 @@ const UserManagementSection = () => {
               <tr>
                 <Th label="User" sortable field="username" style={{ minWidth: 220 }} />
                 <Th label="Type" sortable field="userType" style={{ minWidth: 120 }} />
-                <Th label="Mobile" style={{ minWidth: 130 }} />
                 <Th label="Orders" sortable field="totalOrders" style={{ minWidth: 90, textAlign: 'center' }} />
                 <Th label="Spent" sortable field="totalSpent" style={{ minWidth: 110, textAlign: 'right' }} />
                 <Th label="Created" sortable field="createdAt" style={{ minWidth: 160 }} />
@@ -770,7 +709,7 @@ const UserManagementSection = () => {
             <tbody>
               {paged.length === 0 ? (
                 <tr>
-                  <td colSpan={8}>
+                  <td colSpan={7}>
                     <div className="um-empty">
                       <div className="um-empty-icon"><UsersIcon size={32} /></div>
                       <p className="um-empty-title">No users found</p>
@@ -779,7 +718,7 @@ const UserManagementSection = () => {
                   </td>
                 </tr>
               ) : paged.map(u => (
-                <tr key={u.id}>
+                <tr key={u.mobile}>
                   <td>
                     <div className="um-identity">
                       <div className="um-avatar" aria-hidden="true">
@@ -787,14 +726,11 @@ const UserManagementSection = () => {
                       </div>
                       <div>
                         <div className="um-identity-name">{u.username}</div>
-                        <div className="um-identity-email">{u.email || u.identifier}</div>
+                        <div className="um-identity-email">{u.mobile}</div>
                       </div>
                     </div>
                   </td>
                   <td data-label="Type"><TypeBadge userType={u.userType} /></td>
-                  <td data-label="Mobile" style={{ fontSize: 12.5, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-                    {u.mobile || '—'}
-                  </td>
                   <td data-label="Orders" style={{ textAlign: 'center', color: 'var(--text-dim)' }}>
                     {u.totalOrders ?? '—'}
                   </td>
@@ -808,25 +744,20 @@ const UserManagementSection = () => {
                   <td data-label="Actions">
                     <div className="um-row-actions" style={{ justifyContent: 'flex-end' }}>
                       <button className="um-icon-btn"
-                        onClick={() => setModal({ type: 'view', target: u })}
-                        title="View profile" aria-label={`View ${u.username}`}>
-                        <EyeIcon />
-                      </button>
-                      <button className="um-icon-btn"
                         onClick={() => setModal({ type: 'edit', target: u })}
                         title="Edit account" aria-label={`Edit ${u.username}`}>
                         <EditIcon />
                       </button>
-                      {u.status !== 'suspended' ? (
+                      {u.status === 'active' ? (
                         <button className="um-icon-btn um-icon-btn--warn"
                           onClick={() => setModal({ type: 'suspend', target: u })}
-                          title="Suspend account" aria-label={`Suspend ${u.username}`}>
+                          title="Deactivate account" aria-label={`Deactivate ${u.username}`}>
                           <BanIcon />
                         </button>
                       ) : (
                         <button className="um-icon-btn"
                           onClick={() => setModal({ type: 'restore', target: u })}
-                          title="Restore account" aria-label={`Restore ${u.username}`}>
+                          title="Activate account" aria-label={`Activate ${u.username}`}>
                           <UnlockIcon />
                         </button>
                       )}
@@ -884,10 +815,6 @@ const UserManagementSection = () => {
       </div>
 
       {/* ── Modals ── */}
-      {modal?.type === 'view' && (
-        <ViewModal target={modal.target} onClose={() => setModal(null)}
-          onEdit={(u) => setModal({ type: 'edit', target: u })} />
-      )}
       {(modal?.type === 'add' || modal?.type === 'edit') && (
         <UserFormModal mode={modal.type === 'edit' ? 'edit' : 'add'}
           target={modal.target} onClose={() => setModal(null)}

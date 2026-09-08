@@ -56,6 +56,10 @@ const KeyIcon = () => <Ic d={["M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5
 const InfoIcon = () => <Ic d={["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z", "M12 8v4", "M12 16h.01"]} />;
 const BarChartIcon = () => <Ic d={["M18 20V10", "M12 20V4", "M6 20v-6"]} />;
 const SettingsIcon = () => <Ic d={["M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z", "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"]} />;
+const CalendarIcon = ({ size = 16 }) => <Ic d={["M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z", "M16 2v4", "M8 2v4", "M3 10h18"]} size={size} />;
+const ClockIcon = ({ size = 16 }) => <Ic d={["M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z", "M12 6v6l4 2"]} size={size} />;
+const PackageIcon = ({ size = 16 }) => <Ic d={["M16.5 9.4 7.55 4.24", "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z", "M3.27 6.96 12 12.01l8.73-5.05", "M12 22.08V12"]} size={size} />;
+const TagIcon = ({ size = 16 }) => <Ic d={["M12 2H2v10l11 11 10-10L12 2z", "M7 7h.01"]} size={size} />;
 
 const MODULE_ICONS = {
   orders: <ClipboardIcon />,
@@ -129,6 +133,118 @@ const SEED_AUDIT = [
   { id: 'a3', ts: '2026-07-10T09:00:00Z', action: 'suspend', desc: 'Suspended account <strong>Anita Desai</strong> — policy violation', actor: 'admin_1' },
   { id: 'a4', ts: '2026-07-05T13:00:00Z', action: 'delete', desc: 'Deleted admin account <strong>Temp Admin</strong> — sessions revoked', actor: 'admin_1' },
   { id: 'a5', ts: '2026-06-30T10:05:00Z', action: 'restore', desc: 'Restored account <strong>Arjun Nair</strong> from suspended', actor: 'admin_1' },
+];
+
+/* Seed access-specific order history & actions taken by admin users */
+const SEED_ORDER_ACTIONS = [
+  {
+    id: 'act_101',
+    adminId: 'admin_1',
+    orderId: '#ORD-9842',
+    customerName: 'Sunita Rao',
+    items: '100x Hardcover Spiral Manuals (A4)',
+    amount: '₹8,500',
+    action: 'Approved Refund',
+    actionType: 'refund',
+    details: 'Approved partial refund of ₹850 due to minor binding corner crease reported by customer.',
+    timestamp: '2026-07-25T11:45:00Z',
+  },
+  {
+    id: 'act_102',
+    adminId: 'admin_1',
+    orderId: '#ORD-9830',
+    customerName: 'Apex Media Ltd',
+    items: '2,500x Glossy Corporate Flyers (300 GSM)',
+    amount: '₹14,200',
+    action: 'Dispatched Order',
+    actionType: 'dispatch',
+    details: 'Updated status to Dispatched via Express Courier (Tracking: #EXP-IN-8891).',
+    timestamp: '2026-07-24T16:20:00Z',
+  },
+  {
+    id: 'act_103',
+    adminId: 'admin_1',
+    orderId: '#ORD-9811',
+    customerName: 'Vikram Malhotra',
+    items: '50x Architectural A3 Poster Prints',
+    amount: '₹3,100',
+    action: 'Pre-flight Verification',
+    actionType: 'verify',
+    details: 'Verified high-resolution PDF print gamut & CMYK color breakdown before sending to production press.',
+    timestamp: '2026-07-22T09:30:00Z',
+  },
+  {
+    id: 'act_104',
+    adminId: 'admin_2',
+    orderId: '#ORD-9839',
+    customerName: 'Anita Roy',
+    items: '200x Custom Embossed Letterheads',
+    amount: '₹2,400',
+    action: 'Status Change',
+    actionType: 'status',
+    details: 'Changed status from Submitted to Printing in Progress on offset press line #2.',
+    timestamp: '2026-07-24T15:10:00Z',
+  },
+  {
+    id: 'act_105',
+    adminId: 'admin_2',
+    orderId: '#ORD-9825',
+    customerName: 'Dev Corporate Solutions',
+    items: '500x Gold Foil Visiting Cards',
+    amount: '₹4,800',
+    action: 'Artwork Approved',
+    actionType: 'verify',
+    details: 'Checked foil vector layer alignment and sent digital proof confirmation to client.',
+    timestamp: '2026-07-23T11:05:00Z',
+  },
+  {
+    id: 'act_106',
+    adminId: 'admin_2',
+    orderId: '#ORD-9804',
+    customerName: 'Kavita Shah',
+    items: '20x Canvas Framed Wall Art Prints',
+    amount: '₹6,700',
+    action: 'Dispatched Order',
+    actionType: 'dispatch',
+    details: 'Handed shipment to BlueDart courier (AWB: #BD-902341) and emailed tracking link.',
+    timestamp: '2026-07-21T14:40:00Z',
+  },
+  {
+    id: 'act_107',
+    adminId: 'admin_3',
+    orderId: '#ORD-9799',
+    customerName: 'Green Leaf Co',
+    items: '1,000x Eco-friendly Kraft Paper Bags',
+    amount: '₹9,200',
+    action: 'Quality Inspection',
+    actionType: 'status',
+    details: 'Completed post-print quality inspection check for handle strength and logo centering.',
+    timestamp: '2026-06-29T16:00:00Z',
+  },
+  {
+    id: 'act_108',
+    adminId: 'admin_3',
+    orderId: '#ORD-9780',
+    customerName: 'Rohan Gupta',
+    items: '300x Hardbound Custom Planners',
+    amount: '₹5,500',
+    action: 'Shipping Address Updated',
+    actionType: 'edit',
+    details: 'Updated customer shipping address to office location prior to dispatch.',
+    timestamp: '2026-06-28T10:15:00Z',
+  },
+  {
+    id: 'act_109',
+    adminId: 'admin_4',
+    orderId: '#ORD-9765',
+    customerName: 'TechPulse Inc',
+    items: '150x Custom Lanyards & RFID Badges',
+    amount: '₹7,900',
+    action: 'Cancellation Handled',
+    actionType: 'cancel',
+    details: 'Processed order cancellation requested by customer and issued store credit code.',
+    timestamp: '2026-06-30T14:20:00Z',
+  },
 ];
 
 /* Sanitize a string — strip leading/trailing whitespace, reject HTML injections */
@@ -1290,6 +1406,283 @@ const ConfirmModal = ({ type, target, onClose, onConfirm, isBusy }) => {
 
 
 
+
+/* ================================================================
+   ADMIN PROFILE MODAL (Super Admin Only - Based on Edit Account Modal)
+   ================================================================ */
+const AdminProfileModal = ({ target, roles, orderActions = [], onClose }) => {
+  const [orderSearch, setOrderSearch] = useState('');
+  const firstRef = useRef(null);
+
+  useEffect(() => { firstRef.current?.focus(); }, []);
+  useEffect(() => {
+    const h = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', h);
+    return () => document.removeEventListener('keydown', h);
+  }, [onClose]);
+
+  /* Get assigned role object */
+  const roleObj = useMemo(() => {
+    return roles.find(r => r.id === target?.role) || { name: target?.role || 'Admin', permissions: {} };
+  }, [roles, target?.role]);
+
+  /* Filter order actions for this specific admin */
+  const userOrderActions = useMemo(() => {
+    const list = orderActions.filter(a => a.adminId === target?.id);
+    if (!orderSearch.trim()) return list;
+    const q = orderSearch.toLowerCase().trim();
+    return list.filter(a =>
+      a.orderId.toLowerCase().includes(q) ||
+      a.customerName.toLowerCase().includes(q) ||
+      a.action.toLowerCase().includes(q) ||
+      a.details.toLowerCase().includes(q) ||
+      a.items.toLowerCase().includes(q)
+    );
+  }, [orderActions, target?.id, orderSearch]);
+
+  /* Compute effective permissions combining base role & custom overrides */
+  const effectivePermissions = useMemo(() => {
+    const result = {};
+    PERMISSION_MODULES.forEach(m => {
+      const inherited = roleObj.permissions?.[m.id] || [];
+      const hasOverride = target?.privilegeOverrides && target.privilegeOverrides[m.id] !== undefined;
+      result[m.id] = {
+        actions: hasOverride ? target.privilegeOverrides[m.id] : inherited,
+        isOverride: hasOverride,
+      };
+    });
+    return result;
+  }, [roleObj, target?.privilegeOverrides]);
+
+  return (
+    <div className="am-modal-overlay" role="dialog" aria-modal="true"
+      aria-label={`View ${target?.name || 'Admin'} Profile`}
+      onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="am-modal am-modal--admin-edit am-modal--profile">
+        {/* Header matching Edit Account Modal */}
+        <div className="am-modal-header">
+          <div className="am-modal-icon am-modal-icon--primary">
+            <EyeIcon />
+          </div>
+          <div>
+            <p className="am-modal-title">View {target?.name || 'Admin'} Account Record</p>
+            <p className="am-modal-subtitle">
+              Registration details, assigned privileges, and access order history for {roleObj.name}
+            </p>
+          </div>
+          <button ref={firstRef} className="am-modal-close" onClick={onClose} aria-label="Close profile view">
+            <CloseIcon />
+          </button>
+        </div>
+
+        {/* Modal Body matching Edit Account Modal */}
+        <div className="am-modal-body">
+          <div className="am-form">
+            {/* Section Title */}
+            <label className="am-label" style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--primary)', marginBottom: 8, display: 'block', fontWeight: 700 }}>
+              Full Registration Details
+            </label>
+
+            {/* Name & Email */}
+            <div className="am-field-row">
+              <div className="am-field">
+                <label className="am-label">Full Name</label>
+                <div className="am-input-wrap">
+                  <UserIcon />
+                  <input className="am-input" type="text" value={target?.name || ''} readOnly disabled />
+                </div>
+              </div>
+
+              <div className="am-field">
+                <label className="am-label">Email</label>
+                <div className="am-input-wrap">
+                  <MailIcon />
+                  <input className="am-input" type="email" value={target?.email || ''} readOnly disabled />
+                </div>
+              </div>
+            </div>
+
+            {/* Role & Status */}
+            <div className="am-field-row">
+              <div className="am-field">
+                <label className="am-label">Role</label>
+                <div className="am-input-wrap">
+                  <ShieldIcon />
+                  <input className="am-input" type="text" value={roleObj.name || target?.role || ''} readOnly disabled />
+                </div>
+              </div>
+
+              <div className="am-field">
+                <label className="am-label">Status</label>
+                <div className="am-input-wrap">
+                  {target?.status === 'active' ? <CheckCircleIcon /> : <BanIcon />}
+                  <input className="am-input" type="text" value={target?.status === 'inactive' || target?.status === 'suspended' ? 'Inactive' : 'Active'} readOnly disabled />
+                </div>
+              </div>
+            </div>
+
+            {/* Registration Date & Last Login */}
+            <div className="am-field-row">
+              <div className="am-field">
+                <label className="am-label">Registration Date & Time</label>
+                <div className="am-input-wrap">
+                  <CalendarIcon />
+                  <input className="am-input font-mono" type="text" value={fmtDate(target?.createdAt)} readOnly disabled />
+                </div>
+              </div>
+
+              <div className="am-field">
+                <label className="am-label">Last Login / Active Session</label>
+                <div className="am-input-wrap">
+                  <ClockIcon />
+                  <input className="am-input font-mono" type="text" value={target?.lastLogin ? fmtDate(target?.lastLogin) : 'Never logged in'} readOnly disabled />
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Role Privilege Matrix */}
+            <div className="am-field" style={{ marginTop: 12 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
+                <label className="am-label" style={{ margin: 0 }}>Module Permission & Privilege Matrix</label>
+                <span className="am-field-hint" style={{ margin: 0 }}>Active privilege grants</span>
+              </div>
+
+              <div className="am-privilege-table-wrap">
+                <table className="am-privilege-table">
+                  <thead>
+                    <tr>
+                      <th>Permission Module</th>
+                      <th style={{ textTransform: 'uppercase' }}>View</th>
+                      <th style={{ textTransform: 'uppercase' }}>Edit</th>
+                      <th style={{ textTransform: 'uppercase' }}>Delete</th>
+                      <th>Privilege Origin</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {PERMISSION_MODULES.map(m => {
+                      const permData = effectivePermissions[m.id];
+                      const granted = permData?.actions || [];
+                      const IconComp = MODULE_ICONS[m.id] || <ShieldIcon />;
+
+                      return (
+                        <tr key={m.id}>
+                          <td>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span className="am-perm-module-icon">{IconComp}</span>
+                              <div>
+                                <strong className="am-priv-mod-label">{m.label}</strong>
+                                <span className="am-priv-mod-desc">{m.desc}</span>
+                              </div>
+                            </div>
+                          </td>
+                          {ACTIONS.map(act => (
+                            <td key={act} className="am-priv-cb-cell">
+                              <label className="am-cb-label">
+                                <input
+                                  type="checkbox"
+                                  checked={granted.includes(act)}
+                                  disabled
+                                  style={{ pointerEvents: 'none' }}
+                                />
+                              </label>
+                            </td>
+                          ))}
+                          <td>
+                            {permData?.isOverride ? (
+                              <span className="am-override-badge am-override-badge--custom">
+                                Custom Override
+                              </span>
+                            ) : (
+                              <span className="am-override-badge am-override-badge--inherited">
+                                Inherited from Role
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Access-Specific Order History & Actions Taken */}
+            <div className="am-field" style={{ marginTop: 20 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
+                <label className="am-label" style={{ margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  Access-Specific Order History & Actions Taken
+                  <span className="am-count-pill">{userOrderActions.length}</span>
+                </label>
+                <div className="am-order-mini-search">
+                  <SearchIcon />
+                  <input
+                    type="text"
+                    placeholder="Search order actions..."
+                    value={orderSearch}
+                    onChange={e => setOrderSearch(e.target.value)}
+                  />
+                  {orderSearch && (
+                    <button type="button" onClick={() => setOrderSearch('')} aria-label="Clear filter">
+                      <CloseIcon size={14} />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {userOrderActions.length === 0 ? (
+                <div className="am-empty-orders">
+                  <PackageIcon size={32} />
+                  <p className="am-empty-title">No Order Actions Recorded</p>
+                  <p className="am-empty-sub">
+                    {orderSearch ? 'No order action records match your search filter.' : 'This admin user has not performed any recorded actions on customer orders yet.'}
+                  </p>
+                </div>
+              ) : (
+                <div className="am-order-action-list">
+                  {userOrderActions.map(action => (
+                    <div key={action.id} className="am-order-action-card">
+                      <div className="am-order-action-top">
+                        <div className="am-order-id-tag">
+                          <PackageIcon size={14} />
+                          <strong>{action.orderId}</strong>
+                          <span className="am-customer-name">• {action.customerName}</span>
+                        </div>
+                        <span className="am-action-time font-mono">
+                          <ClockIcon size={13} /> {fmtDate(action.timestamp)}
+                        </span>
+                      </div>
+
+                      <div className="am-order-action-body">
+                        <div className="am-action-main-line">
+                          <span className={`am-action-badge am-action-badge--${(action.actionType || 'default').toLowerCase()}`}>
+                            {action.action}
+                          </span>
+                          <span className="am-order-item-desc">{action.items}</span>
+                          {action.amount && (
+                            <span className="am-order-amount font-mono">{action.amount}</span>
+                          )}
+                        </div>
+                        <p className="am-action-details-text">{action.details}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Modal Footer inside form/body to match Edit Modal */}
+          <div className="am-modal-footer" style={{ marginTop: 24, paddingInline: 0 }}>
+            <button type="button" className="am-btn am-btn--ghost" onClick={onClose}>
+              Close Profile Record
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ================================================================
    MAIN ADMIN MANAGEMENT SECTION
    ================================================================ */
@@ -1300,6 +1693,7 @@ const AdminManagementSection = () => {
   const [admins, setAdmins] = useState(SEED_ADMINS);
   const [roles, setRoles] = useState(INITIAL_ROLES);
   const [auditLog, setAuditLog] = useState(SEED_AUDIT);
+  const [orderActions, setOrderActions] = useState(SEED_ORDER_ACTIONS);
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [stFilter, setStFilter] = useState('all');
@@ -1766,6 +2160,15 @@ const AdminManagementSection = () => {
                   {/* Actions */}
                   <td data-label="Actions">
                     <div className="am-row-actions" style={{ justifyContent: 'flex-end' }}>
+                      {/* View Profile — Super Admin Only */}
+                      {isSuperAdmin && (
+                        <button className="am-icon-btn am-icon-btn--primary"
+                          onClick={() => setModal({ type: 'profile', target: a })}
+                          title="View complete admin profile record" aria-label={`View profile record of ${a.name}`}>
+                          <EyeIcon />
+                        </button>
+                      )}
+
                       {/* Edit */}
                       <button className="am-icon-btn"
                         onClick={() => setModal({ type: 'edit', target: a })}
@@ -1865,6 +2268,15 @@ const AdminManagementSection = () => {
 
 
       {/* ── Modals ── */}
+      {modal?.type === 'profile' && (
+        <AdminProfileModal
+          target={modal.target}
+          roles={roles}
+          orderActions={orderActions}
+          onClose={() => setModal(null)}
+        />
+      )}
+
       {(modal?.type === 'add' || modal?.type === 'edit') && (
         <AdminFormModal
           mode={modal.type === 'edit' ? 'edit' : 'add'}
