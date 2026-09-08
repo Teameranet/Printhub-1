@@ -126,10 +126,10 @@ const Profile = () => {
 
   const createdDate = user?.createdAt
     ? new Date(user.createdAt).toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      })
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
     : (joinDate !== 'N/A' ? joinDate : 'Recently');
 
   const handleSave = () => {
@@ -277,7 +277,7 @@ const Profile = () => {
               </div>
 
               <div className="ph-field-group">
-                <label className="ph-label">Account Created</label>
+                <label className="ph-label">Registration Date</label>
                 <div className="ph-field-value">
                   {createdDate}
                 </div>
