@@ -622,7 +622,9 @@
   flex-shrink: 0;
 }
 
-.am-icon-btn:hover {
+.am-icon-btn:hover,
+.am-icon-btn--primary:hover,
+.am-icon-btn--primary.am-icon-btn--active {
   background: var(--primary-soft);
   color: var(--primary-ink);
   border-color: var(--primary-border);
