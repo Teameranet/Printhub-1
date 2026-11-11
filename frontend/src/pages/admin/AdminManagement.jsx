@@ -2023,7 +2023,7 @@ const AdminManagementSection = () => {
           {isSuperAdmin && (
             <button className="am-role-btn" onClick={() => setModal({ type: 'manage_roles' })}>
               <ShieldIcon />
-              <span>Manage Role</span>
+              <span>Add/Manage Role</span>
             </button>
           )}
         </div>
